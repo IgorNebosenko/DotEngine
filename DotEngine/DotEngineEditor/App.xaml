@@ -7,7 +7,6 @@
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
                  <ResourceDictionary Source="pack://application:,,,/DotEngineEditor.Themes;component/DarkTheme.xaml"/>
-                 <ResourceDictionary Source="pack://application:,,,/DotEngineEditor.Themes;component/LightTheme.xaml"/>
              </ResourceDictionary.MergedDictionaries>
          </ResourceDictionary>
     </Application.Resources>

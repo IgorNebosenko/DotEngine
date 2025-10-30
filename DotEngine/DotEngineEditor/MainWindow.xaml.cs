@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DotEngineEditor.Themes;
 
 namespace DotEngineEditor;
 
@@ -19,5 +20,11 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+    }
+
+    private void OnTestButtonClick(object sender, RoutedEventArgs e)
+    {
+        var app = (App)Application.Current;
+        app.SetTheme(app.Theme == ThemeName.DarkTheme ? ThemeName.LightTheme : ThemeName.DarkTheme);
     }
 }

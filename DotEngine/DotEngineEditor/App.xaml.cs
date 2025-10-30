@@ -1,26 +1,35 @@
-﻿using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Windows;
 using DotEngineEditor.Themes;
 
-namespace DotEngineEditor;
-
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
-public partial class App : Application
+namespace DotEngineEditor
 {
-    public void SetTheme(ThemeName theme)
+    public partial class App : Application
     {
-        var newDict = new ResourceDictionary { Source = new Uri(
-            $"pack://application:,,,/DotEngineEditor.Themes;component/{nameof(theme)}.xaml)", UriKind.Relative) };
-        
-        var oldDict = Current.Resources.MergedDictionaries.FirstOrDefault(d =>
-            d.Source != null && d.Source.OriginalString.Contains("Theme.xaml"));
+        public ThemeName Theme { get; private set; }
 
-        if (oldDict != null)
+        protected override void OnActivated(EventArgs e)
         {
-            Current.Resources.MergedDictionaries.Remove(oldDict);
+            base.OnActivated(e);
+            SetTheme(ThemeName.DarkTheme);
         }
-        
-        Current.Resources.MergedDictionaries.Add(newDict);
+
+        public void SetTheme(ThemeName theme)
+        {
+            Theme = theme;
+            
+            var uri = new Uri($"pack://application:,,,/DotEngineEditor.Themes;component/{theme}.xaml", UriKind.Absolute);
+            var newDict = new ResourceDictionary { Source = uri };
+
+            var oldDict = Current.Resources.MergedDictionaries
+                .FirstOrDefault(d => d.Source != null && d.Source.OriginalString.Contains("Theme.xaml"));
+
+            if (oldDict != null)
+                Current.Resources.MergedDictionaries.Remove(oldDict);
+
+            Current.Resources.MergedDictionaries.Add(newDict);
+        }
+
     }
 }

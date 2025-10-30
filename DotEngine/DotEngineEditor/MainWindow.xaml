@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:DotEngineEditor"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
-    <Grid>
-
+    <Grid Background="{DynamicResource BackgroundBrush}">
+        <Button Content="Test"
+                Width="120" Height="34"
+                Click="OnTestButtonClick"
+                Background="{DynamicResource BackgroundBrush}"
+                Foreground="{DynamicResource ForegroundBrush}"/>
     </Grid>
 </Window>
