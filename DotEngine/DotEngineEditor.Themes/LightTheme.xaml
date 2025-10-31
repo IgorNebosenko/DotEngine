@@ -21,6 +21,13 @@
     <SolidColorBrush x:Key="IconColorBrush" Color="#FF2D2D30"/>
     <Color x:Key="ToolbarButtonHoverColor">Black</Color>
     
+    <Color x:Key="PanelBackgroundColor">#FFF2F2F2</Color>
+    <Color x:Key="PanelBorderColor">#CCCCCC</Color>
+    <Color x:Key="HeaderBackgroundColor">#FFEFEFEF</Color>
+    <Color x:Key="HeaderForegroundColor">#FF000000</Color>
+    <Color x:Key="TreeBackgroundColor">#FFFFFFFF</Color>
+    <Color x:Key="TreeForegroundColor">#FF000000</Color>
+    
     <Color x:Key="IconColor">#FF000000</Color>
     <SolidColorBrush x:Key="IconBrush" Color="{StaticResource IconColor}"/>
     

@@ -12,6 +12,7 @@
         LastChildFill="True">
         <userControls:MenuBar x:Name="MenuBarItem" DockPanel.Dock="Top"/>
         <userControls:ToolBar x:Name="ToolBarItem" DockPanel.Dock="Top"/>
+        <userControls:HierarchyPanel Margin="5" VerticalAlignment="Top"/>
         
         <Button Content="Test"
                 Width="120" Height="34"
