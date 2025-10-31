@@ -11,6 +11,8 @@
         Background="{DynamicResource BackgroundBrush}"
         LastChildFill="True">
         <userControls:MenuBar x:Name="MenuBarItem" DockPanel.Dock="Top"/>
+        <userControls:ToolBar x:Name="ToolBarItem" DockPanel.Dock="Top"/>
+        
         <Button Content="Test"
                 Width="120" Height="34"
                 Click="OnTestButtonClick"
