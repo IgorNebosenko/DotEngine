@@ -16,8 +16,9 @@
     
     <ToolBarTray>
         <ToolBar>
-            <Button ToolTip="Hand" Click="LookHandClick" Margin="2">
-                <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/hand.png" Width="32" Height="32"/>
+            <Button ToolTip="Hand" Margin="2">
+                <Image Style="{DynamicResource ToolbarIcon}" 
+                       Tag="pack://application:,,,/DotEngineEditor.Themes;component/Resources/hand.png"/>
             </Button>
             <Button ToolTip="Move" Click="MoveObjectClick" Margin="2">
                 <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/move.png" Width="32" Height="32"/>
