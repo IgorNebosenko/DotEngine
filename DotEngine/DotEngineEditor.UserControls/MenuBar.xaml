@@ -5,33 +5,39 @@
 
     <Grid Background="{DynamicResource MenuBackgroundBrush}">
         <Menu Background="{DynamicResource MenuBackgroundBrush}"
-              Foreground="{DynamicResource MenuForegroundBrush}">
-            <MenuItem Header="File">
-                <MenuItem Header="New scene" Click="OnNewGameClicked" InputGestureText="Ctrl+N"/>
-                <MenuItem Header="Open scene" Click="OnOpenGameClicked" InputGestureText="Ctrl+N"/>
+              Foreground="{DynamicResource MenuForegroundBrush}"
+              FontSize="12"
+              FontWeight="Normal"
+              Padding="0"
+              VerticalAlignment="Stretch"
+              HorizontalAlignment="Left">
+
+            <MenuItem Header="_File">
+                <MenuItem Header="New Scene" Click="OnNewGameClicked" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="Open Scene" Click="OnOpenGameClicked" InputGestureText="Ctrl+O"/>
                 <Separator/>
                 <MenuItem Header="Save" Click="OnSaveClicked" InputGestureText="Ctrl+S"/>
-                <MenuItem Header="Save as..." Click="OnSaveAsClicked" InputGestureText="Ctrl+Shift+S"/>
+                <MenuItem Header="Save As..." Click="OnSaveAsClicked" InputGestureText="Ctrl+Shift+S"/>
                 <Separator/>
-                <MenuItem Header="New project" Click="OnNewProjectClicked"/>
-                <MenuItem Header="Open project" Click="OnOpenProjectClicked"/>
-                <MenuItem Header="Save project" Click="OnSaveProjectClicked"/>
+                <MenuItem Header="New Project" Click="OnNewProjectClicked"/>
+                <MenuItem Header="Open Project" Click="OnOpenProjectClicked"/>
+                <MenuItem Header="Save Project" Click="OnSaveProjectClicked"/>
                 <Separator/>
-                <MenuItem Header="Build profiles" Click="OnBuildProfilesClicked" InputGestureText="Ctrl+Shift+B"/>
-                <MenuItem Header="Build and run" Click="OnBuildAndRunClicked" InputGestureText="Ctrl+B"/>
+                <MenuItem Header="Build Profiles" Click="OnBuildProfilesClicked" InputGestureText="Ctrl+Shift+B"/>
+                <MenuItem Header="Build and Run" Click="OnBuildAndRunClicked" InputGestureText="Ctrl+B"/>
                 <Separator/>
                 <MenuItem Header="Exit" Click="OnExitClicked" InputGestureText="Alt+F4"/>
             </MenuItem>
-            
-            <MenuItem Header="Edit">
+
+            <MenuItem Header="_Edit">
                 <MenuItem Header="Undo" Click="OnUndoClick" InputGestureText="Ctrl+Z"/>
                 <MenuItem Header="Redo" Click="OnRedoClick" InputGestureText="Ctrl+Y"/>
                 <Separator/>
-                <MenuItem Header="Select all" Click="OnSelectAllClick" InputGestureText="Ctrl+A"/>
-                <MenuItem Header="Deselect all" Click="OnDeselectAllClick" InputGestureText="Shift+D"/>
-                <MenuItem Header="Select children" Click="OnSelectChildrenClick" InputGestureText="Shift+C"/>
-                <MenuItem Header="Select prefab root" Click="OnSelectPrefabRootClick" InputGestureText="Ctrl+Shift+R"/>
-                <MenuItem Header="Invert selection" Click="OnInputSelectionClick" InputGestureText="Ctrl+I"/>
+                <MenuItem Header="Select All" Click="OnSelectAllClick" InputGestureText="Ctrl+A"/>
+                <MenuItem Header="Deselect All" Click="OnDeselectAllClick" InputGestureText="Shift+D"/>
+                <MenuItem Header="Select Children" Click="OnSelectChildrenClick" InputGestureText="Shift+C"/>
+                <MenuItem Header="Select Prefab Root" Click="OnSelectPrefabRootClick" InputGestureText="Ctrl+Shift+R"/>
+                <MenuItem Header="Invert Selection" Click="OnInputSelectionClick" InputGestureText="Ctrl+I"/>
                 <Separator/>
                 <MenuItem Header="Cut" Click="OnCutClick" InputGestureText="Ctrl+X"/>
                 <MenuItem Header="Copy" Click="OnCopyClick" InputGestureText="Ctrl+C"/>
@@ -44,12 +50,12 @@
                 <MenuItem Header="Pause" Click="OnPauseClick" InputGestureText="F6"/>
                 <MenuItem Header="Step" Click="OnStepClick" InputGestureText="F7"/>
                 <Separator/>
-                <MenuItem Header="Project settings" Click="OnProjectSettingsClick"/>
+                <MenuItem Header="Project Settings" Click="OnProjectSettingsClick"/>
                 <MenuItem Header="Preferences" Click="OnPreferencesClick"/>
-                <MenuItem Header="Clear playerData" Click="OnPlayerDataClearClick"/>
+                <MenuItem Header="Clear Player Data" Click="OnPlayerDataClearClick"/>
             </MenuItem>
-            
-            <MenuItem Header="Assets">
+
+            <MenuItem Header="_Assets">
                 <MenuItem Header="Create">
                     <MenuItem Header="Folder"/>
                     <MenuItem Header="Material"/>
@@ -73,10 +79,10 @@
                 <Separator/>
                 <MenuItem Header="Reimport All"/>
                 <Separator/>
-                <MenuItem Header="Open C# project"/>
+                <MenuItem Header="Open C# Project"/>
             </MenuItem>
-            
-            <MenuItem Header="GameObject">
+
+            <MenuItem Header="_GameObject">
                 <MenuItem Header="Create Empty"/>
                 <MenuItem Header="Create Empty Child"/>
                 <MenuItem Header="3D Primitives">
@@ -101,17 +107,16 @@
                 <MenuItem Header="Make Parent"/>
                 <MenuItem Header="Clear Parent"/>
             </MenuItem>
-            
-            <MenuItem Header="Packages"></MenuItem>
-        
-            <MenuItem Header="Window">
-            
-            </MenuItem>
 
-            <MenuItem Header="Help">
+            <MenuItem Header="_Packages"/>
+
+            <MenuItem Header="_Window"/>
+
+            <MenuItem Header="_Help">
                 <MenuItem Header="Documentation"/>
                 <MenuItem Header="About DotEngine"/>
             </MenuItem>
+
         </Menu>
     </Grid>
 </UserControl>
