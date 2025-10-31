@@ -6,9 +6,17 @@
     <Color x:Key="MenuItemColor">#FFFFFFFF</Color>
     <Color x:Key="ForegroundColor">#FF000000</Color>
     
-    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#FF2A2A2A"/>
-    <SolidColorBrush x:Key="MenuForegroundBrush" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="MenuHighlightBrush" Color="#FF3D3D3D"/>
+    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#FFF6F6F6"/>
+    <SolidColorBrush x:Key="MenuForegroundBrush" Color="#222222"/>
+    <SolidColorBrush x:Key="MenuHoverBrush" Color="#FFE0E0E0"/>
+    <SolidColorBrush x:Key="MenuHoverTextBrush" Color="#000000"/>
+    <SolidColorBrush x:Key="MenuDisabledTextBrush" Color="#999999"/>
+    <SolidColorBrush x:Key="MenuGestureBrush" Color="#777777"/>
+    <SolidColorBrush x:Key="MenuBorderBrush" Color="#FFCCCCCC"/>
+
+    <SolidColorBrush x:Key="SubMenuBackgroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="SubMenuForegroundBrush" Color="#222222"/>
+    <SolidColorBrush x:Key="SubMenuArrowBrush" Color="#222222"/>
     
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>

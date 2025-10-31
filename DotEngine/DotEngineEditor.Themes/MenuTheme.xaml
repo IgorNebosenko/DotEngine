@@ -1,0 +1,162 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+    <Style x:Key="SubMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Background" Value="{DynamicResource SubMenuBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SubMenuForegroundBrush}"/>
+        <Setter Property="Padding" Value="12,4"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Grid>
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ContentPresenter Grid.Column="0"
+                                                  ContentSource="Header"
+                                                  RecognizesAccessKey="True"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"/>
+
+                                <StackPanel Grid.Column="1"
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="{TemplateBinding InputGestureText}"
+                                               Foreground="{DynamicResource MenuGestureBrush}"
+                                               FontSize="11"
+                                               Margin="10,0,10,0"
+                                               VerticalAlignment="Center"/>
+                                    <Path x:Name="Arrow"
+                                          Width="6"
+                                          Height="6"
+                                          Stretch="Uniform"
+                                          Fill="{DynamicResource SubMenuArrowBrush}"
+                                          VerticalAlignment="Center"
+                                          Data="M 0 0 L 0 6 L 4 3 Z"
+                                          Visibility="{Binding HasItems,
+                                              RelativeSource={RelativeSource TemplatedParent},
+                                              Converter={StaticResource BoolToVis}}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Popup x:Name="Popup"
+                               Placement="Right"
+                               IsOpen="{TemplateBinding IsSubmenuOpen}"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               PopupAnimation="Fade">
+                            <Border Background="{DynamicResource SubMenuBackgroundBrush}"
+                                    BorderBrush="{DynamicResource MenuBorderBrush}"
+                                    BorderThickness="1"
+                                    MinWidth="200">
+                                <StackPanel IsItemsHost="True"
+                                            KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </Border>
+                        </Popup>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuHoverBrush}"/>
+                            <Setter TargetName="Arrow" Property="Fill" Value="{DynamicResource MenuHoverTextBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource MenuHoverTextBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MainMenuStyle" TargetType="Menu">
+        <Setter Property="Background" Value="{DynamicResource MenuBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MenuForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource MenuBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Menu">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ItemsPresenter Margin="5,0,5,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="MenuItem">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{DynamicResource MenuForegroundBrush}"/>
+        <Setter Property="Padding" Value="12,4"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource SubMenuItemStyle}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Grid>
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <DockPanel LastChildFill="False">
+                                <TextBlock Text="{TemplateBinding InputGestureText}"
+                                           Foreground="{DynamicResource MenuGestureBrush}"
+                                           FontSize="11"
+                                           Margin="20,0,0,0"
+                                           DockPanel.Dock="Right"
+                                           VerticalAlignment="Center"/>
+                                <ContentPresenter ContentSource="Header"
+                                                  RecognizesAccessKey="True"
+                                                  VerticalAlignment="Center"
+                                                  HorizontalAlignment="Left"/>
+                            </DockPanel>
+                        </Border>
+                        <Popup x:Name="Popup"
+                               Placement="Bottom"
+                               IsOpen="{TemplateBinding IsSubmenuOpen}"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               PopupAnimation="Fade">
+                            <Border Background="{DynamicResource SubMenuBackgroundBrush}"
+                                    BorderBrush="{DynamicResource MenuBorderBrush}"
+                                    BorderThickness="1"
+                                    MinWidth="200">
+                                <StackPanel IsItemsHost="True"
+                                            KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuHoverBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource MenuHoverTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsSubmenuOpen" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuHoverBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource MenuHoverTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource MenuDisabledTextBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

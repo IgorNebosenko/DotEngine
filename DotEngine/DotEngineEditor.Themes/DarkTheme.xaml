@@ -9,9 +9,17 @@
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
     
-    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#FF2A2A2A"/>
-    <SolidColorBrush x:Key="MenuForegroundBrush" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="MenuHighlightBrush" Color="#FF3D3D3D"/>
+    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#FF2D2D30"/>
+    <SolidColorBrush x:Key="MenuForegroundBrush" Color="#FFEFEFEF"/>
+    <SolidColorBrush x:Key="MenuHoverBrush" Color="#FF3E3E42"/>
+    <SolidColorBrush x:Key="MenuHoverTextBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="MenuDisabledTextBrush" Color="#FF707070"/>
+    <SolidColorBrush x:Key="MenuGestureBrush" Color="#FFAAAAAA"/>
+    <SolidColorBrush x:Key="MenuBorderBrush" Color="#FF3C3C3C"/>
+
+    <SolidColorBrush x:Key="SubMenuBackgroundBrush" Color="#FF2D2D30"/>
+    <SolidColorBrush x:Key="SubMenuForegroundBrush" Color="#FFEFEFEF"/>
+    <SolidColorBrush x:Key="SubMenuArrowBrush" Color="#FFEFEFEF"/>
     
     <Style TargetType="Window">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
@@ -21,10 +29,5 @@
     <Style TargetType="Button">
         <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
-    </Style>
-    
-    <Style TargetType="Menu">
-        <Setter Property="Background" Value="{StaticResource MenuItemColor}"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
     </Style>
 </ResourceDictionary>

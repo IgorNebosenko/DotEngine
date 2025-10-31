@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DotEngineEditor"
         xmlns:userControls="clr-namespace:DotEngineEditor.UserControls;assembly=DotEngineEditor.UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1200">
+        Title="Dot Engine" Height="800" Width="1200">
     <DockPanel 
         Background="{DynamicResource BackgroundBrush}"
         LastChildFill="True">

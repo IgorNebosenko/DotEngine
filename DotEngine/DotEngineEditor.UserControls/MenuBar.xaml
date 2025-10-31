@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Height="25">
 
-    <Grid Background="{DynamicResource MenuBackgroundBrush}">
-        <Menu Background="{DynamicResource MenuBackgroundBrush}"
-              Foreground="{DynamicResource MenuForegroundBrush}"
-              FontSize="12"
-              FontWeight="Normal"
-              Padding="0"
-              VerticalAlignment="Stretch"
-              HorizontalAlignment="Left">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DotEngineEditor.Themes;component/MenuTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
+    <Grid Background="{DynamicResource MenuBackgroundBrush}">
+        <Menu Style="{StaticResource MainMenuStyle}">
             <MenuItem Header="_File">
                 <MenuItem Header="New Scene" Click="OnNewGameClicked" InputGestureText="Ctrl+N"/>
                 <MenuItem Header="Open Scene" Click="OnOpenGameClicked" InputGestureText="Ctrl+O"/>
@@ -109,14 +110,12 @@
             </MenuItem>
 
             <MenuItem Header="_Packages"/>
-
             <MenuItem Header="_Window"/>
 
             <MenuItem Header="_Help">
                 <MenuItem Header="Documentation"/>
                 <MenuItem Header="About DotEngine"/>
             </MenuItem>
-
         </Menu>
     </Grid>
 </UserControl>
