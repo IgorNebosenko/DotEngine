@@ -43,10 +43,10 @@
                               BorderThickness="0"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch">
-                        <TreeViewItem Header="Scene" IsExpanded="True">
+                        <TreeViewItem Header="Scene">
                             <TreeViewItem Header="Main Camera"/>
                             <TreeViewItem Header="Directional Light"/>
-                            <TreeViewItem Header="Game Objects" IsExpanded="True">
+                            <TreeViewItem Header="Game Objects">
                                 <TreeViewItem Header="Cube"/>
                                 <TreeViewItem Header="Sphere"/>
                             </TreeViewItem>
