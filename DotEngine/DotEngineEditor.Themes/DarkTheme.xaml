@@ -22,6 +22,7 @@
     <SolidColorBrush x:Key="SubMenuArrowBrush" Color="#FFEFEFEF"/>
     
     <SolidColorBrush x:Key="IconColorBrush" Color="#FFFFFFFF"/>
+    <Color x:Key="ToolbarButtonHoverColor">White</Color>
     
     <Color x:Key="IconColor">#FFFFFFFF</Color>
     <SolidColorBrush x:Key="IconBrush" Color="{StaticResource IconColor}"/>
