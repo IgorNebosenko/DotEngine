@@ -6,12 +6,18 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
+        <ApplicationIcon>Resources\DotEngine.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\DotEngineEditor.CustomControls\DotEngineEditor.CustomControls.csproj" />
       <ProjectReference Include="..\DotEngineEditor.Themes\DotEngineEditor.Themes.csproj" />
       <ProjectReference Include="..\DotEngineEditor.UserControls\DotEngineEditor.UserControls.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Resources\DotEngine.ico" />
+      <Resource Include="Resources\DotEngine.ico" />
     </ItemGroup>
 
 </Project>
