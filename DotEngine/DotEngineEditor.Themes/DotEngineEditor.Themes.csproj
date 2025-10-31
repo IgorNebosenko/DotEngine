@@ -22,4 +22,25 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\hand.png" />
+      <Resource Include="Resources\hand.png" />
+      <None Remove="Resources\help.png" />
+      <Resource Include="Resources\help.png" />
+      <None Remove="Resources\icons_copyright.txt" />
+      <Resource Include="Resources\icons_copyright.txt" />
+      <None Remove="Resources\move.png" />
+      <Resource Include="Resources\move.png" />
+      <None Remove="Resources\pause.png" />
+      <Resource Include="Resources\pause.png" />
+      <None Remove="Resources\play.png" />
+      <Resource Include="Resources\play.png" />
+      <None Remove="Resources\rotate.png" />
+      <Resource Include="Resources\rotate.png" />
+      <None Remove="Resources\scale.png" />
+      <Resource Include="Resources\scale.png" />
+      <None Remove="Resources\step.png" />
+      <Resource Include="Resources\step.png" />
+    </ItemGroup>
+
 </Project>

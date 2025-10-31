@@ -17,30 +17,30 @@
     <ToolBarTray>
         <ToolBar>
             <Button ToolTip="Hand" Click="LookHandClick" Margin="2">
-                <Image Source="pack://application:,,,/DotEngineEditor;component/Resources/Look.png" Width="32" Height="32"/>
+                <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/hand.png" Width="32" Height="32"/>
             </Button>
             <Button ToolTip="Move" Click="MoveObjectClick" Margin="2">
-                <Image Source="pack://application:,,,/DotEngineEditor;component/Resources/Move.png" Width="32" Height="32"/>
+                <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/move.png" Width="32" Height="32"/>
             </Button>
             <Button ToolTip="Rotate" Click="RotateObjectClick" Margin="2">
-                <Image Source="pack://application:,,,/DotEngineEditor;component/Resources/Rotate.png" Width="32" Height="32"/>
+                <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/rotate.png" Width="32" Height="32"/>
             </Button>
             <Button ToolTip="Scale" Click="ScaleObjectClick" Margin="2">
-                <Image Source="pack://application:,,,/DotEngineEditor;component/Resources/Scale.png" Width="32" Height="32"/>
+                <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/scale.png" Width="32" Height="32"/>
             </Button>
             <Separator/>
             <Button ToolTip="Help" Click="HelpClicked" Margin="2">
-                <Image Source="pack://application:,,,/DotEngineEditor;component/Resources/Help.png" Width="32" Height="32"/>
+                <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/help.png" Width="32" Height="32"/>
             </Button>
             <Separator/>
             <Button ToolTip="Play" Click="PlayClicked" Margin="2">
-                <Image Source="pack://application:,,,/DotEngineEditor;component/Resources/Play.png" Width="32" Height="32"/>
+                <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/play.png" Width="32" Height="32"/>
             </Button>
             <Button ToolTip="Pause" Click="PauseClicked" Margin="2">
-                <Image Source="pack://application:,,,/DotEngineEditor;component/Resources/Pause.png" Width="32" Height="32"/>
+                <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/pause.png" Width="32" Height="32"/>
             </Button>
             <Button ToolTip="Step" Click="StepClicked" Margin="2">
-                <Image Source="pack://application:,,,/DotEngineEditor;component/Resources/Step.png" Width="32" Height="32"/>
+                <Image Source="pack://application:,,,/DotEngineEditor.Themes;component/Resources/step.png" Width="32" Height="32"/>
             </Button>
         </ToolBar>
     </ToolBarTray>
