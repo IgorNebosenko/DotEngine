@@ -18,37 +18,81 @@
         <userControls:ToolBar DockPanel.Dock="Top"/>
 
         <avalondock:DockingManager x:Name="DockManager"
-                             Background="{DynamicResource PanelBackgroundBrush}"
-                             Foreground="{DynamicResource ForegroundBrush}">
+                                   Background="{DynamicResource PanelBackgroundBrush}"
+                                   Foreground="{DynamicResource ForegroundBrush}">
             <avalondock:LayoutRoot>
                 <avalondock:LayoutPanel Orientation="Horizontal">
 
                     <avalondock:LayoutAnchorablePaneGroup DockWidth="250">
                         <avalondock:LayoutAnchorablePane>
                             <avalondock:LayoutAnchorable x:Name="HierarchyPanel" Title="Hierarchy"
-                                                     CanClose="True"
-                                                     CanHide="True">
+                                                         CanClose="True"
+                                                         CanHide="True">
                                 <userControls:HierarchyPanel/>
                             </avalondock:LayoutAnchorable>
                         </avalondock:LayoutAnchorablePane>
                     </avalondock:LayoutAnchorablePaneGroup>
 
-                    <avalondock:LayoutDocumentPaneGroup>
-                        <avalondock:LayoutDocumentPane>
-                            <avalondock:LayoutDocument Title="Scene View">
+                    <avalondock:LayoutPanel Orientation="Vertical">
+
+                        <avalondock:LayoutDocumentPaneGroup>
+                            <avalondock:LayoutDocumentPane>
+                                <avalondock:LayoutDocument Title="Scene View">
+                                    <Grid Background="{DynamicResource PanelBackgroundBrush}">
+                                        <Button Content="Test"
+                                                Width="120"
+                                                Height="34"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Top"
+                                                Background="{DynamicResource PanelBackgroundBrush}"
+                                                Foreground="{DynamicResource ForegroundBrush}"
+                                                Click="OnTestButtonClick"/>
+                                    </Grid>
+                                </avalondock:LayoutDocument>
+                            </avalondock:LayoutDocumentPane>
+                        </avalondock:LayoutDocumentPaneGroup>
+
+                        <avalondock:LayoutAnchorablePaneGroup DockHeight="200">
+                            <avalondock:LayoutAnchorablePane>
+                                <avalondock:LayoutAnchorable Title="Project"
+                                                             CanClose="True"
+                                                             CanHide="True">
+                                    <Grid Background="{DynamicResource PanelBackgroundBrush}">
+                                        <TextBlock Text="Project panel"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Grid>
+                                </avalondock:LayoutAnchorable>
+                                <avalondock:LayoutAnchorable Title="Console"
+                                                             CanClose="True"
+                                                             CanHide="True">
+                                    <Grid Background="{DynamicResource PanelBackgroundBrush}">
+                                        <TextBlock Text="Console output"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{DynamicResource ForegroundBrush}"/>
+                                    </Grid>
+                                </avalondock:LayoutAnchorable>
+                            </avalondock:LayoutAnchorablePane>
+                        </avalondock:LayoutAnchorablePaneGroup>
+
+                    </avalondock:LayoutPanel>
+
+                    <avalondock:LayoutAnchorablePaneGroup DockWidth="300">
+                        <avalondock:LayoutAnchorablePane>
+                            <avalondock:LayoutAnchorable Title="Inspector"
+                                                         CanClose="True"
+                                                         CanHide="True">
                                 <Grid Background="{DynamicResource PanelBackgroundBrush}">
-                                    <Button Content="Test"
-                                            Width="120"
-                                            Height="34"
-                                            HorizontalAlignment="Left"
-                                            VerticalAlignment="Top"
-                                            Background="{DynamicResource PanelBackgroundBrush}"
-                                            Foreground="{DynamicResource ForegroundBrush}"
-                                            Click="OnTestButtonClick"/>
+                                    <TextBlock Text="Inspector panel"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource ForegroundBrush}"/>
                                 </Grid>
-                            </avalondock:LayoutDocument>
-                        </avalondock:LayoutDocumentPane>
-                    </avalondock:LayoutDocumentPaneGroup>
+                            </avalondock:LayoutAnchorable>
+                        </avalondock:LayoutAnchorablePane>
+                    </avalondock:LayoutAnchorablePaneGroup>
 
                 </avalondock:LayoutPanel>
             </avalondock:LayoutRoot>
