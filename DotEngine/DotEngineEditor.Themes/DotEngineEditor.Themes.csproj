@@ -42,5 +42,9 @@
       <None Remove="Resources\step.png" />
       <Resource Include="Resources\step.png" />
     </ItemGroup>
+	
+	<ItemGroup>
+	    <PackageReference Include="Dirkster.AvalonDock" Version="3.8.1.240924" />
+	</ItemGroup>
 
 </Project>

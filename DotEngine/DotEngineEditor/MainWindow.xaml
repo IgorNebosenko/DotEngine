@@ -3,8 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:dock="clr-namespace:AvalonDock;assembly=Dirkster.AvalonDock"
-        xmlns:layout="clr-namespace:AvalonDock.Layout;assembly=Dirkster.AvalonDock"
         xmlns:userControls="clr-namespace:DotEngineEditor.UserControls;assembly=DotEngineEditor.UserControls"
         xmlns:avalondock="https://github.com/Dirkster99/AvalonDock"
         mc:Ignorable="d"
@@ -45,7 +43,8 @@
                                             HorizontalAlignment="Left"
                                             VerticalAlignment="Top"
                                             Background="{DynamicResource PanelBackgroundBrush}"
-                                            Foreground="{DynamicResource ForegroundBrush}"/>
+                                            Foreground="{DynamicResource ForegroundBrush}"
+                                            Click="OnTestButtonClick"/>
                                 </Grid>
                             </avalondock:LayoutDocument>
                         </avalondock:LayoutDocumentPane>
@@ -54,6 +53,5 @@
                 </avalondock:LayoutPanel>
             </avalondock:LayoutRoot>
         </avalondock:DockingManager>
-
     </DockPanel>
 </Window>

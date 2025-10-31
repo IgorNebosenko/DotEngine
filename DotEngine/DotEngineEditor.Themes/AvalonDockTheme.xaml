@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:avalondock="https://github.com/Dirkster99/AvalonDock">
+
+    <Style TargetType="{x:Type avalondock:DockingManager}">
+        <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+    </Style>
+
+    <Style TargetType="{x:Type avalondock:LayoutDocumentPaneControl}">
+        <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PanelBorderBrush}"/>
+    </Style>
+
+    <Style TargetType="{x:Type avalondock:LayoutAnchorablePaneControl}">
+        <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PanelBorderBrush}"/>
+    </Style>
+
+    <Style TargetType="{x:Type avalondock:LayoutDocumentTabItem}">
+        <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PanelBorderBrush}"/>
+    </Style>
+
+    <Style TargetType="{x:Type avalondock:LayoutAnchorableTabItem}">
+        <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PanelBorderBrush}"/>
+    </Style>
+</ResourceDictionary>
