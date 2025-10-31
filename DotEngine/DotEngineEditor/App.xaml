@@ -5,8 +5,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/DotEngineEditor.Themes;component/DarkTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/DotEngineEditor.Themes;component/LightTheme.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/DotEngineEditor.Themes;component/DarkTheme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/DotEngineEditor.Themes;component/AvalonDockTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
