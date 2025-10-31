@@ -3,21 +3,57 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DotEngineEditor"
+        xmlns:dock="clr-namespace:AvalonDock;assembly=Dirkster.AvalonDock"
+        xmlns:layout="clr-namespace:AvalonDock.Layout;assembly=Dirkster.AvalonDock"
         xmlns:userControls="clr-namespace:DotEngineEditor.UserControls;assembly=DotEngineEditor.UserControls"
+        xmlns:avalondock="https://github.com/Dirkster99/AvalonDock"
         mc:Ignorable="d"
-        Title="Dot Engine" Height="800" Width="1200">
-    <DockPanel 
-        Background="{DynamicResource BackgroundBrush}"
-        LastChildFill="True">
-        <userControls:MenuBar x:Name="MenuBarItem" DockPanel.Dock="Top"/>
-        <userControls:ToolBar x:Name="ToolBarItem" DockPanel.Dock="Top"/>
-        <userControls:HierarchyPanel Margin="5" VerticalAlignment="Top"/>
-        
-        <Button Content="Test"
-                Width="120" Height="34"
-                Click="OnTestButtonClick"
-                Background="{DynamicResource BackgroundBrush}"
-                Foreground="{DynamicResource ForegroundBrush}"/>
+        Title="Dot Engine"
+        Height="800"
+        Width="1200"
+        Background="{DynamicResource BackgroundBrush}">
+
+    <DockPanel LastChildFill="True"
+               Background="{DynamicResource BackgroundBrush}">
+
+        <userControls:MenuBar DockPanel.Dock="Top"/>
+        <userControls:ToolBar DockPanel.Dock="Top"/>
+
+        <avalondock:DockingManager x:Name="DockManager"
+                             Background="{DynamicResource PanelBackgroundBrush}"
+                             Foreground="{DynamicResource ForegroundBrush}">
+            <avalondock:LayoutRoot>
+                <avalondock:LayoutPanel Orientation="Horizontal">
+
+                    <avalondock:LayoutAnchorablePaneGroup DockWidth="250">
+                        <avalondock:LayoutAnchorablePane>
+                            <avalondock:LayoutAnchorable Title="Hierarchy"
+                                                     CanClose="False"
+                                                     CanHide="True">
+                                <userControls:HierarchyPanel/>
+                            </avalondock:LayoutAnchorable>
+                        </avalondock:LayoutAnchorablePane>
+                    </avalondock:LayoutAnchorablePaneGroup>
+
+                    <avalondock:LayoutDocumentPaneGroup>
+                        <avalondock:LayoutDocumentPane>
+                            <avalondock:LayoutDocument Title="Scene View">
+                                <Grid Background="{DynamicResource PanelBackgroundBrush}">
+                                    <Button Content="Test"
+                                            Width="120"
+                                            Height="34"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Background="{DynamicResource PanelBackgroundBrush}"
+                                            Foreground="{DynamicResource ForegroundBrush}"/>
+                                </Grid>
+                            </avalondock:LayoutDocument>
+                        </avalondock:LayoutDocumentPane>
+                    </avalondock:LayoutDocumentPaneGroup>
+
+                </avalondock:LayoutPanel>
+            </avalondock:LayoutRoot>
+        </avalondock:DockingManager>
+
     </DockPanel>
 </Window>
