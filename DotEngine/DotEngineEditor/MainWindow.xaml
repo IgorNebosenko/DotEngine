@@ -25,8 +25,8 @@
 
                     <avalondock:LayoutAnchorablePaneGroup DockWidth="250">
                         <avalondock:LayoutAnchorablePane>
-                            <avalondock:LayoutAnchorable Title="Hierarchy"
-                                                     CanClose="False"
+                            <avalondock:LayoutAnchorable x:Name="HierarchyPanel" Title="Hierarchy"
+                                                     CanClose="True"
                                                      CanHide="True">
                                 <userControls:HierarchyPanel/>
                             </avalondock:LayoutAnchorable>
