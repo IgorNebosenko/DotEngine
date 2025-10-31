@@ -7,4 +7,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DotEngineEditor.Themes\DotEngineEditor.Themes.csproj" />
+    </ItemGroup>
+
 </Project>

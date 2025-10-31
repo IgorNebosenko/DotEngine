@@ -6,6 +6,10 @@
     <Color x:Key="MenuItemColor">#FFFFFFFF</Color>
     <Color x:Key="ForegroundColor">#FF000000</Color>
     
+    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#FF2A2A2A"/>
+    <SolidColorBrush x:Key="MenuForegroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="MenuHighlightBrush" Color="#FF3D3D3D"/>
+    
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
     
