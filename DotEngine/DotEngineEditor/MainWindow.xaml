@@ -7,12 +7,14 @@
         xmlns:userControls="clr-namespace:DotEngineEditor.UserControls;assembly=DotEngineEditor.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
-    <Grid Background="{DynamicResource BackgroundBrush}">
+    <DockPanel 
+        Background="{DynamicResource BackgroundBrush}"
+        LastChildFill="True">
         <userControls:MenuBar x:Name="MenuBarItem" DockPanel.Dock="Top"/>
         <Button Content="Test"
                 Width="120" Height="34"
                 Click="OnTestButtonClick"
                 Background="{DynamicResource BackgroundBrush}"
                 Foreground="{DynamicResource ForegroundBrush}"/>
-    </Grid>
+    </DockPanel>
 </Window>
