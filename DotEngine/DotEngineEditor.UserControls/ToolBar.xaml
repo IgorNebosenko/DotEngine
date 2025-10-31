@@ -16,7 +16,7 @@
     
     <ToolBarTray>
         <ToolBar>
-            <Button ToolTip="Look out" Click="LookOutclick" Margin="2">
+            <Button ToolTip="Hand" Click="LookHandClick" Margin="2">
                 <Image Source="pack://application:,,,/DotEngineEditor;component/Resources/Look.png" Width="32" Height="32"/>
             </Button>
             <Button ToolTip="Move" Click="MoveObjectClick" Margin="2">

@@ -11,11 +11,11 @@ public partial class ToolBar : UserControl
     }
 
     #region Navigation buttons
-    private void LookOutclick(object sender, RoutedEventArgs e)
+    private void LookHandClick(object sender, RoutedEventArgs e)
     {
         throw new NotImplementedException();
     }
-
+    
     private void MoveObjectClick(object sender, RoutedEventArgs e)
     {
         throw new NotImplementedException();
