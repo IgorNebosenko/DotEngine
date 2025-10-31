@@ -8,4 +8,8 @@
     <SolidColorBrush x:Key="TreeBackgroundBrush" Color="{DynamicResource TreeBackgroundColor}"/>
     <SolidColorBrush x:Key="TreeForegroundBrush" Color="{DynamicResource TreeForegroundColor}"/>
 
+    <Style TargetType="TreeViewItem">
+        <Setter Property="Foreground" Value="{DynamicResource TreeForegroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource TreeBackgroundBrush}"/>
+    </Style>
 </ResourceDictionary>

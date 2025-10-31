@@ -1,14 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <Color x:Key="BackgroundColor">#FF1E1E1E</Color>
     <Color x:Key="ButtonColor">#FF2D2D30</Color>
     <Color x:Key="MenuItemColor">#FF2D2D30</Color>
     <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
-    
+
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
-    
+
     <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#FF2D2D30"/>
     <SolidColorBrush x:Key="MenuForegroundBrush" Color="#FFEFEFEF"/>
     <SolidColorBrush x:Key="MenuHoverBrush" Color="#FF3E3E42"/>
@@ -20,25 +20,24 @@
     <SolidColorBrush x:Key="SubMenuBackgroundBrush" Color="#FF2D2D30"/>
     <SolidColorBrush x:Key="SubMenuForegroundBrush" Color="#FFEFEFEF"/>
     <SolidColorBrush x:Key="SubMenuArrowBrush" Color="#FFEFEFEF"/>
-    
+
     <SolidColorBrush x:Key="IconColorBrush" Color="#FFFFFFFF"/>
     <Color x:Key="ToolbarButtonHoverColor">White</Color>
-    
+
     <Color x:Key="PanelBackgroundColor">#FF252526</Color>
-    <Color x:Key="PanelBorderColor">#444444</Color>
+    <Color x:Key="PanelBorderColor">#FF3C3C3C</Color>
     <Color x:Key="HeaderBackgroundColor">#FF2D2D30</Color>
     <Color x:Key="HeaderForegroundColor">#FFFFFFFF</Color>
     <Color x:Key="TreeBackgroundColor">#FF1E1E1E</Color>
     <Color x:Key="TreeForegroundColor">#FFFFFFFF</Color>
-    
-    <Color x:Key="IconColor">#FFFFFFFF</Color>
-    <SolidColorBrush x:Key="IconBrush" Color="{StaticResource IconColor}"/>
-    
+
+    <SolidColorBrush x:Key="IconBrush" Color="#FFFFFFFF"/>
+
     <Style TargetType="Window">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>   
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
     </Style>
-    
+
     <Style TargetType="Button">
         <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
