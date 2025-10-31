@@ -32,4 +32,27 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ToolbarButton" TargetType="Button">
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Rectangle Fill="{DynamicResource IconColorBrush}">
+                                <Rectangle.OpacityMask>
+                                    <ImageBrush ImageSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" Stretch="Uniform"/>
+                                </Rectangle.OpacityMask>
+                            </Rectangle>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

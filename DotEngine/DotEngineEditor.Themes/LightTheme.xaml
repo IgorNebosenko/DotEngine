@@ -18,7 +18,7 @@
     <SolidColorBrush x:Key="SubMenuForegroundBrush" Color="#222222"/>
     <SolidColorBrush x:Key="SubMenuArrowBrush" Color="#222222"/>
     
-    <SolidColorBrush x:Key="IconColorBrush" Color="DarkGray"/>
+    <SolidColorBrush x:Key="IconColorBrush" Color="#FF2D2D30"/>
     
     <Color x:Key="IconColor">#FF000000</Color>
     <SolidColorBrush x:Key="IconBrush" Color="{StaticResource IconColor}"/>
