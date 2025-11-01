@@ -22,7 +22,7 @@
                                    Foreground="{DynamicResource ForegroundBrush}">
             <avalondock:LayoutRoot>
                 <avalondock:LayoutPanel Orientation="Horizontal">
-
+                    
                     <avalondock:LayoutAnchorablePaneGroup DockWidth="250">
                         <avalondock:LayoutAnchorablePane>
                             <avalondock:LayoutAnchorable x:Name="HierarchyPanelItem"
@@ -33,9 +33,9 @@
                             </avalondock:LayoutAnchorable>
                         </avalondock:LayoutAnchorablePane>
                     </avalondock:LayoutAnchorablePaneGroup>
-
+                    
                     <avalondock:LayoutPanel Orientation="Vertical">
-
+                        
                         <avalondock:LayoutDocumentPaneGroup>
                             <avalondock:LayoutDocumentPane>
                                 <avalondock:LayoutDocument Title="Scene View">
@@ -52,7 +52,7 @@
                                 </avalondock:LayoutDocument>
                             </avalondock:LayoutDocumentPane>
                         </avalondock:LayoutDocumentPaneGroup>
-
+                        
                         <avalondock:LayoutAnchorablePaneGroup DockHeight="200">
                             <avalondock:LayoutAnchorablePane>
 
@@ -66,19 +66,14 @@
                                 <avalondock:LayoutAnchorable Title="Console"
                                                              CanClose="True"
                                                              CanHide="True">
-                                    <Grid Background="{DynamicResource PanelBackgroundBrush}">
-                                        <TextBlock Text="Console output"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{DynamicResource ForegroundBrush}"/>
-                                    </Grid>
+                                    <userControls:ConsolePanel x:Name="Console"/>
                                 </avalondock:LayoutAnchorable>
 
                             </avalondock:LayoutAnchorablePane>
                         </avalondock:LayoutAnchorablePaneGroup>
 
                     </avalondock:LayoutPanel>
-
+                    
                     <avalondock:LayoutAnchorablePaneGroup DockWidth="300">
                         <avalondock:LayoutAnchorablePane>
                             <avalondock:LayoutAnchorable Title="Inspector"

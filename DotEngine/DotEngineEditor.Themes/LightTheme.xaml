@@ -21,7 +21,7 @@
     <SolidColorBrush x:Key="IconColorBrush" Color="#FF2D2D30"/>
     <Color x:Key="ToolbarButtonHoverColor">Black</Color>
 
-    <Color x:Key="PanelBackgroundColor">#FFF2F2F2</Color>
+    <Color x:Key="PanelBackgroundColor">#FFF8F8F8</Color>
     <Color x:Key="PanelBorderColor">#CCCCCC</Color>
     <Color x:Key="HeaderBackgroundColor">#FFEFEFEF</Color>
     <Color x:Key="HeaderForegroundColor">#FF000000</Color>
@@ -32,6 +32,18 @@
 
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
+
+    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{StaticResource PanelBackgroundColor}"/>
+    <SolidColorBrush x:Key="PanelBorderBrush" Color="{StaticResource PanelBorderColor}"/>
+
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#F5F5F5"/>
+    <SolidColorBrush x:Key="ButtonPrimaryBackgroundBrush" Color="#3A5BD9"/>
+    <SolidColorBrush x:Key="ButtonDangerBackgroundBrush" Color="#E57373"/>
+
+    <SolidColorBrush x:Key="ConsoleInfoBrush" Color="#303030"/>
+    <SolidColorBrush x:Key="ConsoleWarnBrush" Color="#C07A00"/>
+    <SolidColorBrush x:Key="ConsoleErrorBrush" Color="#D83A3A"/>
 
     <Style TargetType="Window">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>

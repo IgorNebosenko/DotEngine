@@ -54,5 +54,13 @@
 	<ItemGroup>
 	    <PackageReference Include="Dirkster.AvalonDock" Version="3.8.1.240924" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <Page Update="ConsolePanelTheme.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	    <XamlRuntime>Wpf</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	</ItemGroup>
 
 </Project>

@@ -33,6 +33,18 @@
 
     <SolidColorBrush x:Key="IconBrush" Color="#FFFFFFFF"/>
 
+    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{StaticResource PanelBackgroundColor}"/>
+    <SolidColorBrush x:Key="PanelBorderBrush" Color="{StaticResource PanelBorderColor}"/>
+
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#222222"/>
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#2F2F2F"/>
+    <SolidColorBrush x:Key="ButtonPrimaryBackgroundBrush" Color="#3A5BD9"/>
+    <SolidColorBrush x:Key="ButtonDangerBackgroundBrush" Color="#804040"/>
+
+    <SolidColorBrush x:Key="ConsoleInfoBrush" Color="#C0C0C0"/>
+    <SolidColorBrush x:Key="ConsoleWarnBrush" Color="#E0AE3A"/>
+    <SolidColorBrush x:Key="ConsoleErrorBrush" Color="#E05A5A"/>
+
     <Style TargetType="Window">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>

@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="DotEngineEditor.UserControls.ConsolePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Background="{DynamicResource PanelBackgroundBrush}">
+
+    <Grid Background="{DynamicResource PanelBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="32"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" LastChildFill="True" Background="{DynamicResource BackgroundBrush}">
+            <StackPanel Orientation="Horizontal" Margin="6,0,6,0">
+                <ComboBox x:Name="FilterCombo"
+                          Width="140"
+                          VerticalAlignment="Center"
+                          SelectedIndex="0"
+                          ItemsSource="{Binding FilterItems, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          SelectedItem="{Binding SelectedFilter, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}"
+                          Background="{DynamicResource ControlBackgroundBrush}"
+                          Foreground="{DynamicResource ForegroundBrush}"/>
+                <CheckBox x:Name="AutoScrollCheck"
+                          Margin="8,0,0,0"
+                          VerticalAlignment="Center"
+                          IsChecked="{Binding IsAutoScroll, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay}"
+                          Foreground="{DynamicResource ForegroundBrush}">
+                    AutoScroll
+                </CheckBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,6,0">
+                <Button x:Name="CopyButton"
+                        Width="80"
+                        Height="24"
+                        Margin="0,4,6,4"
+                        Click="OnCopy"
+                        Background="{DynamicResource ButtonBackgroundBrush}"
+                        Foreground="{DynamicResource ForegroundBrush}">
+                    Copy
+                </Button>
+                <Button x:Name="ClearButton"
+                        Width="80"
+                        Height="24"
+                        Margin="0,4,0,4"
+                        Click="OnClear"
+                        Background="{DynamicResource ButtonDangerBackgroundBrush}"
+                        Foreground="{DynamicResource ForegroundBrush}">
+                    Clear
+                </Button>
+            </StackPanel>
+        </DockPanel>
+
+        <Border Grid.Row="1"
+                Margin="0"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource PanelBorderBrush}"
+                Background="{DynamicResource ControlBackgroundBrush}">
+            <ListView x:Name="List"
+                      ItemsSource="{Binding VisibleLogs, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                      Background="{DynamicResource ControlBackgroundBrush}"
+                      BorderThickness="0"
+                      VirtualizingPanel.IsVirtualizing="True"
+                      VirtualizingPanel.ScrollUnit="Pixel"
+                      ScrollViewer.CanContentScroll="False"
+                      SelectionMode="Extended">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="4"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Level}" Value="Info">
+                                <Setter Property="Foreground" Value="{DynamicResource ConsoleInfoBrush}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Level}" Value="Warning">
+                                <Setter Property="Foreground" Value="{DynamicResource ConsoleWarnBrush}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Level}" Value="Error">
+                                <Setter Property="Foreground" Value="{DynamicResource ConsoleErrorBrush}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False">
+                        <GridViewColumn Width="110" Header="Time" DisplayMemberBinding="{Binding Time}"/>
+                        <GridViewColumn Width="90" Header="Level" DisplayMemberBinding="{Binding Level}"/>
+                        <GridViewColumn Width="Auto" Header="Message" DisplayMemberBinding="{Binding Message}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+
+        <Grid Grid.Row="2" Background="{DynamicResource BackgroundBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="InputBox"
+                     Grid.Column="0"
+                     Margin="6"
+                     VerticalContentAlignment="Center"
+                     Background="{DynamicResource ControlBackgroundBrush}"
+                     Foreground="{DynamicResource ForegroundBrush}"
+                     KeyDown="OnInputKeyDown"/>
+            <Button x:Name="RunButton"
+                    Grid.Column="1"
+                    Margin="0,6,6,6"
+                    Click="OnRun"
+                    Background="{DynamicResource ButtonPrimaryBackgroundBrush}"
+                    Foreground="{DynamicResource ForegroundBrush}">
+                Run
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

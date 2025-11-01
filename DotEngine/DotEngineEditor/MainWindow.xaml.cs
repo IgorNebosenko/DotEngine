@@ -1,21 +1,24 @@
 ﻿using System.Windows;
 using DotEngineEditor.Themes;
+using DotEngineEditor.UserControls;
 
-namespace DotEngineEditor;
-
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
+namespace DotEngineEditor
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
-    }
+        public MainWindow()
+        {
+            InitializeComponent();
+            Console.Info("Editor started");
+            Console.Warn("Theme system initialized");
+        }
 
-    private void OnTestButtonClick(object sender, RoutedEventArgs e)
-    {
-        var app = (App)Application.Current;
-        app.SetTheme(app.Theme == ThemeName.DarkTheme ? ThemeName.LightTheme : ThemeName.DarkTheme);
+        private void OnTestButtonClick(object sender, RoutedEventArgs e)
+        {
+            var app = (App)Application.Current;
+            var newTheme = app.Theme == ThemeName.DarkTheme ? ThemeName.LightTheme : ThemeName.DarkTheme;
+            app.SetTheme(newTheme);
+            Console.Info($"Theme switched to {newTheme}");
+        }
     }
 }
