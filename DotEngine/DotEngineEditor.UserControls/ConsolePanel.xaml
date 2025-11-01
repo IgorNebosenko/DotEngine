@@ -100,20 +100,20 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="InputBox"
+            <TextBox x:Name="SearchBox"
                      Grid.Column="0"
                      Margin="6"
                      VerticalContentAlignment="Center"
                      Background="{DynamicResource ControlBackgroundBrush}"
                      Foreground="{DynamicResource ForegroundBrush}"
-                     KeyDown="OnInputKeyDown"/>
-            <Button x:Name="RunButton"
+                     TextChanged="OnSearchChanged"/>
+            <Button x:Name="SearchClearButton"
                     Grid.Column="1"
                     Margin="0,6,6,6"
-                    Click="OnRun"
+                    Click="OnSearchClear"
                     Background="{DynamicResource ButtonPrimaryBackgroundBrush}"
                     Foreground="{DynamicResource ForegroundBrush}">
-                Run
+                Clear Search
             </Button>
         </Grid>
     </Grid>

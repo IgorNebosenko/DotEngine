@@ -48,9 +48,8 @@ namespace DotEngineEditor.UserControls
             set => SetValue(VisibleLogsProperty, value);
         }
 
-        public event Action<string>? CommandEntered;
-
         readonly ObservableCollection<LogEntry> _allLogs = new ObservableCollection<LogEntry>();
+        string _searchQuery = string.Empty;
 
         public ConsolePanel()
         {
@@ -78,9 +77,12 @@ namespace DotEngineEditor.UserControls
         void ApplyFilter()
         {
             var filter = SelectedFilter;
-            var items = filter == "All"
-                ? _allLogs
-                : new ObservableCollection<LogEntry>(_allLogs.Where(e => e.Level.ToString() == filter));
+            var query = _searchQuery.ToLowerInvariant();
+            var items = _allLogs.Where(e =>
+                (filter == "All" || e.Level.ToString() == filter) &&
+                (string.IsNullOrEmpty(query) || e.Message.ToLowerInvariant().Contains(query))
+            );
+
             VisibleLogs.Clear();
             foreach (var i in items) VisibleLogs.Add(i);
         }
@@ -118,17 +120,15 @@ namespace DotEngineEditor.UserControls
             Clipboard.SetText(all);
         }
 
-        void OnRun(object sender, RoutedEventArgs e)
+        void OnSearchChanged(object sender, TextChangedEventArgs e)
         {
-            var text = InputBox.Text?.Trim() ?? string.Empty;
-            if (string.IsNullOrEmpty(text)) return;
-            CommandEntered?.Invoke(text);
-            InputBox.Text = string.Empty;
+            _searchQuery = SearchBox.Text.Trim();
+            ApplyFilter();
         }
 
-        void OnInputKeyDown(object sender, KeyEventArgs e)
+        void OnSearchClear(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Enter) OnRun(this, new RoutedEventArgs());
+            SearchBox.Text = string.Empty;
         }
     }
 }
