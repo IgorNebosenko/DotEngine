@@ -11,15 +11,14 @@
         Width="1200"
         Background="{DynamicResource BackgroundBrush}">
 
-    <DockPanel LastChildFill="True"
-               Background="{DynamicResource BackgroundBrush}">
-
+    <DockPanel LastChildFill="True" Background="{DynamicResource BackgroundBrush}">
         <userControls:MenuBar DockPanel.Dock="Top"/>
         <userControls:ToolBar DockPanel.Dock="Top"/>
 
         <avalondock:DockingManager x:Name="DockManager"
                                    Background="{DynamicResource PanelBackgroundBrush}"
                                    Foreground="{DynamicResource ForegroundBrush}">
+
             <avalondock:LayoutRoot>
                 <avalondock:LayoutPanel Orientation="Horizontal">
                     
@@ -33,9 +32,9 @@
                             </avalondock:LayoutAnchorable>
                         </avalondock:LayoutAnchorablePane>
                     </avalondock:LayoutAnchorablePaneGroup>
-                    
+
                     <avalondock:LayoutPanel Orientation="Vertical">
-                        
+
                         <avalondock:LayoutDocumentPaneGroup>
                             <avalondock:LayoutDocumentPane>
                                 <avalondock:LayoutDocument Title="Scene View">
@@ -52,28 +51,26 @@
                                 </avalondock:LayoutDocument>
                             </avalondock:LayoutDocumentPane>
                         </avalondock:LayoutDocumentPaneGroup>
-                        
+
                         <avalondock:LayoutAnchorablePaneGroup DockHeight="200">
                             <avalondock:LayoutAnchorablePane>
-
                                 <avalondock:LayoutAnchorable Title="Project"
                                                              CanClose="True"
                                                              CanHide="True"
                                                              IsSelected="True">
                                     <userControls:ProjectPanel/>
                                 </avalondock:LayoutAnchorable>
-
-                                <avalondock:LayoutAnchorable Title="Console"
+                                <avalondock:LayoutAnchorable x:Name="ConsoleItem"
+                                                             Title="Console"
                                                              CanClose="True"
                                                              CanHide="True">
                                     <userControls:ConsolePanel x:Name="Console"/>
                                 </avalondock:LayoutAnchorable>
-
                             </avalondock:LayoutAnchorablePane>
                         </avalondock:LayoutAnchorablePaneGroup>
 
                     </avalondock:LayoutPanel>
-                    
+
                     <avalondock:LayoutAnchorablePaneGroup DockWidth="300">
                         <avalondock:LayoutAnchorablePane>
                             <avalondock:LayoutAnchorable Title="Inspector"

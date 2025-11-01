@@ -2,12 +2,21 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="BackgroundColor">#FF1E1E1E</Color>
+    <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
     <Color x:Key="ButtonColor">#FF2D2D30</Color>
     <Color x:Key="MenuItemColor">#FF2D2D30</Color>
-    <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="ToolbarButtonHoverColor">White</Color>
+    <Color x:Key="PanelBackgroundColor">#FF252526</Color>
+    <Color x:Key="PanelBorderColor">#FF3C3C3C</Color>
+    <Color x:Key="HeaderBackgroundColor">#FF2D2D30</Color>
+    <Color x:Key="HeaderForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="TreeBackgroundColor">#FF1E1E1E</Color>
+    <Color x:Key="TreeForegroundColor">#FFFFFFFF</Color>
 
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
+    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{StaticResource PanelBackgroundColor}"/>
+    <SolidColorBrush x:Key="PanelBorderBrush" Color="{StaticResource PanelBorderColor}"/>
 
     <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#FF2D2D30"/>
     <SolidColorBrush x:Key="MenuForegroundBrush" Color="#FFEFEFEF"/>
@@ -22,19 +31,7 @@
     <SolidColorBrush x:Key="SubMenuArrowBrush" Color="#FFEFEFEF"/>
 
     <SolidColorBrush x:Key="IconColorBrush" Color="#FFFFFFFF"/>
-    <Color x:Key="ToolbarButtonHoverColor">White</Color>
-
-    <Color x:Key="PanelBackgroundColor">#FF252526</Color>
-    <Color x:Key="PanelBorderColor">#FF3C3C3C</Color>
-    <Color x:Key="HeaderBackgroundColor">#FF2D2D30</Color>
-    <Color x:Key="HeaderForegroundColor">#FFFFFFFF</Color>
-    <Color x:Key="TreeBackgroundColor">#FF1E1E1E</Color>
-    <Color x:Key="TreeForegroundColor">#FFFFFFFF</Color>
-
     <SolidColorBrush x:Key="IconBrush" Color="#FFFFFFFF"/>
-
-    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{StaticResource PanelBackgroundColor}"/>
-    <SolidColorBrush x:Key="PanelBorderBrush" Color="{StaticResource PanelBorderColor}"/>
 
     <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#222222"/>
     <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#2F2F2F"/>

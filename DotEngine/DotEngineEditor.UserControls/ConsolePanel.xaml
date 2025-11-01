@@ -39,7 +39,8 @@
                         Margin="0,4,6,4"
                         Click="OnCopy"
                         Background="{DynamicResource ButtonBackgroundBrush}"
-                        Foreground="{DynamicResource ForegroundBrush}">
+                        Foreground="{DynamicResource ForegroundBrush}"
+                        Cursor="Hand">
                     Copy
                 </Button>
                 <Button x:Name="ClearButton"
@@ -48,14 +49,14 @@
                         Margin="0,4,0,4"
                         Click="OnClear"
                         Background="{DynamicResource ButtonDangerBackgroundBrush}"
-                        Foreground="{DynamicResource ForegroundBrush}">
+                        Foreground="{DynamicResource ForegroundBrush}"
+                        Cursor="Hand">
                     Clear
                 </Button>
             </StackPanel>
         </DockPanel>
 
         <Border Grid.Row="1"
-                Margin="0"
                 BorderThickness="1"
                 BorderBrush="{DynamicResource PanelBorderBrush}"
                 Background="{DynamicResource ControlBackgroundBrush}">
@@ -112,7 +113,8 @@
                     Margin="0,6,6,6"
                     Click="OnSearchClear"
                     Background="{DynamicResource ButtonPrimaryBackgroundBrush}"
-                    Foreground="{DynamicResource ForegroundBrush}">
+                    Foreground="{DynamicResource ForegroundBrush}"
+                    Cursor="Hand">
                 Clear Search
             </Button>
         </Grid>

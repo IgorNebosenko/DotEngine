@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace DotEngineEditor.UserControls
 {
@@ -19,7 +18,7 @@ namespace DotEngineEditor.UserControls
             public string Message { get; set; }
         }
 
-        public ObservableCollection<string> FilterItems { get; } = new ObservableCollection<string> { "All", "Info", "Warning", "Error" };
+        public ObservableCollection<string> FilterItems { get; } = new() { "All", "Info", "Warning", "Error" };
 
         public static readonly DependencyProperty IsAutoScrollProperty =
             DependencyProperty.Register(nameof(IsAutoScroll), typeof(bool), typeof(ConsolePanel), new PropertyMetadata(true));
@@ -48,8 +47,8 @@ namespace DotEngineEditor.UserControls
             set => SetValue(VisibleLogsProperty, value);
         }
 
-        readonly ObservableCollection<LogEntry> _allLogs = new ObservableCollection<LogEntry>();
-        string _searchQuery = string.Empty;
+        private readonly ObservableCollection<LogEntry> _allLogs = new();
+        private string _searchQuery = string.Empty;
 
         public ConsolePanel()
         {
@@ -74,7 +73,7 @@ namespace DotEngineEditor.UserControls
         public void Warn(string message) => Append(LogLevel.Warning, message);
         public void Error(string message) => Append(LogLevel.Error, message);
 
-        void ApplyFilter()
+        private void ApplyFilter()
         {
             var filter = SelectedFilter;
             var query = _searchQuery.ToLowerInvariant();
@@ -87,46 +86,48 @@ namespace DotEngineEditor.UserControls
             foreach (var i in items) VisibleLogs.Add(i);
         }
 
-        void ScrollToEnd()
+        private void ScrollToEnd()
         {
             if (List.Items.Count == 0) return;
-            List.ScrollIntoView(List.Items[List.Items.Count - 1]);
+            List.ScrollIntoView(List.Items[^1]);
         }
 
-        static void OnFilterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnFilterChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var c = (ConsolePanel)d;
             c.ApplyFilter();
             if (c.IsAutoScroll) c.ScrollToEnd();
         }
 
-        void OnClear(object sender, RoutedEventArgs e)
+        private void OnClear(object sender, RoutedEventArgs e)
         {
             _allLogs.Clear();
             VisibleLogs.Clear();
         }
 
-        void OnCopy(object sender, RoutedEventArgs e)
+        private void OnCopy(object sender, RoutedEventArgs e)
         {
             if (List.SelectedItems.Count > 0)
             {
                 var sb = new StringBuilder();
-                foreach (var i in List.SelectedItems.Cast<LogEntry>()) sb.AppendLine($"{i.Time}\t{i.Level}\t{i.Message}");
+                foreach (var i in List.SelectedItems.Cast<LogEntry>())
+                    sb.AppendLine($"{i.Time}\t{i.Level}\t{i.Message}");
                 Clipboard.SetText(sb.ToString());
                 return;
             }
+
             if (VisibleLogs.Count == 0) return;
             var all = string.Join(Environment.NewLine, VisibleLogs.Select(i => $"{i.Time}\t{i.Level}\t{i.Message}"));
             Clipboard.SetText(all);
         }
 
-        void OnSearchChanged(object sender, TextChangedEventArgs e)
+        private void OnSearchChanged(object sender, TextChangedEventArgs e)
         {
             _searchQuery = SearchBox.Text.Trim();
             ApplyFilter();
         }
 
-        void OnSearchClear(object sender, RoutedEventArgs e)
+        private void OnSearchClear(object sender, RoutedEventArgs e)
         {
             SearchBox.Text = string.Empty;
         }
