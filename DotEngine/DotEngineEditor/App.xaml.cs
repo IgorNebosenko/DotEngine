@@ -10,6 +10,11 @@ namespace DotEngineEditor
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
+            
+            //Fix tabs
+            //TODO need to load it from configs
+            SetTheme(ThemeName.DarkTheme);
+            SetTheme(ThemeName.LightTheme);
             SetTheme(ThemeName.DarkTheme);
         }
 
