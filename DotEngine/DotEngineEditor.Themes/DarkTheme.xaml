@@ -7,6 +7,8 @@
     <Color x:Key="PanelBorderColor">#FF3C3C3C</Color>
     <Color x:Key="HeaderBackgroundColor">#FF2D2D30</Color>
     <Color x:Key="HeaderForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="TreeBackgroundColor">#FF252526</Color>
+    <Color x:Key="TreeForegroundColor">#FFFFFFFF</Color>
 
     <Color x:Key="MenuBackgroundColor">#FF2D2D30</Color>
     <Color x:Key="MenuForegroundColor">#FFEFEFEF</Color>
@@ -53,6 +55,8 @@
     <SolidColorBrush x:Key="PanelBorderBrush" Color="{StaticResource PanelBorderColor}"/>
     <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="{StaticResource HeaderBackgroundColor}"/>
     <SolidColorBrush x:Key="HeaderForegroundBrush" Color="{StaticResource HeaderForegroundColor}"/>
+    <SolidColorBrush x:Key="TreeBackgroundBrush" Color="{StaticResource TreeBackgroundColor}"/>
+    <SolidColorBrush x:Key="TreeForegroundBrush" Color="{StaticResource TreeForegroundColor}"/>
 
     <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource MenuBackgroundColor}"/>
     <SolidColorBrush x:Key="MenuForegroundBrush" Color="{StaticResource MenuForegroundColor}"/>
