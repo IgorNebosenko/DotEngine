@@ -25,7 +25,8 @@
 
                     <avalondock:LayoutAnchorablePaneGroup DockWidth="250">
                         <avalondock:LayoutAnchorablePane>
-                            <avalondock:LayoutAnchorable x:Name="HierarchyPanel" Title="Hierarchy"
+                            <avalondock:LayoutAnchorable x:Name="HierarchyPanelItem"
+                                                         Title="Hierarchy"
                                                          CanClose="True"
                                                          CanHide="True">
                                 <userControls:HierarchyPanel/>
@@ -54,16 +55,14 @@
 
                         <avalondock:LayoutAnchorablePaneGroup DockHeight="200">
                             <avalondock:LayoutAnchorablePane>
+
                                 <avalondock:LayoutAnchorable Title="Project"
                                                              CanClose="True"
-                                                             CanHide="True">
-                                    <Grid Background="{DynamicResource PanelBackgroundBrush}">
-                                        <TextBlock Text="Project panel"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{DynamicResource ForegroundBrush}"/>
-                                    </Grid>
+                                                             CanHide="True"
+                                                             IsSelected="True">
+                                    <userControls:ProjectPanel/>
                                 </avalondock:LayoutAnchorable>
+
                                 <avalondock:LayoutAnchorable Title="Console"
                                                              CanClose="True"
                                                              CanHide="True">
@@ -74,6 +73,7 @@
                                                    Foreground="{DynamicResource ForegroundBrush}"/>
                                     </Grid>
                                 </avalondock:LayoutAnchorable>
+
                             </avalondock:LayoutAnchorablePane>
                         </avalondock:LayoutAnchorablePaneGroup>
 

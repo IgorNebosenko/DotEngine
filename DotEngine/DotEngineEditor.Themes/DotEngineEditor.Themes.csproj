@@ -41,6 +41,14 @@
       <Resource Include="Resources\scale.png" />
       <None Remove="Resources\step.png" />
       <Resource Include="Resources\step.png" />
+      <None Remove="Resources\SceneIcon.png" />
+      <Resource Include="Resources\SceneIcon.png" />
+      <None Remove="Resources\CsIcon.png" />
+      <Resource Include="Resources\CsIcon.png" />
+      <None Remove="Resources\PrefabIcon.png" />
+      <Resource Include="Resources\PrefabIcon.png" />
+      <None Remove="Resources\MaterialIcon.png" />
+      <Resource Include="Resources\MaterialIcon.png" />
     </ItemGroup>
 	
 	<ItemGroup>

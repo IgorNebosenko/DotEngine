@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="DotEngineEditor.UserControls.ProjectPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DotEngineEditor.Themes;component/ProjectPanelTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{DynamicResource PanelBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="160"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0"
+                   Background="{DynamicResource PanelHeaderBrush}">
+            <TextBlock Text="Project"
+                       Margin="8,0,0,0"
+                       VerticalAlignment="Center"
+                       Foreground="{DynamicResource ForegroundBrush}"
+                       FontWeight="Bold"/>
+        </DockPanel>
+
+        <Grid Grid.Row="1" Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border BorderThickness="1"
+                    BorderBrush="{DynamicResource PanelBorderBrush}"
+                    Background="{DynamicResource PanelBackgroundBrush}"
+                    CornerRadius="3">
+                <TreeView x:Name="FolderTree"
+                          Foreground="{DynamicResource ForegroundBrush}"
+                          Background="{DynamicResource PanelBackgroundBrush}"
+                          BorderThickness="0"
+                          SelectedItemChanged="OnFolderSelected">
+                    <TreeViewItem Header="Assets" IsExpanded="True">
+                        <TreeViewItem Header="Scenes"/>
+                        <TreeViewItem Header="Scripts"/>
+                        <TreeViewItem Header="Prefabs"/>
+                        <TreeViewItem Header="Materials"/>
+                        <TreeViewItem Header="Textures"/>
+                    </TreeViewItem>
+                </TreeView>
+            </Border>
+
+            <ScrollViewer Grid.Column="1"
+                          Margin="6,0,0,0"
+                          Background="{DynamicResource PanelBackgroundBrush}"
+                          VerticalScrollBarVisibility="Auto">
+                <WrapPanel x:Name="FileGrid"
+                           Orientation="Horizontal"
+                           ItemWidth="90"
+                           ItemHeight="90"/>
+            </ScrollViewer>
+        </Grid>
+
+        <Border Grid.Row="2"
+                BorderBrush="{DynamicResource PanelBorderBrush}"
+                BorderThickness="1"
+                Background="{DynamicResource PanelHeaderBrush}"
+                CornerRadius="3"
+                Margin="4,0,4,4">
+            <Grid Margin="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Path:"
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource ForegroundBrush}"
+                           FontWeight="Bold"/>
+                <TextBlock x:Name="SelectedPathText"
+                           Grid.Column="1"
+                           Margin="8,0,0,0"
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource ForegroundBrush}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
