@@ -3,44 +3,95 @@
 
     <Color x:Key="BackgroundColor">#FF1E1E1E</Color>
     <Color x:Key="ForegroundColor">#FFFFFFFF</Color>
-    <Color x:Key="ButtonColor">#FF2D2D30</Color>
-    <Color x:Key="MenuItemColor">#FF2D2D30</Color>
-    <Color x:Key="ToolbarButtonHoverColor">White</Color>
     <Color x:Key="PanelBackgroundColor">#FF252526</Color>
     <Color x:Key="PanelBorderColor">#FF3C3C3C</Color>
     <Color x:Key="HeaderBackgroundColor">#FF2D2D30</Color>
     <Color x:Key="HeaderForegroundColor">#FFFFFFFF</Color>
-    <Color x:Key="TreeBackgroundColor">#FF1E1E1E</Color>
-    <Color x:Key="TreeForegroundColor">#FFFFFFFF</Color>
+
+    <Color x:Key="MenuBackgroundColor">#FF2D2D30</Color>
+    <Color x:Key="MenuForegroundColor">#FFEFEFEF</Color>
+    <Color x:Key="MenuHoverColor">#FF3E3E42</Color>
+    <Color x:Key="MenuHoverTextColor">#FFFFFFFF</Color>
+    <Color x:Key="MenuDisabledTextColor">#FF707070</Color>
+    <Color x:Key="MenuGestureColor">#FFAAAAAA</Color>
+    <Color x:Key="MenuBorderColor">#FF3C3C3C</Color>
+
+    <Color x:Key="SubMenuBackgroundColor">#FF2D2D30</Color>
+    <Color x:Key="SubMenuForegroundColor">#FFEFEFEF</Color>
+    <Color x:Key="SubMenuArrowColor">#FFEFEFEF</Color>
+
+    <Color x:Key="IconColor">#FFFFFFFF</Color>
+
+    <Color x:Key="ControlBackgroundColor">#FF222222</Color>
+    <Color x:Key="ButtonBackgroundColor">#FF2F2F2F</Color>
+    <Color x:Key="ButtonPrimaryBackgroundColor">#FF3A5BD9</Color>
+    <Color x:Key="ButtonDangerBackgroundColor">#FF804040</Color>
+
+    <Color x:Key="ConsoleInfoColor">#FFC0C0C0</Color>
+    <Color x:Key="ConsoleWarnColor">#FFE0AE3A</Color>
+    <Color x:Key="ConsoleErrorColor">#FFE05A5A</Color>
+
+    <Color x:Key="AxisXLabelBackgroundColor">#FF2A0000</Color>
+    <Color x:Key="AxisXTextColor">#FFFF4C4C</Color>
+    <Color x:Key="AxisXBorderColor">#FFFF4C4C</Color>
+
+    <Color x:Key="AxisYLabelBackgroundColor">#FF002A00</Color>
+    <Color x:Key="AxisYTextColor">#FF58D26B</Color>
+    <Color x:Key="AxisYBorderColor">#FF58D26B</Color>
+
+    <Color x:Key="AxisZLabelBackgroundColor">#FF00152A</Color>
+    <Color x:Key="AxisZTextColor">#FF4BA3EB</Color>
+    <Color x:Key="AxisZBorderColor">#FF4BA3EB</Color>
+
+    <Color x:Key="AxisWLabelBackgroundColor">#FF1E0030</Color>
+    <Color x:Key="AxisWTextColor">#FFB770FF</Color>
+    <Color x:Key="AxisWBorderColor">#FFB770FF</Color>
 
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
     <SolidColorBrush x:Key="PanelBackgroundBrush" Color="{StaticResource PanelBackgroundColor}"/>
     <SolidColorBrush x:Key="PanelBorderBrush" Color="{StaticResource PanelBorderColor}"/>
+    <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="{StaticResource HeaderBackgroundColor}"/>
+    <SolidColorBrush x:Key="HeaderForegroundBrush" Color="{StaticResource HeaderForegroundColor}"/>
 
-    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="#FF2D2D30"/>
-    <SolidColorBrush x:Key="MenuForegroundBrush" Color="#FFEFEFEF"/>
-    <SolidColorBrush x:Key="MenuHoverBrush" Color="#FF3E3E42"/>
-    <SolidColorBrush x:Key="MenuHoverTextBrush" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="MenuDisabledTextBrush" Color="#FF707070"/>
-    <SolidColorBrush x:Key="MenuGestureBrush" Color="#FFAAAAAA"/>
-    <SolidColorBrush x:Key="MenuBorderBrush" Color="#FF3C3C3C"/>
+    <SolidColorBrush x:Key="MenuBackgroundBrush" Color="{StaticResource MenuBackgroundColor}"/>
+    <SolidColorBrush x:Key="MenuForegroundBrush" Color="{StaticResource MenuForegroundColor}"/>
+    <SolidColorBrush x:Key="MenuHoverBrush" Color="{StaticResource MenuHoverColor}"/>
+    <SolidColorBrush x:Key="MenuHoverTextBrush" Color="{StaticResource MenuHoverTextColor}"/>
+    <SolidColorBrush x:Key="MenuDisabledTextBrush" Color="{StaticResource MenuDisabledTextColor}"/>
+    <SolidColorBrush x:Key="MenuGestureBrush" Color="{StaticResource MenuGestureColor}"/>
+    <SolidColorBrush x:Key="MenuBorderBrush" Color="{StaticResource MenuBorderColor}"/>
 
-    <SolidColorBrush x:Key="SubMenuBackgroundBrush" Color="#FF2D2D30"/>
-    <SolidColorBrush x:Key="SubMenuForegroundBrush" Color="#FFEFEFEF"/>
-    <SolidColorBrush x:Key="SubMenuArrowBrush" Color="#FFEFEFEF"/>
+    <SolidColorBrush x:Key="SubMenuBackgroundBrush" Color="{StaticResource SubMenuBackgroundColor}"/>
+    <SolidColorBrush x:Key="SubMenuForegroundBrush" Color="{StaticResource SubMenuForegroundColor}"/>
+    <SolidColorBrush x:Key="SubMenuArrowBrush" Color="{StaticResource SubMenuArrowColor}"/>
 
-    <SolidColorBrush x:Key="IconColorBrush" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="IconBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="IconColorBrush" Color="{StaticResource IconColor}"/>
 
-    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#222222"/>
-    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#2F2F2F"/>
-    <SolidColorBrush x:Key="ButtonPrimaryBackgroundBrush" Color="#3A5BD9"/>
-    <SolidColorBrush x:Key="ButtonDangerBackgroundBrush" Color="#804040"/>
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource ControlBackgroundColor}"/>
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="{StaticResource ButtonBackgroundColor}"/>
+    <SolidColorBrush x:Key="ButtonPrimaryBackgroundBrush" Color="{StaticResource ButtonPrimaryBackgroundColor}"/>
+    <SolidColorBrush x:Key="ButtonDangerBackgroundBrush" Color="{StaticResource ButtonDangerBackgroundColor}"/>
 
-    <SolidColorBrush x:Key="ConsoleInfoBrush" Color="#C0C0C0"/>
-    <SolidColorBrush x:Key="ConsoleWarnBrush" Color="#E0AE3A"/>
-    <SolidColorBrush x:Key="ConsoleErrorBrush" Color="#E05A5A"/>
+    <SolidColorBrush x:Key="ConsoleInfoBrush" Color="{StaticResource ConsoleInfoColor}"/>
+    <SolidColorBrush x:Key="ConsoleWarnBrush" Color="{StaticResource ConsoleWarnColor}"/>
+    <SolidColorBrush x:Key="ConsoleErrorBrush" Color="{StaticResource ConsoleErrorColor}"/>
+
+    <SolidColorBrush x:Key="AxisXLabelBackgroundBrush" Color="{StaticResource AxisXLabelBackgroundColor}"/>
+    <SolidColorBrush x:Key="AxisXTextBrush" Color="{StaticResource AxisXTextColor}"/>
+    <SolidColorBrush x:Key="AxisXBorderBrush" Color="{StaticResource AxisXBorderColor}"/>
+
+    <SolidColorBrush x:Key="AxisYLabelBackgroundBrush" Color="{StaticResource AxisYLabelBackgroundColor}"/>
+    <SolidColorBrush x:Key="AxisYTextBrush" Color="{StaticResource AxisYTextColor}"/>
+    <SolidColorBrush x:Key="AxisYBorderBrush" Color="{StaticResource AxisYBorderColor}"/>
+
+    <SolidColorBrush x:Key="AxisZLabelBackgroundBrush" Color="{StaticResource AxisZLabelBackgroundColor}"/>
+    <SolidColorBrush x:Key="AxisZTextBrush" Color="{StaticResource AxisZTextColor}"/>
+    <SolidColorBrush x:Key="AxisZBorderBrush" Color="{StaticResource AxisZBorderColor}"/>
+
+    <SolidColorBrush x:Key="AxisWLabelBackgroundBrush" Color="{StaticResource AxisWLabelBackgroundColor}"/>
+    <SolidColorBrush x:Key="AxisWTextBrush" Color="{StaticResource AxisWTextColor}"/>
+    <SolidColorBrush x:Key="AxisWBorderBrush" Color="{StaticResource AxisWBorderColor}"/>
 
     <Style TargetType="Window">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
@@ -48,7 +99,47 @@
     </Style>
 
     <Style TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
-        <Setter Property="Foreground" Value="{StaticResource ForegroundColor}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+    </Style>
+
+    <Style x:Key="VectorFieldHeader" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource HeaderBackgroundBrush}"/>
+        <Setter Property="Padding" Value="6,2"/>
+        <Setter Property="CornerRadius" Value="4,4,0,0"/>
+        <Setter Property="Margin" Value="0,0,0,2"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style x:Key="VectorFieldAxisLabel" TargetType="Border">
+        <Setter Property="MinWidth" Value="22"/>
+        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="Margin" Value="0,0,4,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="{DynamicResource PanelBackgroundBrush}"/>
+    </Style>
+
+    <Style x:Key="VectorFieldTextBox" TargetType="TextBox">
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+        <Setter Property="Padding" Value="6,2"/>
+        <Setter Property="Margin" Value="2,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CaretBrush" Value="{DynamicResource ForegroundBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="4">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="DotEngineEditor.UserControls.InspectorItems.Vector4Field"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             MinHeight="48"
+             HorizontalAlignment="Stretch"
+             Background="{DynamicResource PanelBackgroundBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Style="{StaticResource VectorFieldHeader}">
+            <TextBlock Text="{Binding Header, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       Foreground="{DynamicResource ForegroundBrush}"
+                       FontWeight="SemiBold"
+                       FontSize="12"/>
+        </Border>
+
+        <Border Grid.Row="1"
+                Background="{DynamicResource PanelBackgroundBrush}"
+                Padding="4,2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0"
+                        Style="{StaticResource VectorFieldAxisLabel}"
+                        Background="{DynamicResource AxisXLabelBackgroundBrush}">
+                    <TextBlock Text="X"
+                               Foreground="{DynamicResource AxisXTextBrush}"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBox Grid.Column="1"
+                         Style="{StaticResource VectorFieldTextBox}"
+                         BorderBrush="{DynamicResource AxisXBorderBrush}"
+                         Text="{Binding X, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+
+                <Border Grid.Column="2"
+                        Style="{StaticResource VectorFieldAxisLabel}"
+                        Background="{DynamicResource AxisYLabelBackgroundBrush}">
+                    <TextBlock Text="Y"
+                               Foreground="{DynamicResource AxisYTextBrush}"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBox Grid.Column="3"
+                         Style="{StaticResource VectorFieldTextBox}"
+                         BorderBrush="{DynamicResource AxisYBorderBrush}"
+                         Text="{Binding Y, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+
+                <Border Grid.Column="4"
+                        Style="{StaticResource VectorFieldAxisLabel}"
+                        Background="{DynamicResource AxisZLabelBackgroundBrush}">
+                    <TextBlock Text="Z"
+                               Foreground="{DynamicResource AxisZTextBrush}"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBox Grid.Column="5"
+                         Style="{StaticResource VectorFieldTextBox}"
+                         BorderBrush="{DynamicResource AxisZBorderBrush}"
+                         Text="{Binding Z, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+
+                <Border Grid.Column="6"
+                        Style="{StaticResource VectorFieldAxisLabel}"
+                        Background="{DynamicResource AxisWLabelBackgroundBrush}">
+                    <TextBlock Text="W"
+                               Foreground="{DynamicResource AxisWTextBrush}"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBox Grid.Column="7"
+                         Style="{StaticResource VectorFieldTextBox}"
+                         BorderBrush="{DynamicResource AxisWBorderBrush}"
+                         Text="{Binding W, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

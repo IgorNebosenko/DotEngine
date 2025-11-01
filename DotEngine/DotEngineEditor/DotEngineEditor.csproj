@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotEngineEditor.CustomControls\DotEngineEditor.CustomControls.csproj" />
     <ProjectReference Include="..\DotEngineEditor.Themes\DotEngineEditor.Themes.csproj" />
     <ProjectReference Include="..\DotEngineEditor.UserControls\DotEngineEditor.UserControls.csproj" />
     <PackageReference Include="Dirkster.AvalonDock" Version="3.8.1.240924" />

@@ -18,10 +18,9 @@
         <avalondock:DockingManager x:Name="DockManager"
                                    Background="{DynamicResource PanelBackgroundBrush}"
                                    Foreground="{DynamicResource ForegroundBrush}">
-
             <avalondock:LayoutRoot>
                 <avalondock:LayoutPanel Orientation="Horizontal">
-                    
+
                     <avalondock:LayoutAnchorablePaneGroup DockWidth="250">
                         <avalondock:LayoutAnchorablePane>
                             <avalondock:LayoutAnchorable x:Name="HierarchyPanelItem"
@@ -73,15 +72,11 @@
 
                     <avalondock:LayoutAnchorablePaneGroup DockWidth="300">
                         <avalondock:LayoutAnchorablePane>
-                            <avalondock:LayoutAnchorable Title="Inspector"
+                            <avalondock:LayoutAnchorable x:Name="InspectorPanel"
+                                                         Title="Inspector"
                                                          CanClose="True"
                                                          CanHide="True">
-                                <Grid Background="{DynamicResource PanelBackgroundBrush}">
-                                    <TextBlock Text="Inspector panel"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               Foreground="{DynamicResource ForegroundBrush}"/>
-                                </Grid>
+                                <userControls:InspectorPanel/>
                             </avalondock:LayoutAnchorable>
                         </avalondock:LayoutAnchorablePane>
                     </avalondock:LayoutAnchorablePaneGroup>
