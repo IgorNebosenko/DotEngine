@@ -12,78 +12,83 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Background="{DynamicResource PanelBackgroundBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="160"/>
-        </Grid.RowDefinitions>
-
-        <DockPanel Grid.Row="0"
-                   Background="{DynamicResource PanelHeaderBrush}">
-            <TextBlock Text="Project"
-                       Margin="8,0,0,0"
-                       VerticalAlignment="Center"
-                       Foreground="{DynamicResource ForegroundBrush}"
-                       FontWeight="Bold"/>
-        </DockPanel>
-
-        <Grid Grid.Row="1" Margin="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Border BorderThickness="1"
-                    BorderBrush="{DynamicResource PanelBorderBrush}"
-                    Background="{DynamicResource PanelBackgroundBrush}"
-                    CornerRadius="3">
-                <TreeView x:Name="FolderTree"
-                          Foreground="{DynamicResource ForegroundBrush}"
-                          Background="{DynamicResource PanelBackgroundBrush}"
-                          BorderThickness="0"
-                          SelectedItemChanged="OnFolderSelected">
-                    <TreeViewItem Header="Assets" IsExpanded="True">
-                        <TreeViewItem Header="Scenes"/>
-                        <TreeViewItem Header="Scripts"/>
-                        <TreeViewItem Header="Prefabs"/>
-                        <TreeViewItem Header="Materials"/>
-                        <TreeViewItem Header="Textures"/>
-                    </TreeViewItem>
-                </TreeView>
-            </Border>
-
-            <ScrollViewer Grid.Column="1"
-                          Margin="6,0,0,0"
-                          Background="{DynamicResource PanelBackgroundBrush}"
-                          VerticalScrollBarVisibility="Auto">
-                <WrapPanel x:Name="FileGrid"
-                           Orientation="Horizontal"
-                           ItemWidth="90"
-                           ItemHeight="90"/>
-            </ScrollViewer>
-        </Grid>
-
-        <Border Grid.Row="2"
+    <Grid Background="{DynamicResource PanelBackgroundBrush}"
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+        <Border Background="{DynamicResource PanelBackgroundBrush}"
                 BorderBrush="{DynamicResource PanelBorderBrush}"
                 BorderThickness="1"
-                Background="{DynamicResource PanelHeaderBrush}"
-                CornerRadius="3"
-                Margin="4,0,4,4">
-            <Grid Margin="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Text="Path:"
-                           VerticalAlignment="Center"
-                           Foreground="{DynamicResource ForegroundBrush}"
-                           FontWeight="Bold"/>
-                <TextBlock x:Name="SelectedPathText"
-                           Grid.Column="1"
-                           Margin="8,0,0,0"
-                           VerticalAlignment="Center"
-                           Foreground="{DynamicResource ForegroundBrush}"/>
+                CornerRadius="5"
+                Margin="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="{DynamicResource HeaderBackgroundBrush}">
+                    <TextBlock Text="Project"
+                               Foreground="{DynamicResource HeaderForegroundBrush}"
+                               Padding="5"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="1"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ScrollViewer Grid.Column="0"
+                                  Background="{DynamicResource TreeBackgroundBrush}"
+                                  VerticalScrollBarVisibility="Auto">
+                        <TreeView x:Name="FolderTree"
+                                  Background="{DynamicResource TreeBackgroundBrush}"
+                                  Foreground="{DynamicResource TreeForegroundBrush}"
+                                  BorderThickness="0"
+                                  SelectedItemChanged="OnFolderSelected"/>
+                    </ScrollViewer>
+
+                    <Border Grid.Column="1"
+                            Width="1"
+                            Background="{DynamicResource PanelBorderBrush}"
+                            Margin="0,4,0,4"/>
+
+                    <ScrollViewer Grid.Column="2"
+                                  Background="{DynamicResource TreeBackgroundBrush}"
+                                  VerticalScrollBarVisibility="Auto">
+                        <WrapPanel x:Name="FileGrid"
+                                   Orientation="Horizontal"
+                                   Margin="8"/>
+                    </ScrollViewer>
+                </Grid>
+
+                <Border Grid.Row="2"
+                        BorderBrush="{DynamicResource PanelBorderBrush}"
+                        BorderThickness="1,1,1,0"
+                        Background="{DynamicResource HeaderBackgroundBrush}"
+                        CornerRadius="0"
+                        Margin="4,0,4,4">
+                    <Grid Margin="8,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Path:"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource HeaderForegroundBrush}"
+                                   FontWeight="Bold"/>
+                        <TextBlock x:Name="SelectedPathText"
+                                   Grid.Column="1"
+                                   Margin="8,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource HeaderForegroundBrush}"/>
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
     </Grid>
