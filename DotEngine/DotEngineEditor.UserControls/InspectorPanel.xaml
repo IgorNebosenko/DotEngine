@@ -77,25 +77,15 @@
                           IsExpanded="True"
                           Margin="0,2,0,4">
                     <StackPanel Margin="10,5">
-                        <inspectorItems:Vector3Field Header="Position"
-                                                     X="{Binding PositionX}"
-                                                     Y="{Binding PositionY}"
-                                                     Z="{Binding PositionZ}"/>
+                        <inspectorItems:Vector3Field x:Name="PositionField" Header="Position"/>
                         <Separator Margin="0,5"/>
-                        <inspectorItems:Vector4Field Header="Rotation"
-                                                     X="{Binding RotationX}"
-                                                     Y="{Binding RotationY}"
-                                                     Z="{Binding RotationZ}"
-                                                     W="{Binding RotationW}"/>
-                        <inspectorItems:Vector3Field Header="Euler Angles"
-                                                     X="{Binding EulerX}"
-                                                     Y="{Binding EulerY}"
-                                                     Z="{Binding EulerZ}"/>
+                        <inspectorItems:Vector4Field x:Name="RotationField" Header="Rotation"/>
+                        <inspectorItems:Vector3Field x:Name="EulerAnglesField" Header="Euler Angles"/>
                         <Separator Margin="0,5"/>
-                        <inspectorItems:Vector3Field Header="Scale"
-                                                     X="{Binding ScaleX}"
-                                                     Y="{Binding ScaleY}"
-                                                     Z="{Binding ScaleZ}"/>
+                        <inspectorItems:Vector3Field x:Name="ScaleField" Header="Scale"
+                                                     X="1"
+                                                     Y="1"
+                                                     Z="1"/>
                     </StackPanel>
                 </Expander>
 

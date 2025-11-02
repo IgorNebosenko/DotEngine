@@ -13,9 +13,9 @@ namespace DotEngineEditor.UserControls
 
         public class LogEntry
         {
-            public string Time { get; set; }
+            public string? Time { get; set; }
             public LogLevel Level { get; set; }
-            public string Message { get; set; }
+            public string? Message { get; set; }
         }
 
         public ObservableCollection<string> FilterItems { get; } = new() { "All", "Info", "Warning", "Error" };
