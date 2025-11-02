@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Navigation;
 using DotEngineEditor.Themes;
 using Kernel.Project;
 
@@ -21,6 +22,9 @@ namespace DotEngineEditor
             SetTheme(ThemeName.DarkTheme);
             SetTheme(ThemeName.LightTheme);
             SetTheme(ThemeName.DarkTheme);
+            
+            //ToDo think about this load...
+            _projectInstance.AssetsInstance.Load();
         }
 
         public void SetTheme(ThemeName theme)

@@ -1,4 +1,6 @@
-﻿namespace Kernel.Project;
+﻿using Kernel.Project.Assets;
+
+namespace Kernel.Project;
 
 public class ProjectInstance
 {
@@ -16,12 +18,12 @@ public class ProjectInstance
     
     public ProjectInstance(string projectDirectory)
     {
+        AssetsInstance = new AssetsInstance(projectDirectory);
         
         Console.WriteLine("Stub");
         return;
         //TODO write all of this!
         
-        AssetsInstance = new AssetsInstance(projectDirectory);
         BinInstance = new BinInstance(projectDirectory);
         CacheInstance = new CacheInstance(projectDirectory);
         ConfigsInstance = new ConfigsInstance(projectDirectory);
@@ -39,5 +41,10 @@ public class ProjectInstance
             PackagesInstance,
             UserSettingsInstance
         ];
+    }
+
+    public void Load()
+    {
+        AssetsInstance.Load();
     }
 }
