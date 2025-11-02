@@ -1,15 +1,20 @@
 ﻿using System.Windows;
 using DotEngineEditor.Themes;
+using Kernel.Project;
 
 namespace DotEngineEditor
 {
     public partial class App : Application
     {
+        private ProjectInstance _projectInstance;
+        
         public ThemeName Theme { get; private set; }
 
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
+
+            _projectInstance = new ProjectInstance(@"D:/Test/subFolder");
             
             //Fix tabs
             //TODO need to load it from configs
