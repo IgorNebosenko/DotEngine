@@ -25,9 +25,6 @@ public class AssetsInstance : IProjectInstance
         var assetFiles = new List<string>(GetAllDirectoriesList());
         assetFiles.AddRange(Directory.GetFiles(FullPath, "*", SearchOption.AllDirectories));
         
-        foreach (var assetFile in assetFiles)
-            Console.WriteLine(assetFile);
-        
         CleanUpDJson(assetFiles);
         
         var dJsonFiles = new List<string>(Directory.GetFiles(FullPath, $"*{DJsonExtension}", SearchOption.AllDirectories));
@@ -50,20 +47,20 @@ public class AssetsInstance : IProjectInstance
         {
             var dir = stack.Pop();
 
-            IEnumerable<string> subdirs;
+            IEnumerable<string> subDirectories;
             try
             {
-                subdirs = Directory.EnumerateDirectories(dir);
+                subDirectories = Directory.EnumerateDirectories(dir);
             }
             catch
             {
                 continue;
             }
 
-            foreach (var subdir in subdirs)
+            foreach (var subDirectory in subDirectories)
             {
-                directories.Add(subdir);
-                stack.Push(subdir);
+                directories.Add(subDirectory);
+                stack.Push(subDirectory);
             }
         }
 
