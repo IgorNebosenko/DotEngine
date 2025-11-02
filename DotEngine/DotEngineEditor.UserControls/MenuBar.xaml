@@ -13,7 +13,7 @@
 
     <Grid Background="{DynamicResource MenuBackgroundBrush}">
         <Menu Style="{StaticResource MainMenuStyle}">
-            <MenuItem Header="_File">
+            <MenuItem Header="File">
                 <MenuItem Header="New Scene" Click="OnNewGameClicked" InputGestureText="Ctrl+N"/>
                 <MenuItem Header="Open Scene" Click="OnOpenGameClicked" InputGestureText="Ctrl+O"/>
                 <Separator/>
@@ -30,7 +30,7 @@
                 <MenuItem Header="Exit" Click="OnExitClicked" InputGestureText="Alt+F4"/>
             </MenuItem>
 
-            <MenuItem Header="_Edit">
+            <MenuItem Header="Edit">
                 <MenuItem Header="Undo" Click="OnUndoClick" InputGestureText="Ctrl+Z"/>
                 <MenuItem Header="Redo" Click="OnRedoClick" InputGestureText="Ctrl+Y"/>
                 <Separator/>
@@ -56,7 +56,7 @@
                 <MenuItem Header="Clear Player Data" Click="OnPlayerDataClearClick"/>
             </MenuItem>
 
-            <MenuItem Header="_Assets">
+            <MenuItem Header="Assets">
                 <MenuItem Header="Create">
                     <MenuItem Header="Folder"/>
                     <MenuItem Header="Material"/>
@@ -83,7 +83,7 @@
                 <MenuItem Header="Open C# Project"/>
             </MenuItem>
 
-            <MenuItem Header="_GameObject">
+            <MenuItem Header="GameObject">
                 <MenuItem Header="Create Empty"/>
                 <MenuItem Header="Create Empty Child"/>
                 <MenuItem Header="3D Primitives">
@@ -109,10 +109,19 @@
                 <MenuItem Header="Clear Parent"/>
             </MenuItem>
 
-            <MenuItem Header="_Packages"/>
-            <MenuItem Header="_Window"/>
+            <MenuItem Header="Packages"/>
+            <MenuItem Header="Window">
+                <MenuItem Header="Swap theme"/>
+                <Separator/>
+                <MenuItem Header="Hierarchy"/>
+                <MenuItem Header="Project"/>
+                <MenuItem Header="Console"/>
+                <MenuItem Header="Inspector"/>
+                <MenuItem Header="Scene View"/>
+                <MenuItem Header="Game"/>
+            </MenuItem>
 
-            <MenuItem Header="_Help">
+            <MenuItem Header="Help">
                 <MenuItem Header="Documentation"/>
                 <MenuItem Header="About DotEngine"/>
             </MenuItem>
