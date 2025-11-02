@@ -97,6 +97,11 @@
     <SolidColorBrush x:Key="AxisWTextBrush" Color="{StaticResource AxisWTextColor}"/>
     <SolidColorBrush x:Key="AxisWBorderBrush" Color="{StaticResource AxisWBorderColor}"/>
 
+    <SolidColorBrush x:Key="SubTextBrush" Color="#FFFFFFFF"/>
+
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="#FF2D2D30"/>
+    <SolidColorBrush x:Key="InputBorderBrush" Color="#FF505050"/>
+
     <Style TargetType="Window">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
@@ -125,12 +130,13 @@
     </Style>
 
     <Style x:Key="VectorFieldTextBox" TargetType="TextBox">
-        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
         <Setter Property="Padding" Value="6,2"/>
         <Setter Property="Margin" Value="2,0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}"/>
         <Setter Property="CaretBrush" Value="{DynamicResource ForegroundBrush}"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="Template">
@@ -146,4 +152,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

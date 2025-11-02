@@ -45,7 +45,9 @@
                         <TextBox Text="GameObject"
                                  Background="{DynamicResource InputBackgroundBrush}"
                                  Foreground="{DynamicResource ForegroundBrush}"
-                                 BorderThickness="0"
+                                 BorderBrush="{DynamicResource InputBorderBrush}"
+                                 BorderThickness="1"
+                                 Padding="4,2"
                                  Margin="0,2,0,6"/>
 
                         <TextBlock Text="Tag"
@@ -54,7 +56,9 @@
                         <TextBox Text="No Tag"
                                  Background="{DynamicResource InputBackgroundBrush}"
                                  Foreground="{DynamicResource ForegroundBrush}"
-                                 BorderThickness="0"
+                                 BorderBrush="{DynamicResource InputBorderBrush}"
+                                 BorderThickness="1"
+                                 Padding="4,2"
                                  Margin="0,2,0,6"/>
 
                         <TextBlock Text="Layer"
@@ -63,7 +67,10 @@
                         <ComboBox SelectedIndex="0"
                                   Margin="0,2,0,6"
                                   Background="{DynamicResource InputBackgroundBrush}"
-                                  Foreground="{DynamicResource ForegroundBrush}"/>
+                                  Foreground="{DynamicResource ForegroundBrush}"
+                                  BorderBrush="{DynamicResource InputBorderBrush}"
+                                  BorderThickness="1"
+                                  Padding="4,2"/>
 
                         <CheckBox Content="Is Static"
                                   Foreground="{DynamicResource ForegroundBrush}"

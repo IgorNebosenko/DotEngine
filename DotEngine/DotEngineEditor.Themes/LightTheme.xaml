@@ -14,8 +14,8 @@
     <Color x:Key="MenuForegroundColor">#FF222222</Color>
     <Color x:Key="MenuHoverColor">#FFE0E0E0</Color>
     <Color x:Key="MenuHoverTextColor">#FF000000</Color>
-    <Color x:Key="MenuDisabledTextColor">#FF999999</Color>
-    <Color x:Key="MenuGestureColor">#FF777777</Color>
+    <Color x:Key="MenuDisabledTextColor">#FF9A9A9A</Color>
+    <Color x:Key="MenuGestureColor">#FF666666</Color>
     <Color x:Key="MenuBorderColor">#FFCCCCCC</Color>
 
     <Color x:Key="SubMenuBackgroundColor">#FFFFFFFF</Color>
@@ -25,29 +25,29 @@
     <Color x:Key="IconColor">#FF000000</Color>
 
     <Color x:Key="ControlBackgroundColor">#FFFFFFFF</Color>
-    <Color x:Key="ButtonBackgroundColor">#FFF5F5F5</Color>
+    <Color x:Key="ButtonBackgroundColor">#FFF0F0F0</Color>
     <Color x:Key="ButtonPrimaryBackgroundColor">#FF3A5BD9</Color>
-    <Color x:Key="ButtonDangerBackgroundColor">#FFE57373</Color>
+    <Color x:Key="ButtonDangerBackgroundColor">#FFB44A4A</Color>
 
-    <Color x:Key="ConsoleInfoColor">#FF303030</Color>
-    <Color x:Key="ConsoleWarnColor">#FFC07A00</Color>
-    <Color x:Key="ConsoleErrorColor">#FFD83A3A</Color>
+    <Color x:Key="ConsoleInfoColor">#FF444444</Color>
+    <Color x:Key="ConsoleWarnColor">#FFD4982A</Color>
+    <Color x:Key="ConsoleErrorColor">#FFD94A4A</Color>
 
     <Color x:Key="AxisXLabelBackgroundColor">#FFFFEAEA</Color>
-    <Color x:Key="AxisXTextColor">#FFCC0000</Color>
-    <Color x:Key="AxisXBorderColor">#FFCC0000</Color>
+    <Color x:Key="AxisXTextColor">#FFCC1E1E</Color>
+    <Color x:Key="AxisXBorderColor">#FFCC1E1E</Color>
 
-    <Color x:Key="AxisYLabelBackgroundColor">#FFEAF8EA</Color>
-    <Color x:Key="AxisYTextColor">#FF2D8A3A</Color>
-    <Color x:Key="AxisYBorderColor">#FF2D8A3A</Color>
+    <Color x:Key="AxisYLabelBackgroundColor">#FFE9F8EC</Color>
+    <Color x:Key="AxisYTextColor">#FF2CA24A</Color>
+    <Color x:Key="AxisYBorderColor">#FF2CA24A</Color>
 
-    <Color x:Key="AxisZLabelBackgroundColor">#FFEAF2FF</Color>
-    <Color x:Key="AxisZTextColor">#FF2A67A8</Color>
-    <Color x:Key="AxisZBorderColor">#FF2A67A8</Color>
+    <Color x:Key="AxisZLabelBackgroundColor">#FFE9F1FF</Color>
+    <Color x:Key="AxisZTextColor">#FF2B7FD0</Color>
+    <Color x:Key="AxisZBorderColor">#FF2B7FD0</Color>
 
-    <Color x:Key="AxisWLabelBackgroundColor">#FFF2E6FF</Color>
-    <Color x:Key="AxisWTextColor">#FF7A48B5</Color>
-    <Color x:Key="AxisWBorderColor">#FF7A48B5</Color>
+    <Color x:Key="AxisWLabelBackgroundColor">#FFF4E9FF</Color>
+    <Color x:Key="AxisWTextColor">#FF9747FF</Color>
+    <Color x:Key="AxisWBorderColor">#FF9747FF</Color>
 
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
@@ -97,6 +97,11 @@
     <SolidColorBrush x:Key="AxisWTextBrush" Color="{StaticResource AxisWTextColor}"/>
     <SolidColorBrush x:Key="AxisWBorderBrush" Color="{StaticResource AxisWBorderColor}"/>
 
+    <SolidColorBrush x:Key="SubTextBrush" Color="#FF000000"/>
+
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="InputBorderBrush" Color="#FFBBBBBB"/>
+
     <Style TargetType="Window">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
@@ -125,12 +130,13 @@
     </Style>
 
     <Style x:Key="VectorFieldTextBox" TargetType="TextBox">
-        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource InputBackgroundBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
         <Setter Property="Padding" Value="6,2"/>
         <Setter Property="Margin" Value="2,0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource InputBorderBrush}"/>
         <Setter Property="CaretBrush" Value="{DynamicResource ForegroundBrush}"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="Template">
@@ -146,4 +152,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>
