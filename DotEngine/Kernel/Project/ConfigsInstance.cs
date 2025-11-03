@@ -7,7 +7,6 @@ public class ConfigsInstance : IProjectInstance
     public ConfigsInstance(string projectDirectory)
     {
         _folderPath = projectDirectory;
-        Load();
     }
     
     public string FolderPath => "Configs";

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using DotEngineEditor.Themes;
 using Kernel.Engine;
 using Kernel.Project;
@@ -11,7 +9,7 @@ namespace DotEngineEditor
     {
         private EngineMetaDataHolder _engineMetaDataHolder;
         private ProjectInstance _projectInstance;
-
+        
         public ThemeName Theme { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -44,6 +42,7 @@ namespace DotEngineEditor
             }
 
             _projectInstance = new ProjectInstance(_engineMetaDataHolder.Data.LastProjectPath);
+            _projectInstance.CheckAllDirectories();
             _projectInstance.Load();
             return true;
         }

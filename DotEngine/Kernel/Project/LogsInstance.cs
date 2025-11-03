@@ -7,7 +7,6 @@ public class LogsInstance : IProjectInstance
     public LogsInstance(string projectDirectory)
     {
         _folderPath = projectDirectory;
-        Load();
     }
     
     public string FolderPath => "Logs";

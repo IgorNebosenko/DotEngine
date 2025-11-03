@@ -1,13 +1,20 @@
 ﻿namespace Kernel.Engine;
 
 [Serializable]
-public class EngineVersion(int TopVersion, int MiddleVersion, int LowVersion)
+public class EngineVersion
 {
+    public static readonly EngineVersion CurrentVersion = new (0, 0, 1);
+    
     public int TopVersion;
     public int MiddleVersion;
     public int LowVersion;
 
-    public static EngineVersion CurrentVersion => new EngineVersion(0, 0, 1);
+    public EngineVersion(int topVersion, int middleVersion, int lowVersion)
+    {
+        TopVersion = topVersion;
+        MiddleVersion = middleVersion;
+        LowVersion = lowVersion;
+    }
 }
 
 [Serializable]

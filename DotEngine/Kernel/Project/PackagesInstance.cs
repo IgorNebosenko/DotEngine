@@ -7,7 +7,6 @@ public class PackagesInstance : IProjectInstance
     public PackagesInstance(string folderPath)
     {
         _folderPath = folderPath;
-        Load();
     }
     
     public string FolderPath => "Packages";

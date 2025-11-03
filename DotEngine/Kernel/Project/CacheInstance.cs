@@ -7,8 +7,6 @@ public class CacheInstance : IProjectInstance
     public CacheInstance(string basePath)
     {
         _folderPath = basePath;
-        
-        Load();
     }
     
     public string FolderPath => "Cache";

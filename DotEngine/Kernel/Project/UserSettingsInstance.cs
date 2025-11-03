@@ -7,7 +7,6 @@ public class UserSettingsInstance : IProjectInstance
     public UserSettingsInstance(string folderPath)
     {
         _folderPath = folderPath;
-        Load();
     }
     
     public string FolderPath => "UserSettings";

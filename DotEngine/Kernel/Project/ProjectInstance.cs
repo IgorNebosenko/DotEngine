@@ -4,6 +4,8 @@ namespace Kernel.Project;
 
 public class ProjectInstance
 {
+    private string _projectDirectory;
+    
     public AssetsInstance AssetsInstance { get; private set; }
     public BinInstance BinInstance { get; private set; }
     public CacheInstance CacheInstance { get; private set; }
@@ -18,11 +20,9 @@ public class ProjectInstance
     
     public ProjectInstance(string projectDirectory)
     {
-        AssetsInstance = new AssetsInstance(projectDirectory);
+        _projectDirectory = projectDirectory;
         
-        Console.WriteLine("Stub");
-        return;
-        //TODO write all of this!
+        AssetsInstance = new AssetsInstance(_projectDirectory);
         
         BinInstance = new BinInstance(projectDirectory);
         CacheInstance = new CacheInstance(projectDirectory);
@@ -41,6 +41,19 @@ public class ProjectInstance
             PackagesInstance,
             UserSettingsInstance
         ];
+    }
+
+    public void CheckAllDirectories()
+    {
+        for (var i = 0; i < _projectItems.Length; i++)
+        {
+            var fullPath = Path.Combine(_projectDirectory, _projectItems[i].FolderPath);
+
+            if (!Directory.Exists(fullPath))
+            {
+                Directory.CreateDirectory(fullPath);
+            }
+        }
     }
 
     public void Load()

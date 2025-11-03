@@ -7,8 +7,6 @@ public class BinInstance : IProjectInstance
     public BinInstance(string basePath)
     {
         _folderPath = basePath;
-        
-        Load();
     }
     
     public string FolderPath => "Bin";
