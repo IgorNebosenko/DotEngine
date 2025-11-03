@@ -23,7 +23,7 @@ namespace DotEngineEditor
                 return;
             }
 
-            SetTheme();
+            LoadTheme();
         }
 
         private void MetaDataInit()
@@ -47,11 +47,12 @@ namespace DotEngineEditor
             return true;
         }
 
-        private void SetTheme()
+        private void LoadTheme()
         {
             SetTheme(ThemeName.DarkTheme);
             SetTheme(ThemeName.LightTheme);
-            SetTheme(ThemeName.DarkTheme);
+            
+            SetTheme(_engineMetaDataHolder.Data.IsDarkTheme ? ThemeName.DarkTheme : ThemeName.LightTheme);
         }
 
         public void SetTheme(ThemeName theme)

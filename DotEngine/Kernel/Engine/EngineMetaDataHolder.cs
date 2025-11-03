@@ -46,7 +46,8 @@ public class EngineMetaDataHolder
         void OnFolderOk(object? o, EventArgs eventArgs) => Data = new EngineData
         {
             EngineVersion = EngineVersion.CurrentVersion,
-            LastProjectPath = dialog.FolderName
+            LastProjectPath = dialog.FolderName,
+            IsDarkTheme = true
         };
 
         dialog.FolderOk += OnFolderOk;

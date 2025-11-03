@@ -22,4 +22,5 @@ public class EngineData
 {
     public string LastProjectPath;
     public EngineVersion EngineVersion;
+    public bool IsDarkTheme;
 }
