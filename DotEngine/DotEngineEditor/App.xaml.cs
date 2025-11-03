@@ -1,25 +1,55 @@
-﻿using System.Windows;
-using System.Windows.Navigation;
+﻿using System;
+using System.Linq;
+using System.Windows;
 using DotEngineEditor.Themes;
+using Kernel.Engine;
 using Kernel.Project;
 
 namespace DotEngineEditor
 {
     public partial class App : Application
     {
+        private EngineMetaDataHolder _engineMetaDataHolder;
         private ProjectInstance _projectInstance;
-        
+
         public ThemeName Theme { get; private set; }
 
-        protected override void OnActivated(EventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnActivated(e);
-
-            _projectInstance = new ProjectInstance(@"D:/Test/subFolder");
-            _projectInstance.Load();
+            base.OnStartup(e);
             
-            //Fix tabs
-            //TODO need to load it from configs
+            MetaDataInit();
+            if (!TryProjectInit())
+            {
+                Current.Shutdown();
+                return;
+            }
+
+            SetTheme();
+        }
+
+        private void MetaDataInit()
+        {
+            _engineMetaDataHolder = new EngineMetaDataHolder();
+            _engineMetaDataHolder.HandleMetaData();
+        }
+
+        private bool TryProjectInit()
+        {
+            // Not always false! 
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+            if (_engineMetaDataHolder.Data == null || string.IsNullOrEmpty(_engineMetaDataHolder.Data.LastProjectPath))
+            {
+                return false;
+            }
+
+            _projectInstance = new ProjectInstance(_engineMetaDataHolder.Data.LastProjectPath);
+            _projectInstance.Load();
+            return true;
+        }
+
+        private void SetTheme()
+        {
             SetTheme(ThemeName.DarkTheme);
             SetTheme(ThemeName.LightTheme);
             SetTheme(ThemeName.DarkTheme);
@@ -28,7 +58,7 @@ namespace DotEngineEditor
         public void SetTheme(ThemeName theme)
         {
             Theme = theme;
-            
+
             var uri = new Uri($"pack://application:,,,/DotEngineEditor.Themes;component/{theme}.xaml", UriKind.Absolute);
             var newDict = new ResourceDictionary { Source = uri };
 
@@ -40,6 +70,5 @@ namespace DotEngineEditor
 
             Current.Resources.MergedDictionaries.Add(newDict);
         }
-
     }
 }
