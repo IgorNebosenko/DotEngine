@@ -16,15 +16,13 @@ namespace DotEngineEditor
             base.OnActivated(e);
 
             _projectInstance = new ProjectInstance(@"D:/Test/subFolder");
+            _projectInstance.Load();
             
             //Fix tabs
             //TODO need to load it from configs
             SetTheme(ThemeName.DarkTheme);
             SetTheme(ThemeName.LightTheme);
             SetTheme(ThemeName.DarkTheme);
-            
-            //ToDo think about this load...
-            _projectInstance.AssetsInstance.Load();
         }
 
         public void SetTheme(ThemeName theme)

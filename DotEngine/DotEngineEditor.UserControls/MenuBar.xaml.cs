@@ -158,6 +158,4 @@ public partial class MenuBar : UserControl
         throw new NotImplementedException();
     }
     #endregion
-    
-    
 }
