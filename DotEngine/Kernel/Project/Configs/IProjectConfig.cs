@@ -2,5 +2,5 @@
 
 public interface IProjectConfig
 {
-    IProjectConfig DefaultInstance { get; }
+    string ConfigFile { get; }
 }

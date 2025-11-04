@@ -1,4 +1,5 @@
 ﻿using Kernel.Engine;
+using Newtonsoft.Json;
 
 namespace Kernel.Project.Configs;
 
@@ -7,9 +8,12 @@ public class EditorBuildConfig : IProjectConfig
 {
     public string[] scenesHashes;
     public Platform targetPlatform;
-    
-    public IProjectConfig DefaultInstance => new EditorBuildConfig
+
+    public EditorBuildConfig()
     {
-        targetPlatform = Platform.WindowsX64
-    };
+        targetPlatform = Platform.WindowsX64;
+    }
+    
+    [JsonIgnore]
+    public string ConfigFile => "EditorConfig.json";
 }
