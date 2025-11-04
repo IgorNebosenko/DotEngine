@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+        <ProjectReference Include="..\DirectXLayer\DirectXLayer.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DirectXLayer\DirectXLayer.csproj" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     </ItemGroup>
 
 </Project>
