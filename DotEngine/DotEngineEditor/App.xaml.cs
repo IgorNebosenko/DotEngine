@@ -1,27 +1,79 @@
 ﻿using System.Windows;
 using DotEngineEditor.Themes;
+using Kernel.Engine;
+using Kernel.Project;
+using Microsoft.Win32;
 
 namespace DotEngineEditor
 {
     public partial class App : Application
     {
+        private EngineMetaDataHolder _engineMetaDataHolder;
+        private ProjectInstance _projectInstance;
+        
         public ThemeName Theme { get; private set; }
 
-        protected override void OnActivated(EventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnActivated(e);
+            base.OnStartup(e);
             
-            //Fix tabs
-            //TODO need to load it from configs
+            MetaDataInit();
+            if (!TryProjectInit())
+            {
+                Current.Shutdown();
+                return;
+            }
+
+            LoadTheme();
+        }
+
+        private void MetaDataInit()
+        {
+            _engineMetaDataHolder = new EngineMetaDataHolder();
+            _engineMetaDataHolder.HandleMetaData(x => MessageBox.Show(x), CreateMetaDataDialog);
+        }
+        
+        private string CreateMetaDataDialog()
+        {
+            var dialog = new OpenFolderDialog();
+            string folderPath = string.Empty;
+
+            void OnFolderOk(object? o, EventArgs eventArgs) => folderPath = dialog.FolderName;
+
+            dialog.FolderOk += OnFolderOk;
+            dialog.ShowDialog();
+            dialog.FolderOk -= OnFolderOk;
+
+            return folderPath;
+        }
+
+        private bool TryProjectInit()
+        {
+            // Not always false! 
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+            if (_engineMetaDataHolder.Data == null || string.IsNullOrEmpty(_engineMetaDataHolder.Data.LastProjectPath))
+            {
+                return false;
+            }
+
+            _projectInstance = new ProjectInstance(_engineMetaDataHolder.Data.LastProjectPath);
+            _projectInstance.CheckAllDirectories();
+            _projectInstance.Load();
+            return true;
+        }
+
+        private void LoadTheme()
+        {
             SetTheme(ThemeName.DarkTheme);
             SetTheme(ThemeName.LightTheme);
-            SetTheme(ThemeName.DarkTheme);
+            
+            SetTheme(_engineMetaDataHolder.Data.IsDarkTheme ? ThemeName.DarkTheme : ThemeName.LightTheme);
         }
 
         public void SetTheme(ThemeName theme)
         {
             Theme = theme;
-            
+
             var uri = new Uri($"pack://application:,,,/DotEngineEditor.Themes;component/{theme}.xaml", UriKind.Absolute);
             var newDict = new ResourceDictionary { Source = uri };
 
@@ -33,6 +85,5 @@ namespace DotEngineEditor
 
             Current.Resources.MergedDictionaries.Add(newDict);
         }
-
     }
 }
