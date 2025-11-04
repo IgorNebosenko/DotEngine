@@ -2,6 +2,7 @@
 using DotEngineEditor.Themes;
 using Kernel.Engine;
 using Kernel.Project;
+using Microsoft.Win32;
 
 namespace DotEngineEditor
 {
@@ -29,7 +30,21 @@ namespace DotEngineEditor
         private void MetaDataInit()
         {
             _engineMetaDataHolder = new EngineMetaDataHolder();
-            _engineMetaDataHolder.HandleMetaData();
+            _engineMetaDataHolder.HandleMetaData(x => MessageBox.Show(x), CreateMetaDataDialog);
+        }
+        
+        private string CreateMetaDataDialog()
+        {
+            var dialog = new OpenFolderDialog();
+            string folderPath = string.Empty;
+
+            void OnFolderOk(object? o, EventArgs eventArgs) => folderPath = dialog.FolderName;
+
+            dialog.FolderOk += OnFolderOk;
+            dialog.ShowDialog();
+            dialog.FolderOk -= OnFolderOk;
+
+            return folderPath;
         }
 
         private bool TryProjectInit()

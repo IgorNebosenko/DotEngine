@@ -12,7 +12,7 @@ public class EngineMetaDataHolder
     
     public EngineData Data { get; private set; }
     
-    public void HandleMetaData()
+    public void HandleMetaData(Action<string> messageCallback, Func<string> createMetaDataCallback)
     {
         if (!Directory.Exists(MetaDataPath))
         {
@@ -27,32 +27,32 @@ public class EngineMetaDataHolder
         var json = File.ReadAllText(EngineDataPath);
         var dataTemp = JsonConvert.DeserializeObject<EngineData>(json);
 
-        if (dataTemp == null)
+        if (dataTemp == null || string.IsNullOrEmpty(dataTemp.LastProjectPath))
         {
-            MessageBox.Show("Can't find last opened project, please select correct folder, or create new one!");
-            CreateMetaData();
-            SaveMetaData();
+            messageCallback?.Invoke("Can't find last opened project, please select correct folder, or create new one!");
+            
+            var projectPath = createMetaDataCallback?.Invoke();
+
+            if (!string.IsNullOrEmpty(projectPath))
+            {
+                Data = new EngineData
+                {
+                    EngineVersion = EngineVersion.CurrentVersion,
+                    LastProjectPath = projectPath,
+                    IsDarkTheme = true
+                };
+                
+                SaveMetaData();
+            }
+            else
+            {
+                messageCallback?.Invoke("Path to folder is empty! Initialization of engine is interrupted!");
+            }
         }
         else
         {
             Data = dataTemp;
         }
-    }
-
-    private void CreateMetaData()
-    {
-        var dialog = new OpenFolderDialog();
-
-        void OnFolderOk(object? o, EventArgs eventArgs) => Data = new EngineData
-        {
-            EngineVersion = EngineVersion.CurrentVersion,
-            LastProjectPath = dialog.FolderName,
-            IsDarkTheme = true
-        };
-
-        dialog.FolderOk += OnFolderOk;
-        dialog.ShowDialog();
-        dialog.FolderOk -= OnFolderOk;
     }
 
     public void SaveMetaData()
