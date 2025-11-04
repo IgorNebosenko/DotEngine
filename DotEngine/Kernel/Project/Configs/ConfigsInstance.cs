@@ -10,6 +10,7 @@ public class ConfigsInstance : IProjectInstance
     
     private AudioConfig _audioConfig;
     private EditorBuildConfig _editorBuildConfig;
+    private EditorConfig _editorConfig;
     private ProjectConfig _projectConfig;
     
     public ConfigsInstance(string projectDirectory)
@@ -25,11 +26,14 @@ public class ConfigsInstance : IProjectInstance
         _audioConfig = LoadOrCreateProjectConfig<AudioConfig>();
         _editorBuildConfig = LoadOrCreateProjectConfig<EditorBuildConfig>();
         _projectConfig = LoadOrCreateProjectConfig<ProjectConfig>();
+        _projectConfig = LoadOrCreateProjectConfig<ProjectConfig>();
+        Console.WriteLine("Fill with other configs and check json files!");
         
         _configs = new List<IProjectConfig>
         {
             _audioConfig,
             _editorBuildConfig,
+            _editorConfig,
             _projectConfig
         };
         
@@ -41,19 +45,11 @@ public class ConfigsInstance : IProjectInstance
         var defaultInstance = new T();
         
         var fullPath = Path.Combine(FullPath, defaultInstance.ConfigFile);
-        if (File.Exists(fullPath))
-        {
-            var data = JsonConvert.DeserializeObject<T>(File.ReadAllText(fullPath));
+        if (!File.Exists(fullPath)) 
+            return defaultInstance;
+        var data = JsonConvert.DeserializeObject<T>(File.ReadAllText(fullPath));
 
-            if (data == null)
-            {
-                return defaultInstance;
-            }
-            
-            return data;
-        }
-        
-        return defaultInstance;
+        return data ?? defaultInstance;
     }
 
     public void Save()
