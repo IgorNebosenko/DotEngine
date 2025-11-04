@@ -6,24 +6,24 @@ namespace Kernel.Project.Configs;
 [Serializable]
 public class ProjectConfig : IProjectConfig
 {
-    public EngineVersion EngineVersion;
+    public EngineVersion engineVersion;
 
-    public string ProjectName;
-    public string CompanyName;
-    public string ProjectVersion;
-    public int BundleVersion;
+    public string projectName;
+    public string companyName;
+    public string projectVersion;
+    public int bundleVersion;
 
-    public DirectXVersion DirectXVersion;
+    public DirectXVersion directXVersion;
 
     public string LastBinPath;
 
     public IProjectConfig DefaultInstance => new ProjectConfig
     {
-        EngineVersion = EngineVersion.CurrentVersion,
-        ProjectName = "DefaultInstance",
-        CompanyName = "Default Company",
-        ProjectVersion = "0.0.1",
-        BundleVersion = 1,
-        DirectXVersion = DirectXVersion.DirectX11
+        engineVersion = EngineVersion.CurrentVersion,
+        projectName = "DefaultInstance",
+        companyName = "Default Company",
+        projectVersion = "0.0.1",
+        bundleVersion = 1,
+        directXVersion = DirectXVersion.DirectX11
     };
 }

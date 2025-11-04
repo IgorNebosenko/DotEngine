@@ -3,6 +3,9 @@
 public class ConfigsInstance : IProjectInstance
 {
     private string _projectDirectory;
+    
+    private AudioConfig _audioConfig;
+    private EditorBuildConfig _editorBuildConfig;
     private ProjectConfig _projectConfig;
     
     public ConfigsInstance(string projectDirectory)
@@ -15,10 +18,12 @@ public class ConfigsInstance : IProjectInstance
     
     public void Load()
     {
-        _projectConfig = (ProjectConfig)LoadOrCreateProjectConfig(Path.Combine(FullPath, "ProjectConfig.json"));
+        _audioConfig = LoadOrCreateProjectConfig<AudioConfig>(Path.Combine(FullPath, "Audio.config"));
+        _editorBuildConfig = LoadOrCreateProjectConfig<EditorBuildConfig>(Path.Combine(FullPath, "EditorBuild.config"));
+        _projectConfig = LoadOrCreateProjectConfig<ProjectConfig>(Path.Combine(FullPath, "Project.config"));
     }
 
-    private IProjectConfig LoadOrCreateProjectConfig(string fullPath)
+    private T LoadOrCreateProjectConfig<T>(string fullPath) where T : class, IProjectConfig
     {
         throw new NotImplementedException();
     }
