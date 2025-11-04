@@ -8,17 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="PresentationFramework">
-        <HintPath>C:\Users\Igor Nebosenko\.dotnet\shared\Microsoft.WindowsDesktop.App\8.0.21\PresentationFramework.dll</HintPath>
-      </Reference>
+        <Reference Include="PresentationFramework">
+            <HintPath>$(UserProfile)\.dotnet\shared\Microsoft.WindowsDesktop.App\8.0.21\PresentationFramework.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DirectXLayer\DirectXLayer.csproj" />
+        <ProjectReference Include="..\DirectXLayer\DirectXLayer.csproj" />
     </ItemGroup>
 
 </Project>
