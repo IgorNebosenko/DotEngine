@@ -60,5 +60,5 @@ public class TagAndLayersConfig : IProjectConfig
     }
     
     [JsonIgnore]
-    public string ConfigFile => "TagsAndLayers.json";
+    public string ConfigFile => "TagsAndLayersConfig.json";
 }

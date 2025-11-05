@@ -14,5 +14,5 @@ public class PhysicsConfig : IProjectConfig
     }
     
     [JsonIgnore]
-    public string ConfigFile => "Physics.json";
+    public string ConfigFile => "PhysicsConfig.json";
 }

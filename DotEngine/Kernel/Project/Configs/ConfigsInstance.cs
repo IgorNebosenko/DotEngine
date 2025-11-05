@@ -16,6 +16,7 @@ public class ConfigsInstance : IProjectInstance
     private ProjectConfig _projectConfig;
     private QualityConfig _qualityConfig;
     private TagAndLayersConfig _tagAndLayersConfig;
+    private TimeConfig _timeConfig;
     
     public ConfigsInstance(string projectDirectory)
     {
@@ -35,7 +36,7 @@ public class ConfigsInstance : IProjectInstance
         _projectConfig = LoadOrCreateProjectConfig<ProjectConfig>();
         _qualityConfig = LoadOrCreateProjectConfig<QualityConfig>();
         _tagAndLayersConfig  = LoadOrCreateProjectConfig<TagAndLayersConfig>();
-        Console.WriteLine("Fill with other configs and check json files!");
+        _timeConfig = LoadOrCreateProjectConfig<TimeConfig>();
         
         _configs = new List<IProjectConfig>
         {
@@ -46,7 +47,8 @@ public class ConfigsInstance : IProjectInstance
             _physicsConfig,
             _projectConfig,
             _qualityConfig,
-            _tagAndLayersConfig
+            _tagAndLayersConfig,
+            _timeConfig
         };
         
         Save();
