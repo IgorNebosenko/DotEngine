@@ -15,5 +15,5 @@ public class EditorConfig : IProjectConfig
     }
     
     [JsonIgnore]
-    public string ConfigFile { get; }
+    public string ConfigFile => "EditorConfig.json";
 }

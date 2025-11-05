@@ -13,6 +13,7 @@ public class ConfigsInstance : IProjectInstance
     private EditorConfig _editorConfig;
     private PhysicsConfig _physicsConfig;
     private ProjectConfig _projectConfig;
+    private QualityConfig _qualityConfig;
     
     public ConfigsInstance(string projectDirectory)
     {
@@ -29,6 +30,7 @@ public class ConfigsInstance : IProjectInstance
         _editorConfig = LoadOrCreateProjectConfig<EditorConfig>();
         _physicsConfig = LoadOrCreateProjectConfig<PhysicsConfig>();
         _projectConfig = LoadOrCreateProjectConfig<ProjectConfig>();
+        _qualityConfig = LoadOrCreateProjectConfig<QualityConfig>();
         Console.WriteLine("Fill with other configs and check json files!");
         
         _configs = new List<IProjectConfig>
@@ -37,7 +39,8 @@ public class ConfigsInstance : IProjectInstance
             _editorBuildConfig,
             _editorConfig,
             _physicsConfig,
-            _projectConfig
+            _projectConfig,
+            _qualityConfig
         };
         
         Save();
