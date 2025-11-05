@@ -25,5 +25,7 @@ public class TimeConfig : IProjectConfig
             
         if (timeScale < float.Epsilon)
             yield return new ValidationResult("TimeScale must be greater than 0");
+        
+        yield break;
     }
 }

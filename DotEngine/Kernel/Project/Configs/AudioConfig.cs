@@ -31,6 +31,6 @@ public class AudioConfig : IProjectConfig
         if (pitch < -10f || pitch > 10f)
             yield return new ValidationResult("Incorrect pitch!  It must be in [-10f...10f]");
         
-        
+        yield break;
     }
 }

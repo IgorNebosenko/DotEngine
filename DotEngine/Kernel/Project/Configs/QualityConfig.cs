@@ -33,5 +33,7 @@ public class QualityConfig : IProjectConfig
         
         if (buildQualityLevel < 0 || buildQualityLevel >= qualityConfigItems.Count)
             yield return new ValidationResult("Current build quality level is out of range!");
+        
+        yield break;
     }
 }

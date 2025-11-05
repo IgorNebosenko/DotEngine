@@ -22,5 +22,7 @@ public class EditorBuildConfig : IProjectConfig
     {
         if (scenesHashes.GroupBy(x => x).Any(group => group.Count() > 1))
             yield return new ValidationResult("Some of scenes are equals in list!");
+        
+        yield break;
     }
 }

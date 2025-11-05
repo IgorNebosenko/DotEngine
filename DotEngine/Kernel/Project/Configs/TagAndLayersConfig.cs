@@ -67,5 +67,7 @@ public class TagAndLayersConfig : IProjectConfig
     {
         if (layers.Length != LayersCount)
             yield return new ValidationResult($"Count of layers must be {LayersCount}!");
+        
+        yield break;
     }
 }
