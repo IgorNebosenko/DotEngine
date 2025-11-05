@@ -1,4 +1,5 @@
-﻿using SharpDX;
+﻿using Newtonsoft.Json;
+using SharpDX;
 
 namespace Kernel.Project.Configs;
 
@@ -12,5 +13,6 @@ public class PhysicsConfig : IProjectConfig
         gravity = new Vector3(0f, -9.81f, 0f);
     }
     
+    [JsonIgnore]
     public string ConfigFile => "Physics.json";
 }
