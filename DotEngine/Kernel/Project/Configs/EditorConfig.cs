@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Kernel.Project.Configs;
 
@@ -16,4 +17,9 @@ public class EditorConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "EditorConfig.json";
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        yield break;
+    }
 }

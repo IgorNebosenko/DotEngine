@@ -1,4 +1,5 @@
-﻿using Kernel.Engine;
+﻿using System.ComponentModel.DataAnnotations;
+using Kernel.Engine;
 using Newtonsoft.Json;
 
 namespace Kernel.Project.Configs;
@@ -16,4 +17,10 @@ public class EditorBuildConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "EditorBuildConfig.json";
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (scenesHashes.GroupBy(x => x).Any(group => group.Count() > 1))
+            yield return new ValidationResult("Some of scenes are equals in list!");
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 using SharpDX;
 
 namespace Kernel.Project.Configs;
@@ -15,4 +16,9 @@ public class PhysicsConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "PhysicsConfig.json";
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        yield break;
+    }
 }

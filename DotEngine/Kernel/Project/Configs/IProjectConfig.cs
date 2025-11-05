@@ -1,6 +1,8 @@
-﻿namespace Kernel.Project.Configs;
+﻿using System.ComponentModel.DataAnnotations;
 
-public interface IProjectConfig
+namespace Kernel.Project.Configs;
+
+public interface IProjectConfig : IValidatableObject
 {
     string ConfigFile { get; }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Kernel.Project.Configs;
 
@@ -61,4 +62,10 @@ public class TagAndLayersConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "TagsAndLayersConfig.json";
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (layers.Length != LayersCount)
+            yield return new ValidationResult($"Count of layers must be {LayersCount}!");
+    }
 }

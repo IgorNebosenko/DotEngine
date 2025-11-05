@@ -1,4 +1,5 @@
-﻿using Kernel.Project.Configs.InputConfigs;
+﻿using System.ComponentModel.DataAnnotations;
+using Kernel.Project.Configs.InputConfigs;
 using Newtonsoft.Json;
 
 namespace Kernel.Project.Configs;
@@ -10,4 +11,9 @@ public class InputConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "InputConfig.json";
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        yield break;
+    }
 }

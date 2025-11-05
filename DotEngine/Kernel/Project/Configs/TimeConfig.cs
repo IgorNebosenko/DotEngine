@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace Kernel.Project.Configs;
 
@@ -16,4 +17,13 @@ public class TimeConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "TimeConfig.json";
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (fixedDeltaTimeStep < float.Epsilon)
+            yield return new ValidationResult("Fixed DeltaTimeStep must be greater than 0");
+            
+        if (timeScale < float.Epsilon)
+            yield return new ValidationResult("TimeScale must be greater than 0");
+    }
 }

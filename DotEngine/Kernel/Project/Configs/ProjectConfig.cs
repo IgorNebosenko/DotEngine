@@ -1,4 +1,5 @@
-﻿using DirectXLayer;
+﻿using System.ComponentModel.DataAnnotations;
+using DirectXLayer;
 using Kernel.Engine;
 using Newtonsoft.Json;
 
@@ -16,7 +17,7 @@ public class ProjectConfig : IProjectConfig
 
     public DirectXVersion directXVersion;
 
-    public string LastBinPath;
+    public string lastBinPath;
 
     public ProjectConfig()
     {
@@ -30,4 +31,9 @@ public class ProjectConfig : IProjectConfig
 
     [JsonIgnore]
     public string ConfigFile => "ProjectConfig.json";
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        yield break;
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Kernel.Project.Configs.QualityConfigs;
+﻿using System.ComponentModel.DataAnnotations;
+using Kernel.Project.Configs.QualityConfigs;
 using Newtonsoft.Json;
 
 namespace Kernel.Project.Configs;
@@ -24,4 +25,13 @@ public class QualityConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "QualityConfig.json";
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        if (currentQualityLevel < 0 || currentQualityLevel >= qualityConfigItems.Count)
+            yield return new ValidationResult("Current quality level is out of range!");
+        
+        if (buildQualityLevel < 0 || buildQualityLevel >= qualityConfigItems.Count)
+            yield return new ValidationResult("Current build quality level is out of range!");
+    }
 }
