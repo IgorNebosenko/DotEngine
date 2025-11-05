@@ -11,6 +11,7 @@ public class ConfigsInstance : IProjectInstance
     private AudioConfig _audioConfig;
     private EditorBuildConfig _editorBuildConfig;
     private EditorConfig _editorConfig;
+    private PhysicsConfig _physicsConfig;
     private ProjectConfig _projectConfig;
     
     public ConfigsInstance(string projectDirectory)
@@ -25,7 +26,8 @@ public class ConfigsInstance : IProjectInstance
     {
         _audioConfig = LoadOrCreateProjectConfig<AudioConfig>();
         _editorBuildConfig = LoadOrCreateProjectConfig<EditorBuildConfig>();
-        _projectConfig = LoadOrCreateProjectConfig<ProjectConfig>();
+        _editorConfig = LoadOrCreateProjectConfig<EditorConfig>();
+        _physicsConfig = LoadOrCreateProjectConfig<PhysicsConfig>();
         _projectConfig = LoadOrCreateProjectConfig<ProjectConfig>();
         Console.WriteLine("Fill with other configs and check json files!");
         
@@ -34,6 +36,7 @@ public class ConfigsInstance : IProjectInstance
             _audioConfig,
             _editorBuildConfig,
             _editorConfig,
+            _physicsConfig,
             _projectConfig
         };
         
