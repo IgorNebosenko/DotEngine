@@ -11,6 +11,7 @@ public class ConfigsInstance : IProjectInstance
     private AudioConfig _audioConfig;
     private EditorBuildConfig _editorBuildConfig;
     private EditorConfig _editorConfig;
+    private InputConfig _inputConfig;
     private PhysicsConfig _physicsConfig;
     private ProjectConfig _projectConfig;
     private QualityConfig _qualityConfig;
@@ -28,6 +29,7 @@ public class ConfigsInstance : IProjectInstance
         _audioConfig = LoadOrCreateProjectConfig<AudioConfig>();
         _editorBuildConfig = LoadOrCreateProjectConfig<EditorBuildConfig>();
         _editorConfig = LoadOrCreateProjectConfig<EditorConfig>();
+        _inputConfig = LoadOrCreateProjectConfig<InputConfig>();
         _physicsConfig = LoadOrCreateProjectConfig<PhysicsConfig>();
         _projectConfig = LoadOrCreateProjectConfig<ProjectConfig>();
         _qualityConfig = LoadOrCreateProjectConfig<QualityConfig>();
@@ -38,6 +40,7 @@ public class ConfigsInstance : IProjectInstance
             _audioConfig,
             _editorBuildConfig,
             _editorConfig,
+            _inputConfig,
             _physicsConfig,
             _projectConfig,
             _qualityConfig
