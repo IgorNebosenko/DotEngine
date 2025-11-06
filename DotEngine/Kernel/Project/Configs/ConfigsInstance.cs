@@ -59,11 +59,35 @@ public class ConfigsInstance : IProjectInstance
         var defaultInstance = new T();
         
         var fullPath = Path.Combine(FullPath, defaultInstance.ConfigFile);
-        if (!File.Exists(fullPath)) 
+        if (!File.Exists(fullPath))
+        {
+            Console.WriteLine($"Not found {defaultInstance.ConfigFile}. Create new instance");
+            
             return defaultInstance;
+        }
+
         var data = JsonConvert.DeserializeObject<T>(File.ReadAllText(fullPath));
 
-        return data ?? defaultInstance;
+        if (data == null)
+        {
+            Console.WriteLine($"Can't read or convert config file {defaultInstance.ConfigFile}!");
+
+            return new T();
+        }
+        
+        var validationStatus = data.Validate(out var errorStrings);
+
+        if (!validationStatus)
+        {
+            for (var i = 0; i < errorStrings.Count; i++)
+            {
+                Console.WriteLine(errorStrings[i]);
+            }
+
+            return new T();
+        }
+
+        return data;
     }
 
     public void Save()
