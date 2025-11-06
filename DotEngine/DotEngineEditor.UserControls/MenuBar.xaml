@@ -38,7 +38,7 @@
                 <MenuItem Header="Deselect All" Click="OnDeselectAllClick" InputGestureText="Shift+D"/>
                 <MenuItem Header="Select Children" Click="OnSelectChildrenClick" InputGestureText="Shift+C"/>
                 <MenuItem Header="Select Prefab Root" Click="OnSelectPrefabRootClick" InputGestureText="Ctrl+Shift+R"/>
-                <MenuItem Header="Invert Selection" Click="OnInputSelectionClick" InputGestureText="Ctrl+I"/>
+                <MenuItem Header="Invert Selection" Click="OnInvertSelectionClick" InputGestureText="Ctrl+I"/>
                 <Separator/>
                 <MenuItem Header="Cut" Click="OnCutClick" InputGestureText="Ctrl+X"/>
                 <MenuItem Header="Copy" Click="OnCopyClick" InputGestureText="Ctrl+C"/>

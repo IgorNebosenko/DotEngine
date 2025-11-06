@@ -7,6 +7,8 @@ namespace DotEngineEditor.UserControls;
 public partial class MenuBar : UserControl
 {
     private readonly IFileTabHandler _fileTabHandler;
+    private readonly IEditTabHandler _editTabHandler;
+    private readonly IPlayTabsHandler _playTabsHandler;
     private readonly IWindowTabHandler _windowTabHandler;
     
     public MenuBar()
@@ -14,6 +16,8 @@ public partial class MenuBar : UserControl
         InitializeComponent();
         
         _fileTabHandler = Application.Current.Windows.OfType<IFileTabHandler>().Single();
+        _editTabHandler = Application.Current.Windows.OfType<IEditTabHandler>().Single();
+        _playTabsHandler = Application.Current.Windows.OfType<IPlayTabsHandler>().Single();
         _windowTabHandler = Application.Current.Windows.OfType<IWindowTabHandler>().Single();
     }
 
@@ -72,97 +76,97 @@ public partial class MenuBar : UserControl
     #region Edit
     private void OnUndoClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.Undo();
     }
 
     private void OnRedoClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.Redo();
     }
 
     private void OnSelectAllClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.SelectAll();
     }
 
     private void OnDeselectAllClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.DeselectAll();
     }
 
     private void OnSelectChildrenClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.SelectChildren();
     }
 
     private void OnSelectPrefabRootClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.SelectPrefabRoot();
     }
 
-    private void OnInputSelectionClick(object sender, RoutedEventArgs e)
+    private void OnInvertSelectionClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.InvertSelection();
     }
 
     private void OnCutClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.Cut();
     }
 
     private void OnCopyClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.Copy();
     }
 
     private void OnPasteClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.Paste();
     }
 
     private void OnDuplicateClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.Duplicate();
     }
 
     private void OnRenameClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.Rename();
     }
 
     private void OnDeleteClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.Delete();
     }
 
     private void OnPlayClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _playTabsHandler.Play();
     }
 
     private void OnPauseClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _playTabsHandler.Pause();
     }
 
     private void OnStepClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _playTabsHandler.Step();
     }
 
     private void OnProjectSettingsClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.ProjectSettings();
     }
 
     private void OnPreferencesClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.Preferences();
     }
 
     private void OnPlayerDataClearClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _editTabHandler.ClearPlayerData();
     }
     #endregion
 
