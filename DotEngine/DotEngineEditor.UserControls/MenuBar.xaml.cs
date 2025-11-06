@@ -7,18 +7,40 @@ namespace DotEngineEditor.UserControls;
 public partial class MenuBar : UserControl
 {
     private readonly IFileTabHandler _fileTabHandler;
+    
     private readonly IEditTabHandler _editTabHandler;
     private readonly IPlayTabsHandler _playTabsHandler;
+    
+    private readonly IAssetsHandler _assetsHandler;
+    private readonly ICreateElementHandler _createElementHandler;
+
+    private readonly IGameObjectHandler _gameObjectHandler;
+    
+    private readonly IPackagesHandler _packagesHandler;
+    
     private readonly IWindowTabHandler _windowTabHandler;
+    
+    private readonly IHelpHandler _helpHandler;
     
     public MenuBar()
     {
         InitializeComponent();
         
         _fileTabHandler = Application.Current.Windows.OfType<IFileTabHandler>().Single();
+        
         _editTabHandler = Application.Current.Windows.OfType<IEditTabHandler>().Single();
         _playTabsHandler = Application.Current.Windows.OfType<IPlayTabsHandler>().Single();
+        
+        //_assetsHandler = Application.Current.Windows.OfType<IAssetsHandler>().Single();
+        //_createElementHandler = Application.Current.Windows.OfType<ICreateElementHandler>().Single();
+        
+        //_gameObjectHandler = Application.Current.Windows.OfType<IGameObjectHandler>().Single();
+        
+        //_packagesHandler = Application.Current.Windows.OfType<IPackagesHandler>().Single();
+        
         _windowTabHandler = Application.Current.Windows.OfType<IWindowTabHandler>().Single();
+        
+        //_helpHandler = Application.Current.Windows.OfType<IHelpHandler>().Single();
     }
 
     #region File
