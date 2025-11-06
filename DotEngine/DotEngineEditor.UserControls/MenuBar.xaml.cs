@@ -6,7 +6,7 @@ namespace DotEngineEditor.UserControls;
 
 public partial class MenuBar : UserControl
 {
-    private IWindowTabHandler _windowTabHandler;
+    private readonly IWindowTabHandler _windowTabHandler;
     
     public MenuBar()
     {
@@ -170,5 +170,34 @@ public partial class MenuBar : UserControl
         _windowTabHandler.SwapTheme();
     }
 
+    private void OnHierarchyInstantiateClicked(object sender, RoutedEventArgs e)
+    {
+        _windowTabHandler.InstantiateHierarchy();
+    }
+    
+    private void OnProjectInstantiateClicked(object sender, RoutedEventArgs e)
+    {
+        _windowTabHandler.InstantiateProject();
+    }
+    
+    private void OnConsoleInstantiateClicked(object sender, RoutedEventArgs e)
+    {
+        _windowTabHandler.InstantiateConsole();
+    }
+
+    private void OnInspectorInstantiateClicked(object sender, RoutedEventArgs e)
+    {
+        _windowTabHandler.InstantiateInspector();
+    }
+
+    private void OnSceneViewInstantiateClicked(object sender, RoutedEventArgs e)
+    {
+        _windowTabHandler.InstantiateSceneView();
+    }
+
+    private void OnGameInstantiateClicked(object sender, RoutedEventArgs e)
+    {
+        _windowTabHandler.InstantiateGame();
+    }
     #endregion
 }

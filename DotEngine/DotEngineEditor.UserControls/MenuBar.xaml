@@ -113,12 +113,12 @@
             <MenuItem Header="Window">
                 <MenuItem Header="Swap theme" Click="OnSwapThemeClicked"/>
                 <Separator/>
-                <MenuItem Header="Hierarchy"/>
-                <MenuItem Header="Project"/>
-                <MenuItem Header="Console"/>
-                <MenuItem Header="Inspector"/>
-                <MenuItem Header="Scene View"/>
-                <MenuItem Header="Game"/>
+                <MenuItem Header="Hierarchy" Click="OnHierarchyInstantiateClicked"/>
+                <MenuItem Header="Project" Click="OnProjectInstantiateClicked"/>
+                <MenuItem Header="Console" Click="OnConsoleInstantiateClicked"/>
+                <MenuItem Header="Inspector" Click="OnInspectorInstantiateClicked"/>
+                <MenuItem Header="Scene View" Click="OnSceneViewInstantiateClicked"/>
+                <MenuItem Header="Game" Click="OnGameInstantiateClicked"/>
             </MenuItem>
 
             <MenuItem Header="Help">
