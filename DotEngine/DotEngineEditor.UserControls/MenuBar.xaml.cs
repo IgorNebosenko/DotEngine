@@ -6,64 +6,66 @@ namespace DotEngineEditor.UserControls;
 
 public partial class MenuBar : UserControl
 {
+    private readonly IFileTabHandler _fileTabHandler;
     private readonly IWindowTabHandler _windowTabHandler;
     
     public MenuBar()
     {
         InitializeComponent();
         
+        _fileTabHandler = Application.Current.Windows.OfType<IFileTabHandler>().Single();
         _windowTabHandler = Application.Current.Windows.OfType<IWindowTabHandler>().Single();
     }
 
     #region File
     private void OnNewGameClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.NewScene();
     }
     
     private void OnOpenGameClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.OpenScene();
     }
 
     private void OnSaveClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.Save();
     }
 
     private void OnSaveAsClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.SaveAs();
     }
 
     private void OnNewProjectClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.NewProject();
     }
 
     private void OnOpenProjectClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.OpenProject();
     }
 
     private void OnSaveProjectClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.SaveProject();
     }
 
     private void OnBuildProfilesClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.BuildProfiles();
     }
 
     private void OnBuildAndRunClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.BuildAndRun();
     }
 
     private void OnExitClicked(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _fileTabHandler.Exit();
     }
     #endregion
 
