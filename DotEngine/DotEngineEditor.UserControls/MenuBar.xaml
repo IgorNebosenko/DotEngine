@@ -111,7 +111,7 @@
 
             <MenuItem Header="Packages"/>
             <MenuItem Header="Window">
-                <MenuItem Header="Swap theme"/>
+                <MenuItem Header="Swap theme" Click="OnSwapThemeClicked"/>
                 <Separator/>
                 <MenuItem Header="Hierarchy"/>
                 <MenuItem Header="Project"/>

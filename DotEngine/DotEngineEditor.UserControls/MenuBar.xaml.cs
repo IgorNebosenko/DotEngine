@@ -1,13 +1,18 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using DotEngineEditor.UserControls.Interfaces;
 
 namespace DotEngineEditor.UserControls;
 
 public partial class MenuBar : UserControl
 {
+    private IWindowTabHandler _windowTabHandler;
+    
     public MenuBar()
     {
         InitializeComponent();
+        
+        _windowTabHandler = Application.Current.Windows.OfType<IWindowTabHandler>().Single();
     }
 
     #region File
@@ -157,5 +162,13 @@ public partial class MenuBar : UserControl
     {
         throw new NotImplementedException();
     }
+    #endregion
+
+    #region Window
+    private void OnSwapThemeClicked(object sender, RoutedEventArgs e)
+    {
+        _windowTabHandler.SwapTheme();
+    }
+
     #endregion
 }

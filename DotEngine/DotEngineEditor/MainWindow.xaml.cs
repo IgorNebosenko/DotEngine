@@ -1,10 +1,11 @@
 ﻿using System.Windows;
 using DotEngineEditor.Themes;
 using DotEngineEditor.UserControls;
+using DotEngineEditor.UserControls.Interfaces;
 
 namespace DotEngineEditor
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IWindowTabHandler
     {
         public MainWindow()
         {
@@ -14,6 +15,11 @@ namespace DotEngineEditor
         }
 
         private void OnTestButtonClick(object sender, RoutedEventArgs e)
+        {
+            SwapTheme();
+        }
+
+        public void SwapTheme()
         {
             var app = (App)Application.Current;
             var newTheme = app.Theme == ThemeName.DarkTheme ? ThemeName.LightTheme : ThemeName.DarkTheme;
