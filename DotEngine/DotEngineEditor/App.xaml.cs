@@ -26,7 +26,7 @@ namespace DotEngineEditor
                 loadBar.Dispatcher.Invoke(() => loadBar.SetLabel("Metadata init..."));
                 MetaDataInit();
                 
-                loadBar.Dispatcher.Invoke(() => loadBar.SetProgress(0.5f));
+                loadBar.Dispatcher.Invoke(() => loadBar.SetProgress(50f));
                 loadBar.Dispatcher.Invoke(() => loadBar.SetLabel("Try project init..."));
                 
                 if (!TryProjectInit())
@@ -34,7 +34,7 @@ namespace DotEngineEditor
                     Dispatcher.Invoke(() => Current.Shutdown());
                     return;
                 }
-                loadBar.Dispatcher.Invoke(() => loadBar.SetProgress(1f));
+                loadBar.Dispatcher.Invoke(() => loadBar.SetProgress(100f));
             });
 
             LoadTheme();
