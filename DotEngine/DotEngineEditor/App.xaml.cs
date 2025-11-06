@@ -13,18 +13,37 @@ namespace DotEngineEditor
         
         public ThemeName Theme { get; private set; }
 
-        protected override void OnStartup(StartupEventArgs e)
+        protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            
-            MetaDataInit();
-            if (!TryProjectInit())
+
+            var loadBar = new LoadBar();
+            loadBar.Show();
+            loadBar.Title = "Loading...";
+
+            await Task.Run(() =>
             {
-                Current.Shutdown();
-                return;
-            }
+                loadBar.Dispatcher.Invoke(() => loadBar.SetLabel("Metadata init..."));
+                MetaDataInit();
+                
+                loadBar.Dispatcher.Invoke(() => loadBar.SetProgress(0.5f));
+                loadBar.Dispatcher.Invoke(() => loadBar.SetLabel("Try project init..."));
+                
+                if (!TryProjectInit())
+                {
+                    Dispatcher.Invoke(() => Current.Shutdown());
+                    return;
+                }
+            });
 
             LoadTheme();
+
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            
+            Current.MainWindow = mainWindow;
+            
+            loadBar.Close();
         }
 
         private void MetaDataInit()
@@ -49,8 +68,6 @@ namespace DotEngineEditor
 
         private bool TryProjectInit()
         {
-            // Not always false! 
-            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
             if (_engineMetaDataHolder.Data == null || string.IsNullOrEmpty(_engineMetaDataHolder.Data.LastProjectPath))
             {
                 return false;
