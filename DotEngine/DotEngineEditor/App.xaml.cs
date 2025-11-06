@@ -34,6 +34,7 @@ namespace DotEngineEditor
                     Dispatcher.Invoke(() => Current.Shutdown());
                     return;
                 }
+                loadBar.Dispatcher.Invoke(() => loadBar.SetProgress(1f));
             });
 
             LoadTheme();
