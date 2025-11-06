@@ -22,7 +22,7 @@ public class TagAndLayersConfig : IProjectConfig
             "EditorOnly"
         };
 
-        layers = new string[LayersCount]
+        layers = new []
         {
             "Default",
             "TransparentFX",
@@ -61,4 +61,18 @@ public class TagAndLayersConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "TagsAndLayersConfig.json";
+
+    public bool Validate(out List<string> errorMessages)
+    {
+        errorMessages = new List<string>();
+        var status = true;
+        
+        if (layers.Length != LayersCount)
+        {
+            errorMessages.Add($"Layers count must be equal to {LayersCount}");
+            status = false;
+        }
+        
+        return status;
+    }
 }

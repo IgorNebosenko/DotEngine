@@ -30,4 +30,18 @@ public class ProjectConfig : IProjectConfig
 
     [JsonIgnore]
     public string ConfigFile => "ProjectConfig.json";
+
+    public bool Validate(out List<string> errorMessages)
+    {
+        errorMessages = new List<string>();
+        var status = true;
+        
+        if (bundleVersion <= 0)
+        {
+            errorMessages.Add("BundleVersion must be greater than 0!");
+            status = false;
+        }
+
+        return status;
+    }
 }

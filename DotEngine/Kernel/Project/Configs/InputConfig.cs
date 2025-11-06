@@ -10,4 +10,10 @@ public class InputConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "InputConfig.json";
+
+    public bool Validate(out List<string> errorMessages)
+    {
+        errorMessages = new List<string>();
+        return true;
+    }
 }

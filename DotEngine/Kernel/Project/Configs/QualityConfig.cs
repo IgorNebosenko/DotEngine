@@ -24,4 +24,30 @@ public class QualityConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "QualityConfig.json";
+
+    public bool Validate(out List<string> errorMessages)
+    {
+        errorMessages = new List<string>();
+        var status = true;
+        
+        if (qualityConfigItems == null || qualityConfigItems?.Count == 0)
+        {
+            errorMessages.Add("Quality levels must have at least one item!");
+            status = false;
+        }
+
+        if (currentQualityLevel < 0 || currentQualityLevel >= qualityConfigItems?.Count)
+        {
+            errorMessages.Add("Current quality level is out of range!");
+            status = false;
+        }
+
+        if (buildQualityLevel < 0 || buildQualityLevel >= qualityConfigItems?.Count)
+        {
+            errorMessages.Add("Build quality level is out of range!");
+            status = false;
+        }
+
+        return status;
+    }
 }

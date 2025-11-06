@@ -15,4 +15,10 @@ public class PhysicsConfig : IProjectConfig
     
     [JsonIgnore]
     public string ConfigFile => "PhysicsConfig.json";
+
+    public bool Validate(out List<string> errorMessages)
+    {
+        errorMessages = new List<string>();
+        return true;
+    }
 }
