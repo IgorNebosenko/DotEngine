@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using DotEngineEditor.UserControls.Common;
 using DotEngineEditor.UserControls.Interfaces;
 
 namespace DotEngineEditor;
@@ -7,47 +8,47 @@ public partial class MainWindow : IFileTabHandler
 {
     public void NewScene()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("New scene");
     }
 
     public void OpenScene()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Open scene");
     }
 
     public void Save()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Save");
     }
 
     public void SaveAs()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Save as");
     }
 
     public void NewProject()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("New project");
     }
 
     public void OpenProject()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Open project");
     }
 
     public void SaveProject()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Save project");
     }
 
     public void BuildProfiles()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Build profiles");
     }
 
     public void BuildAndRun()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Build and run");
     }
 
     public void Exit()

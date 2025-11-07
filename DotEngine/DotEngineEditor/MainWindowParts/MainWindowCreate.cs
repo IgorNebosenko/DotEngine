@@ -1,4 +1,5 @@
-﻿using DotEngineEditor.UserControls.Interfaces;
+﻿using DotEngineEditor.UserControls.Common;
+using DotEngineEditor.UserControls.Interfaces;
 
 namespace DotEngineEditor;
 
@@ -6,11 +7,11 @@ public partial class MainWindow : ICreateElementHandler
 {
     public void CreateFolder()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Create folder");
     }
 
     public void CreateMaterial()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Create material");
     }
 }

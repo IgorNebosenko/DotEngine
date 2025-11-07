@@ -1,4 +1,5 @@
-﻿using DotEngineEditor.UserControls.Interfaces;
+﻿using DotEngineEditor.UserControls.Common;
+using DotEngineEditor.UserControls.Interfaces;
 
 namespace DotEngineEditor;
 
@@ -6,21 +7,21 @@ public partial class MainWindow : INavigationHandler
 {
     public void Hand()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Hand");
     }
 
     public void Move()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Move");
     }
 
     public void Rotate()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Rotate");
     }
 
     public void Scale()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Scale");
     }
 }

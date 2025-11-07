@@ -1,4 +1,5 @@
-﻿using DotEngineEditor.UserControls.Interfaces;
+﻿using DotEngineEditor.UserControls.Common;
+using DotEngineEditor.UserControls.Interfaces;
 
 namespace DotEngineEditor;
 
@@ -6,96 +7,96 @@ public partial class MainWindow : IEditTabHandler, IPlayTabsHandler
 {
     public void Undo()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Undo");
     }
 
     public void Redo()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Redo");
     }
 
     public void SelectAll()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Select all");
     }
 
     public void DeselectAll()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Deselect all");
     }
 
     public void SelectChildren()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Select children");
     }
 
     public void SelectPrefabRoot()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Select prefab root");
     }
 
     public void InvertSelection()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Invert selection");
     }
 
     public void Cut()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Cut");
     }
 
     public void Copy()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Copy");
     }
 
     public void Paste()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Paste");
     }
 
     public void Duplicate()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Duplicate");
     }
 
     public void Rename()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Rename");
     }
 
     public void Delete()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Delete");
     }
 
     public void Play()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Play");
     }
 
     public void Pause()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Pause");
     }
 
     public void Step()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Step");
     }
 
     public void ProjectSettings()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Project settings");
     }
 
     public void Preferences()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Preferences");
     }
 
     public void ClearPlayerData()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Clear player data");
     }
 }

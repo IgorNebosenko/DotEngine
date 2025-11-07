@@ -1,4 +1,5 @@
-﻿using DotEngineEditor.UserControls.Interfaces;
+﻿using DotEngineEditor.UserControls.Common;
+using DotEngineEditor.UserControls.Interfaces;
 
 namespace DotEngineEditor;
 
@@ -6,31 +7,31 @@ public partial class MainWindow : IAssetsHandler
 {
     public void ShowInExplorer()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Show in explorer");
     }
 
     public void Open()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Open");
     }
 
     public void CopyPath()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Copy path");
     }
 
     public void Refresh()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Refresh");
     }
 
     public void ReimportAll()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Reimport all");
     }
 
     public void OpenCSharpProject()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Open C# project");
     }
 }

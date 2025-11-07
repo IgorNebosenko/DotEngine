@@ -1,4 +1,5 @@
-﻿using DotEngineEditor.UserControls.Interfaces;
+﻿using DotEngineEditor.UserControls.Common;
+using DotEngineEditor.UserControls.Interfaces;
 
 namespace DotEngineEditor;
 
@@ -6,11 +7,11 @@ public partial class MainWindow : IHelpHandler
 {
     public void Documentation()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("Documentation");
     }
 
     public void AboutDotEngine()
     {
-        throw new NotImplementedException();
+        CustomMessageBox.NotImplement("About DotEngine");
     }
 }
