@@ -40,14 +40,12 @@ public partial class MainWindow : IWindowTabHandler
 
     public void InstantiateSceneView()
     {
-        //ToDo write this!
-        //InstantiateUserComponent<SceneViewPanel>("SceneView", new Vector2(600f, 800f));
+        InstantiateUserComponent<SceneViewPanel>("SceneView", new Vector2(800f, 600f));
     }
 
     public void InstantiateGame()
     {
-        //ToDo write this!
-        //InstantiateUserComponent<GamePanel>("Game", new Vector2(600f, 800f));
+        InstantiateUserComponent<GamePanel>("Game", new Vector2(800f, 600f));
     }
 
     private void InstantiateUserComponent<T>(string title, Vector2 size) where T : UserControl, new()
