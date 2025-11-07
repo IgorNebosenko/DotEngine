@@ -13,6 +13,6 @@ public class UserSettingsInstance : IProjectInstance
     
     public void Load()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Load UserSettings isn't implemented yet");
     }
 }

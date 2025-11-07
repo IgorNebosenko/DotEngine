@@ -13,6 +13,6 @@ public class PackagesInstance : IProjectInstance
     
     public void Load()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Loading Packages isn't implemented yet");
     }
 }

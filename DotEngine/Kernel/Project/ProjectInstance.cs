@@ -59,7 +59,9 @@ public class ProjectInstance
 
     public void Load()
     {
-        AssetsInstance.Load();
-        ConfigsInstance.Load();
+        for (var i = 0; i < _projectItems.Length; i++)
+        {
+            _projectItems[i].Load();
+        }
     }
 }
