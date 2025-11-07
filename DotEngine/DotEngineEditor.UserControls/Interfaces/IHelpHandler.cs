@@ -2,5 +2,6 @@
 
 public interface IHelpHandler
 {
-    
+    void Documentation();
+    void AboutDotEngine();
 }

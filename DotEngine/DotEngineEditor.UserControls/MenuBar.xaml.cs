@@ -15,6 +15,7 @@ public partial class MenuBar : UserControl
     private readonly ICreateElementHandler _createElementHandler;
 
     private readonly IGameObjectHandler _gameObjectHandler;
+    private readonly ICreate3DPrimitiveHandler _create3DPrimitiveHandler;
     
     private readonly IPackagesHandler _packagesHandler;
     
@@ -31,65 +32,66 @@ public partial class MenuBar : UserControl
         _editTabHandler = Application.Current.Windows.OfType<IEditTabHandler>().Single();
         _playTabsHandler = Application.Current.Windows.OfType<IPlayTabsHandler>().Single();
         
-        //_assetsHandler = Application.Current.Windows.OfType<IAssetsHandler>().Single();
-        //_createElementHandler = Application.Current.Windows.OfType<ICreateElementHandler>().Single();
+        _assetsHandler = Application.Current.Windows.OfType<IAssetsHandler>().Single();
+        _createElementHandler = Application.Current.Windows.OfType<ICreateElementHandler>().Single();
         
-        //_gameObjectHandler = Application.Current.Windows.OfType<IGameObjectHandler>().Single();
+        _gameObjectHandler = Application.Current.Windows.OfType<IGameObjectHandler>().Single();
+        _create3DPrimitiveHandler = Application.Current.Windows.OfType<ICreate3DPrimitiveHandler>().Single();
         
-        //_packagesHandler = Application.Current.Windows.OfType<IPackagesHandler>().Single();
+        _packagesHandler = Application.Current.Windows.OfType<IPackagesHandler>().Single();
         
         _windowTabHandler = Application.Current.Windows.OfType<IWindowTabHandler>().Single();
         
-        //_helpHandler = Application.Current.Windows.OfType<IHelpHandler>().Single();
+        _helpHandler = Application.Current.Windows.OfType<IHelpHandler>().Single();
     }
 
     #region File
-    private void OnNewGameClicked(object sender, RoutedEventArgs e)
+    private void OnNewGameClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.NewScene();
     }
     
-    private void OnOpenGameClicked(object sender, RoutedEventArgs e)
+    private void OnOpenGameClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.OpenScene();
     }
 
-    private void OnSaveClicked(object sender, RoutedEventArgs e)
+    private void OnSaveClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.Save();
     }
 
-    private void OnSaveAsClicked(object sender, RoutedEventArgs e)
+    private void OnSaveAsClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.SaveAs();
     }
 
-    private void OnNewProjectClicked(object sender, RoutedEventArgs e)
+    private void OnNewProjectClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.NewProject();
     }
 
-    private void OnOpenProjectClicked(object sender, RoutedEventArgs e)
+    private void OnOpenProjectClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.OpenProject();
     }
 
-    private void OnSaveProjectClicked(object sender, RoutedEventArgs e)
+    private void OnSaveProjectClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.SaveProject();
     }
 
-    private void OnBuildProfilesClicked(object sender, RoutedEventArgs e)
+    private void OnBuildProfilesClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.BuildProfiles();
     }
 
-    private void OnBuildAndRunClicked(object sender, RoutedEventArgs e)
+    private void OnBuildAndRunClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.BuildAndRun();
     }
 
-    private void OnExitClicked(object sender, RoutedEventArgs e)
+    private void OnExitClick(object sender, RoutedEventArgs e)
     {
         _fileTabHandler.Exit();
     }
@@ -192,40 +194,165 @@ public partial class MenuBar : UserControl
     }
     #endregion
 
+    #region Assets
+    private void OnShowInExplorerClick(object sender, RoutedEventArgs e)
+    {
+        _assetsHandler.ShowInExplorer();
+    }
+
+    private void OnOpenClick(object sender, RoutedEventArgs e)
+    {
+        _assetsHandler.Open();
+    }
+
+    private void OnCopyPathClick(object sender, RoutedEventArgs e)
+    {
+        _assetsHandler.CopyPath();
+    }
+
+    private void OnRefreshClick(object sender, RoutedEventArgs e)
+    {
+        _assetsHandler.Refresh();
+    }
+
+    private void OnReimportAllClick(object sender, RoutedEventArgs e)
+    {
+        _assetsHandler.ReimportAll();
+    }
+
+    private void OnOpenCSharpProjectClick(object sender, RoutedEventArgs e)
+    {
+        _assetsHandler.OpenCSharpProject();
+    }
+    
+    #region CreateElement
+    private void OnFolderCreateClick(object sender, RoutedEventArgs e)
+    {
+        _createElementHandler.CreateFolder();
+    }
+
+    private void OnMaterialCreateClick(object sender, RoutedEventArgs e)
+    {
+        _createElementHandler.CreateMaterial();
+    }
+    #endregion
+    #endregion
+
+    #region GameObject
+    private void OnCreateEmptyClick(object sender, RoutedEventArgs e)
+    {
+        _gameObjectHandler.CreateEmpty();
+    }
+
+    private void OnCreateEmptyChildClick(object sender, RoutedEventArgs e)
+    {
+        _gameObjectHandler.CreateEmptyChild();
+    }
+
+    private void OnCenterInChildrenClick(object sender, RoutedEventArgs e)
+    {
+        _gameObjectHandler.CreateEmptyChild();
+    }
+
+    private void OnMakeParentClick(object sender, RoutedEventArgs e)
+    {
+        _gameObjectHandler.MakeParent();
+    }
+
+    private void OnClearParentClick(object sender, RoutedEventArgs e)
+    {
+        _gameObjectHandler.CleanParent();
+    }
+
+    #region Create 3D Primitive
+    private void OnCreateCubeClick(object sender, RoutedEventArgs e)
+    {
+        _create3DPrimitiveHandler.CreateCube();
+    }
+
+    private void OnCreateSphereClick(object sender, RoutedEventArgs e)
+    {
+        _create3DPrimitiveHandler.CreateSphere();
+    }
+
+    private void OnCreateCapsuleClick(object sender, RoutedEventArgs e)
+    {
+        _create3DPrimitiveHandler.CreateCapsule();
+    }
+
+    private void OnCreateCylinderClick(object sender, RoutedEventArgs e)
+    {
+        _create3DPrimitiveHandler.CreateCylinder();
+    }
+
+    private void OnCreatePyramidClick(object sender, RoutedEventArgs e)
+    {
+        _create3DPrimitiveHandler.CreatePyramid();
+    }
+
+    private void OnCreatePlaneClick(object sender, RoutedEventArgs e)
+    {
+        _create3DPrimitiveHandler.CreatePlane();
+    }
+
+    private void OnCreateQuadClick(object sender, RoutedEventArgs e)
+    {
+        _create3DPrimitiveHandler.CreateQuad();
+    }
+    #endregion
+
+    #endregion
+
+    #region Packages
+    
+    #endregion
+
     #region Window
-    private void OnSwapThemeClicked(object sender, RoutedEventArgs e)
+    private void OnSwapThemeClick(object sender, RoutedEventArgs e)
     {
         _windowTabHandler.SwapTheme();
     }
 
-    private void OnHierarchyInstantiateClicked(object sender, RoutedEventArgs e)
+    private void OnHierarchyInstantiateClick(object sender, RoutedEventArgs e)
     {
         _windowTabHandler.InstantiateHierarchy();
     }
     
-    private void OnProjectInstantiateClicked(object sender, RoutedEventArgs e)
+    private void OnProjectInstantiateClick(object sender, RoutedEventArgs e)
     {
         _windowTabHandler.InstantiateProject();
     }
     
-    private void OnConsoleInstantiateClicked(object sender, RoutedEventArgs e)
+    private void OnConsoleInstantiateClick(object sender, RoutedEventArgs e)
     {
         _windowTabHandler.InstantiateConsole();
     }
 
-    private void OnInspectorInstantiateClicked(object sender, RoutedEventArgs e)
+    private void OnInspectorInstantiateClick(object sender, RoutedEventArgs e)
     {
         _windowTabHandler.InstantiateInspector();
     }
 
-    private void OnSceneViewInstantiateClicked(object sender, RoutedEventArgs e)
+    private void OnSceneViewInstantiateClick(object sender, RoutedEventArgs e)
     {
         _windowTabHandler.InstantiateSceneView();
     }
 
-    private void OnGameInstantiateClicked(object sender, RoutedEventArgs e)
+    private void OnGameInstantiateClick(object sender, RoutedEventArgs e)
     {
         _windowTabHandler.InstantiateGame();
+    }
+    #endregion
+
+    #region Help
+    private void OnDocumentationClick(object sender, RoutedEventArgs e)
+    {
+        _helpHandler.Documentation();
+    }
+
+    private void OnAboutDotEngineClicked(object sender, RoutedEventArgs e)
+    {
+        _helpHandler.AboutDotEngine();
     }
     #endregion
 }
