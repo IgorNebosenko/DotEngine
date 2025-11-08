@@ -1,5 +1,7 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using System.Windows.Media;
 
 namespace DirectXLayer.Windows;
 
@@ -8,10 +10,10 @@ public class EditorWindow : HwndHost, IDisposable
     private readonly int _width;
     private readonly int _height;
 
-    public EditorWindow(int width, int height)
+    public EditorWindow(Vector2 windowSize)
     {
-        _width = width;
-        _height = height;
+        _width = (int)windowSize.X;
+        _height = (int)windowSize.Y;
     }
     
     #region WinAPI
@@ -31,11 +33,30 @@ public class EditorWindow : HwndHost, IDisposable
             WS_CHILD | WS_VISIBLE, 0, 0, _width, _height,
             hwndParent.Handle, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
         
+        InitializeDirectX(hWnd);
+        CompositionTarget.Rendering += OnRendering;
         
         return new HandleRef(this, hWnd);
     }
 
     protected override void DestroyWindowCore(HandleRef hwnd)
     {
+        CompositionTarget.Rendering -= OnRendering;
+        Dispose();
+    }
+
+    private void InitializeDirectX(IntPtr hwnd)
+    {
+        
+    }
+    
+    private void OnRendering(object? sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Dispose()
+    {
+        
     }
 }
