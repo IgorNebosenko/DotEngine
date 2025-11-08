@@ -6,6 +6,6 @@ namespace DirectXLayer.Shaders;
 [StructLayout(LayoutKind.Sequential)]
 public struct Vertex
 {
-    public Vector3 Position;
-    public Color Color;
+    public Vector3 position;
+    public Color color;
 }
