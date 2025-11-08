@@ -1,4 +1,4 @@
-﻿using DirectXLayer;
+﻿using DirectXLayer.Enums;
 using Kernel.Engine;
 using Newtonsoft.Json;
 
