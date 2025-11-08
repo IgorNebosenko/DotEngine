@@ -37,11 +37,19 @@
 
                         <avalondock:LayoutDocumentPaneGroup>
                             <avalondock:LayoutDocumentPane>
-                                <avalondock:LayoutDocument Title="Scene View">
+
+                                <avalondock:LayoutDocument Title="Scene View" IsSelected="True">
                                     <Grid Background="{DynamicResource PanelBackgroundBrush}">
                                         <windows:EditorWindow/>
                                     </Grid>
                                 </avalondock:LayoutDocument>
+
+                                <avalondock:LayoutDocument Title="Game">
+                                    <Grid Background="{DynamicResource PanelBackgroundBrush}">
+                                        <windows:EditorWindow/>
+                                    </Grid>
+                                </avalondock:LayoutDocument>
+
                             </avalondock:LayoutDocumentPane>
                         </avalondock:LayoutDocumentPaneGroup>
 
