@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DirectXLayer\DirectXLayer.csproj" />
       <ProjectReference Include="..\DotEngineEditor.Themes\DotEngineEditor.Themes.csproj" />
     </ItemGroup>
 
