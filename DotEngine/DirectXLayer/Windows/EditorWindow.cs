@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Interop;
-using System.Windows.Media;
 using DirectXLayer.Shaders;
 using DirectXLayer.Shaders.Integrated;
 using SharpDX;
@@ -20,8 +21,8 @@ namespace DirectXLayer.Windows
 {
     public class EditorWindow : HwndHost, IDisposable
     {
-        private readonly int _width;
-        private readonly int _height;
+        private int _width;
+        private int _height;
 
         private Device _device;
         private SwapChain _swapChain;
@@ -43,6 +44,15 @@ namespace DirectXLayer.Windows
         private Viewport _viewport;
         private float _rotation;
         private float _cubeTime;
+        private float _cubeY;
+        private float _cubeVelocity;
+        private bool _isGrounded;
+
+        private CancellationTokenSource _cts;
+        private Task _renderTask;
+        private Task _fixedUpdateTask;
+        private int _frameTimeInterval = 16;
+        private int _fixedTimeInterval = 20;
 
         public EditorWindow()
         {
@@ -50,20 +60,91 @@ namespace DirectXLayer.Windows
             _height = 600;
         }
 
+        public void SetResolution(Vector2 resolution)
+        {
+            _width = (int)resolution.X;
+            _width = (int)resolution.Y;
+        }
+
+        public void SetTargetFps(int frameCount)
+        {
+            _frameTimeInterval = 1000 / frameCount;
+        }
+
+        public void SetFixedUpdateRate(int rate)
+        {
+            _fixedTimeInterval = 1000 / rate;
+        }
+
+        #region DirectX Handle
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
             var hwnd = CreateWindowEx(0, "static", "",
                 WS_CHILD | WS_VISIBLE, 0, 0, _width, _height,
                 hwndParent.Handle, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
+
             InitializeDirectX(hwnd);
-            CompositionTarget.Rendering += OnRendering;
+
+            _cts = new CancellationTokenSource();
+            _renderTask = Task.Run(() => RenderLoop(_cts.Token));
+            _fixedUpdateTask = Task.Run(() => FixedUpdateLoop(_cts.Token));
+
             return new HandleRef(this, hwnd);
         }
 
         protected override void DestroyWindowCore(HandleRef hwnd)
         {
-            CompositionTarget.Rendering -= OnRendering;
+            _cts?.Cancel();
+            _renderTask?.Wait();
+            _fixedUpdateTask?.Wait();
             Dispose();
+        }
+
+        private async Task RenderLoop(CancellationToken token)
+        {
+            try
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    Render();
+                    await Task.Delay(_frameTimeInterval, token);
+                }
+            }
+            catch (TaskCanceledException)
+            {
+            }
+        }
+
+        private async Task FixedUpdateLoop(CancellationToken token)
+        {
+            try
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    FixedUpdate();
+                    await Task.Delay(_fixedTimeInterval, token);
+                }
+            }
+            catch (TaskCanceledException)
+            {
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (_isGrounded && _cubeY <= -0.5f)
+            {
+                _cubeVelocity = 0.08f;
+                _isGrounded = false;
+            }
+            _cubeY += _cubeVelocity;
+            _cubeVelocity -= 0.004f;
+            if (_cubeY <= -0.5f)
+            {
+                _cubeY = -0.5f;
+                _cubeVelocity = 0f;
+                _isGrounded = true;
+            }
         }
 
         private void InitializeDirectX(IntPtr hwnd)
@@ -118,11 +199,11 @@ namespace DirectXLayer.Windows
         {
             var vertices = new[]
             {
-                new Vertex { position = new Vector3(-0.5f, -0.5f,  0.5f), color = Color.Red },
-                new Vertex { position = new Vector3( 0.5f, -0.5f,  0.5f), color = Color.Green },
-                new Vertex { position = new Vector3( 0.5f, -0.5f, -0.5f), color = Color.Blue },
-                new Vertex { position = new Vector3(-0.5f, -0.5f, -0.5f), color = Color.Yellow },
-                new Vertex { position = new Vector3( 0.0f,  0.5f,  0.0f), color = Color.Magenta }
+                new Vertex { position = new Vector3(-0.5f,-0.5f, 0.5f), color = Color.Red },
+                new Vertex { position = new Vector3( 0.5f,-0.5f, 0.5f), color = Color.Green },
+                new Vertex { position = new Vector3( 0.5f,-0.5f,-0.5f), color = Color.Blue },
+                new Vertex { position = new Vector3(-0.5f,-0.5f,-0.5f), color = Color.Yellow },
+                new Vertex { position = new Vector3( 0.0f, 0.5f, 0.0f), color = Color.Magenta }
             };
             var indices = new ushort[] { 0,1,2, 0,2,3, 0,4,1, 1,4,2, 2,4,3, 3,4,0 };
             CreateBuffers(vertices, indices, out _vertexBufferPyramid, out _indexBufferPyramid);
@@ -134,12 +215,12 @@ namespace DirectXLayer.Windows
             {
                 new Vertex { position = new Vector3(-0.5f,-0.5f,-0.5f), color = Color.Red },
                 new Vertex { position = new Vector3(-0.5f, 0.5f,-0.5f), color = Color.Green },
-                new Vertex { position = new Vector3(0.5f, 0.5f,-0.5f), color = Color.Blue },
-                new Vertex { position = new Vector3(0.5f,-0.5f,-0.5f), color = Color.Yellow },
-                new Vertex { position = new Vector3(-0.5f,-0.5f,0.5f), color = Color.Magenta },
-                new Vertex { position = new Vector3(-0.5f,0.5f,0.5f), color = Color.Cyan },
-                new Vertex { position = new Vector3(0.5f,0.5f,0.5f), color = Color.White },
-                new Vertex { position = new Vector3(0.5f,-0.5f,0.5f), color = Color.Grey }
+                new Vertex { position = new Vector3( 0.5f, 0.5f,-0.5f), color = Color.Blue },
+                new Vertex { position = new Vector3( 0.5f,-0.5f,-0.5f), color = Color.Yellow },
+                new Vertex { position = new Vector3(-0.5f,-0.5f, 0.5f), color = Color.Magenta },
+                new Vertex { position = new Vector3(-0.5f, 0.5f, 0.5f), color = Color.Cyan },
+                new Vertex { position = new Vector3( 0.5f, 0.5f, 0.5f), color = Color.White },
+                new Vertex { position = new Vector3( 0.5f,-0.5f, 0.5f), color = Color.Grey }
             };
             var indices = new ushort[]
             {
@@ -267,11 +348,6 @@ namespace DirectXLayer.Windows
             _deviceContext.Rasterizer.State = _rasterizerState;
         }
 
-        private void OnRendering(object sender, EventArgs e)
-        {
-            Render();
-        }
-
         private void Render()
         {
             if (_deviceContext == null) return;
@@ -285,7 +361,7 @@ namespace DirectXLayer.Windows
             _deviceContext.PixelShader.Set(_pixelShader);
             _deviceContext.VertexShader.SetConstantBuffer(0, _constantBuffer);
             DrawObject(_vertexBufferPyramid, _indexBufferPyramid, Matrix.Translation(-1.5f, 0f, 0f) * Matrix.RotationY(_rotation));
-            DrawObject(_vertexBufferCube, _indexBufferCube, Matrix.Translation(1.5f, (float)Math.Abs(Math.Sin(_cubeTime)) - 0.5f, 0f));
+            DrawObject(_vertexBufferCube, _indexBufferCube, Matrix.Translation(1.5f, _cubeY, 0f));
             DrawObject(_vertexBufferSphere, _indexBufferSphere, Matrix.Translation(0f, -0.5f, 1.5f));
             _swapChain.Present(1, PresentFlags.None);
         }
@@ -306,6 +382,9 @@ namespace DirectXLayer.Windows
 
         public void Dispose()
         {
+            _cts?.Cancel();
+            _renderTask?.Wait();
+            _fixedUpdateTask?.Wait();
             _rasterizerState?.Dispose();
             _inputLayout?.Dispose();
             _vertexShader?.Dispose();
@@ -324,12 +403,29 @@ namespace DirectXLayer.Windows
             _deviceContext?.Dispose();
             _device?.Dispose();
         }
+        #endregion
+        
+        #region WinAPI
 
         private const int WS_CHILD = 0x40000000;
         private const int WS_VISIBLE = 0x10000000;
+
         [DllImport("user32.dll", EntryPoint = "CreateWindowEx", CharSet = CharSet.Unicode)]
-        private static extern IntPtr CreateWindowEx(int dwExStyle, string lpszClassName, string lpszWindowName,
-            int style, int x, int y, int width, int height, IntPtr hwndParent,
-            IntPtr hMenu, IntPtr hInst, IntPtr pvParam);
+        private static extern IntPtr CreateWindowEx(
+            int dwExStyle,
+            string lpszClassName,
+            string lpszWindowName,
+            int style,
+            int x,
+            int y,
+            int width,
+            int height,
+            IntPtr hwndParent,
+            IntPtr hMenu,
+            IntPtr hInst,
+            IntPtr pvParam
+        );
+
+        #endregion
     }
 }
