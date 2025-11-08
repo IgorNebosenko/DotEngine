@@ -1,3 +1,4 @@
 # DotEngine
 Dot Engine - free game engine
-<img width="1188" height="799" alt="image" src="https://github.com/user-attachments/assets/092870f0-e0cf-4139-9e54-46371f106863" />
+<img width="1489" height="991" alt="image" src="https://github.com/user-attachments/assets/5210db35-bafa-485d-97a1-7b7354e01f9e" />
+
