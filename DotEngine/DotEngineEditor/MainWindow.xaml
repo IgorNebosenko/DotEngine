@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:userControls="clr-namespace:DotEngineEditor.UserControls;assembly=DotEngineEditor.UserControls"
         xmlns:avalondock="https://github.com/Dirkster99/AvalonDock"
+        xmlns:windows="clr-namespace:DirectXLayer.Windows;assembly=DirectXLayer"
         mc:Ignorable="d"
         Title="Dot Engine"
         Height="800"
@@ -38,14 +39,7 @@
                             <avalondock:LayoutDocumentPane>
                                 <avalondock:LayoutDocument Title="Scene View">
                                     <Grid Background="{DynamicResource PanelBackgroundBrush}">
-                                        <Button Content="Test"
-                                                Width="120"
-                                                Height="34"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Top"
-                                                Background="{DynamicResource PanelBackgroundBrush}"
-                                                Foreground="{DynamicResource ForegroundBrush}"
-                                                Click="OnTestButtonClick"/>
+                                        <windows:EditorWindow/>
                                     </Grid>
                                 </avalondock:LayoutDocument>
                             </avalondock:LayoutDocumentPane>

@@ -2,7 +2,7 @@
 
 namespace DirectXLayer.Shaders;
 
-[StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential, Pack = 4)]
 public struct Color
 {
     public float r;
