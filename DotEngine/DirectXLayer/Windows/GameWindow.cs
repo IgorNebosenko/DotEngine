@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Interop;
+using DirectXLayer.Assimp;
+using DirectXLayer.Mesh;
 using DirectXLayer.Shaders;
 using DirectXLayer.Shaders.Integrated;
 using SharpDX;
@@ -24,6 +27,9 @@ namespace DirectXLayer.Windows
         private int _width;
         private int _height;
 
+        private IReadOnlyList<VertexModelData> _loadedMeshes;
+        private bool _hasLoadedModel;
+
         private Device _device;
         private SwapChain _swapChain;
         private DeviceContext _deviceContext;
@@ -43,7 +49,6 @@ namespace DirectXLayer.Windows
         private RasterizerState _rasterizerState;
         private Viewport _viewport;
         private float _rotation;
-        private float _cubeTime;
         private float _cubeY;
         private float _cubeVelocity;
         private bool _isGrounded;
@@ -54,6 +59,15 @@ namespace DirectXLayer.Windows
         private int _frameTimeInterval = 16;
         private int _fixedTimeInterval = 20;
 
+        private MeshLoader _meshLoader;
+        private string _pendingModelPath;
+        private Vector3 _pendingModelPosition;
+        private Vector3 _pendingModelRotation;
+        private Vector3 _pendingModelScale;
+        private bool _pendingLoadRequested;
+
+        public bool IsInitialized { get; private set; }
+
         public GameWindow()
         {
             _width = 800;
@@ -63,7 +77,7 @@ namespace DirectXLayer.Windows
         public void SetResolution(Vector2 resolution)
         {
             _width = (int)resolution.X;
-            _width = (int)resolution.Y;
+            _height = (int)resolution.Y;
         }
 
         public void SetTargetFps(int frameCount)
@@ -76,7 +90,28 @@ namespace DirectXLayer.Windows
             _fixedTimeInterval = 1000 / rate;
         }
 
-        #region DirectX Handle
+        public void LoadModel(string path, Vector3 position, Vector3 rotation, Vector3 scale)
+        {
+            if (!IsInitialized)
+            {
+                _pendingModelPath = path;
+                _pendingModelPosition = position;
+                _pendingModelRotation = rotation;
+                _pendingModelScale = scale;
+                _pendingLoadRequested = true;
+                return;
+            }
+
+            _loadedMeshes = _meshLoader.ReadModel(path);
+            _hasLoadedModel = _loadedMeshes.Count > 0;
+
+            Console.WriteLine($"Loaded meshes: {_loadedMeshes?.Count}");
+
+            if (!_hasLoadedModel)
+                Console.WriteLine($"Model at {path} was not loaded (invalid or empty).");
+        }
+
+        #region DirectX
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
             var hwnd = CreateWindowEx(0, "static", "",
@@ -110,9 +145,7 @@ namespace DirectXLayer.Windows
                     await Task.Delay(_frameTimeInterval, token);
                 }
             }
-            catch (TaskCanceledException)
-            {
-            }
+            catch (TaskCanceledException) { }
         }
 
         private async Task FixedUpdateLoop(CancellationToken token)
@@ -125,9 +158,7 @@ namespace DirectXLayer.Windows
                     await Task.Delay(_fixedTimeInterval, token);
                 }
             }
-            catch (TaskCanceledException)
-            {
-            }
+            catch (TaskCanceledException) { }
         }
 
         private void FixedUpdate()
@@ -152,7 +183,8 @@ namespace DirectXLayer.Windows
             var swapChainDesc = new SwapChainDescription
             {
                 BufferCount = 1,
-                ModeDescription = new ModeDescription(_width, _height, new Rational(60, 1), Format.R8G8B8A8_UNorm),
+                ModeDescription = new ModeDescription(_width, _height,
+                    new Rational(60, 1), Format.R8G8B8A8_UNorm),
                 IsWindowed = true,
                 OutputHandle = hwnd,
                 SampleDescription = new SampleDescription(1, 0),
@@ -160,7 +192,10 @@ namespace DirectXLayer.Windows
                 Usage = Usage.RenderTargetOutput
             };
 
-            Device.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.None, swapChainDesc, out _device, out _swapChain);
+            Device.CreateWithSwapChain(DriverType.Hardware,
+                DeviceCreationFlags.None, swapChainDesc, out _device, out _swapChain);
+
+            _meshLoader = new MeshLoader(_device);
             _deviceContext = _device.ImmediateContext;
 
             using (var backBuffer = _swapChain.GetBackBuffer<Texture2D>(0))
@@ -193,6 +228,15 @@ namespace DirectXLayer.Windows
             CreateRasterizerState();
 
             _deviceContext.OutputMerger.SetTargets(_depthStencilView, _renderTargetView);
+
+            IsInitialized = true;
+
+            if (_pendingLoadRequested)
+            {
+                _pendingLoadRequested = false;
+                LoadModel(_pendingModelPath, _pendingModelPosition,
+                    _pendingModelRotation, _pendingModelScale);
+            }
         }
 
         private void CreatePyramid()
@@ -323,7 +367,7 @@ namespace DirectXLayer.Windows
 
         private void CreateShaders()
         {
-            var shader = new DefaultShader();
+            var shader = new LitShader();
             var vs = ShaderBytecode.Compile(shader.Vertex, "VS", "vs_4_0");
             var ps = ShaderBytecode.Compile(shader.Pixel, "PS", "ps_4_0");
             _vertexShader = new VertexShader(_device, vs);
@@ -331,7 +375,7 @@ namespace DirectXLayer.Windows
             var elements = new[]
             {
                 new InputElement("POSITION",0,Format.R32G32B32_Float,0,0),
-                new InputElement("COLOR",0,Format.R32G32B32A32_Float,12,0)
+                new InputElement("NORMAL",0,Format.R32G32B32_Float,12,0)
             };
             _inputLayout = new InputLayout(_device, vs, elements);
         }
@@ -351,18 +395,29 @@ namespace DirectXLayer.Windows
         private void Render()
         {
             if (_deviceContext == null) return;
+
             _deviceContext.ClearRenderTargetView(_renderTargetView, new Color4(0.05f, 0.05f, 0.1f, 1f));
             _deviceContext.ClearDepthStencilView(_depthStencilView, DepthStencilClearFlags.Depth, 1f, 0);
+
             _rotation += 0.01f;
-            _cubeTime += 0.05f;
+
             _deviceContext.InputAssembler.InputLayout = _inputLayout;
             _deviceContext.InputAssembler.PrimitiveTopology = PrimitiveTopology.TriangleList;
             _deviceContext.VertexShader.Set(_vertexShader);
             _deviceContext.PixelShader.Set(_pixelShader);
             _deviceContext.VertexShader.SetConstantBuffer(0, _constantBuffer);
+
             DrawObject(_vertexBufferPyramid, _indexBufferPyramid, Matrix.Translation(-1.5f, 0f, 0f) * Matrix.RotationY(_rotation));
             DrawObject(_vertexBufferCube, _indexBufferCube, Matrix.Translation(1.5f, _cubeY, 0f));
             DrawObject(_vertexBufferSphere, _indexBufferSphere, Matrix.Translation(0f, -0.5f, 1.5f));
+
+            if (_hasLoadedModel && _loadedMeshes != null)
+            {
+                var modelWorld = Matrix.Scaling(0.1f) * Matrix.RotationY(_rotation * 0.5f) * Matrix.Translation(0f, -0.5f, -2f);
+                foreach (var mesh in _loadedMeshes)
+                    DrawModel(mesh, modelWorld);
+            }
+
             _swapChain.Present(1, PresentFlags.None);
         }
 
@@ -378,6 +433,27 @@ namespace DirectXLayer.Windows
             _deviceContext.InputAssembler.SetVertexBuffers(0, new VertexBufferBinding(vb, 12 + 16, 0));
             _deviceContext.InputAssembler.SetIndexBuffer(ib, Format.R16_UInt, 0);
             _deviceContext.DrawIndexed(ib.Description.SizeInBytes / sizeof(ushort), 0, 0);
+        }
+
+        private void DrawModel(VertexModelData mesh, Matrix world)
+        {
+            var view = Matrix.LookAtLH(new Vector3(0, 1f, -4f), Vector3.Zero, Vector3.UnitY);
+            var proj = Matrix.PerspectiveFovLH((float)Math.PI / 4f, (float)_width / _height, 0.1f, 100f);
+            var wvp = world * view * proj;
+            wvp.Transpose();
+
+            _deviceContext.MapSubresource(_constantBuffer, MapMode.WriteDiscard, MapFlags.None, out var ds);
+            ds.Write(new ConstantBuffer { WorldViewProjection = wvp });
+            _deviceContext.UnmapSubresource(_constantBuffer, 0);
+
+            _deviceContext.InputAssembler.InputLayout = _inputLayout;
+            _deviceContext.InputAssembler.PrimitiveTopology = PrimitiveTopology.TriangleList;
+            _deviceContext.InputAssembler.SetVertexBuffers(0, new VertexBufferBinding(mesh.vertexBuffer, Utilities.SizeOf<Vector3>() * 2, 0));
+            _deviceContext.InputAssembler.SetIndexBuffer(mesh.indexBuffer, Format.R32_UInt, 0);
+            _deviceContext.VertexShader.Set(_vertexShader);
+            _deviceContext.PixelShader.Set(_pixelShader);
+            _deviceContext.VertexShader.SetConstantBuffer(0, _constantBuffer);
+            _deviceContext.DrawIndexed(mesh.indexCount, 0, 0);
         }
 
         public void Dispose()
@@ -404,9 +480,8 @@ namespace DirectXLayer.Windows
             _device?.Dispose();
         }
         #endregion
-        
-        #region WinAPI
 
+        #region WinAPI
         private const int WS_CHILD = 0x40000000;
         private const int WS_VISIBLE = 0x10000000;
 
@@ -425,7 +500,6 @@ namespace DirectXLayer.Windows
             IntPtr hInst,
             IntPtr pvParam
         );
-
         #endregion
     }
 }

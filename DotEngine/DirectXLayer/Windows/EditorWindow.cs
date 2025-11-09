@@ -1,8 +1,7 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using DirectXLayer.Assimp;
+using DirectXLayer.Mesh;
 using DirectXLayer.Shaders;
 using DirectXLayer.Shaders.Integrated;
 using SharpDX;
@@ -23,6 +22,9 @@ namespace DirectXLayer.Windows
     {
         private int _width;
         private int _height;
+        
+        private IReadOnlyList<VertexModelData> _loadedMeshes;
+        private bool _hasLoadedModel;
 
         private Device _device;
         private SwapChain _swapChain;
@@ -54,6 +56,8 @@ namespace DirectXLayer.Windows
         private int _frameTimeInterval = 16;
         private int _fixedTimeInterval = 20;
 
+        private MeshLoader _meshLoader;
+
         public EditorWindow()
         {
             _width = 800;
@@ -74,6 +78,23 @@ namespace DirectXLayer.Windows
         public void SetFixedUpdateRate(int rate)
         {
             _fixedTimeInterval = 1000 / rate;
+        }
+
+        public void LoadModel(string path, Vector3 position, Vector3 rotation, Vector3 scale)
+        {
+            _loadedMeshes = _meshLoader.ReadModel(path);
+
+            if (_loadedMeshes.Count == 0)
+            {
+                Console.WriteLine($"Model at {path} was not loaded (invalid or empty).");
+                return;
+            }
+            
+            foreach (var mesh in _loadedMeshes)
+            {
+                var world = Matrix.Scaling(0.01f) * Matrix.RotationY(_rotation * 0.5f) * Matrix.Translation(0f, -0.5f, -2f);
+                DrawModel(mesh, world);
+            }
         }
 
         #region DirectX Handle
@@ -161,6 +182,9 @@ namespace DirectXLayer.Windows
             };
 
             Device.CreateWithSwapChain(DriverType.Hardware, DeviceCreationFlags.None, swapChainDesc, out _device, out _swapChain);
+            
+            _meshLoader = new MeshLoader(_device);
+            
             _deviceContext = _device.ImmediateContext;
 
             using (var backBuffer = _swapChain.GetBackBuffer<Texture2D>(0))
@@ -378,6 +402,28 @@ namespace DirectXLayer.Windows
             _deviceContext.InputAssembler.SetVertexBuffers(0, new VertexBufferBinding(vb, 12 + 16, 0));
             _deviceContext.InputAssembler.SetIndexBuffer(ib, Format.R16_UInt, 0);
             _deviceContext.DrawIndexed(ib.Description.SizeInBytes / sizeof(ushort), 0, 0);
+        }
+        
+        private void DrawModel(VertexModelData mesh, Matrix world)
+        {
+            var view = Matrix.LookAtLH(new Vector3(0, 1f, -4f), Vector3.Zero, Vector3.UnitY);
+            var proj = Matrix.PerspectiveFovLH((float)Math.PI / 4f, (float)_width / _height, 0.1f, 100f);
+            var wvp = world * view * proj;
+            wvp.Transpose();
+
+            _deviceContext.MapSubresource(_constantBuffer, MapMode.WriteDiscard, MapFlags.None, out var ds);
+            ds.Write(new ConstantBuffer { WorldViewProjection = wvp });
+            _deviceContext.UnmapSubresource(_constantBuffer, 0);
+
+            _deviceContext.InputAssembler.InputLayout = _inputLayout;
+            _deviceContext.InputAssembler.PrimitiveTopology = SharpDX.Direct3D.PrimitiveTopology.TriangleList;
+            _deviceContext.InputAssembler.SetVertexBuffers(0, new VertexBufferBinding(mesh.vertexBuffer, Utilities.SizeOf<Vector3>() * 2, 0));
+            _deviceContext.InputAssembler.SetIndexBuffer(mesh.indexBuffer, Format.R32_UInt, 0);
+            _deviceContext.VertexShader.Set(_vertexShader);
+            _deviceContext.PixelShader.Set(_pixelShader);
+            _deviceContext.VertexShader.SetConstantBuffer(0, _constantBuffer);
+
+            _deviceContext.DrawIndexed(mesh.indexCount, 0, 0);
         }
 
         public void Dispose()
