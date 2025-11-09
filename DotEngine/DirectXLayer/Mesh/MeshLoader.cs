@@ -11,9 +11,12 @@ public class MeshLoader
 
     public MeshLoader(Device device)
     {
-        _loaders = new[]
+        _loaders = new ILoader[]
         {
-            new FbxLoader(device)
+            new FbxLoader(device),
+            new ObjLoader(device),
+            new DaeLoader(device),
+            new BlendLoader(device)
         };
     }
 
