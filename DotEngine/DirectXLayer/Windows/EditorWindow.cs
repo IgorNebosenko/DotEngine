@@ -105,8 +105,6 @@ namespace DirectXLayer.Windows
             _loadedMeshes = _meshLoader.ReadModel(path);
             _hasLoadedModel = _loadedMeshes.Count > 0;
 
-            Console.WriteLine($"Loaded meshes: {_loadedMeshes?.Count}");
-
             if (!_hasLoadedModel)
                 Console.WriteLine($"Model at {path} was not loaded (invalid or empty).");
         }
