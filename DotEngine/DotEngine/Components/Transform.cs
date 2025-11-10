@@ -162,6 +162,133 @@ public class Transform : Component, IEnumerable
         Rotate(new Vector3(x, y, z), relativeTo);
     }
 
+    public void Rotate(Vector3 axis, float angle, Space relativeTo = Space.Self)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void RotateAround(Vector3 point, Vector3 axis, float angle)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LookAt(Transform target, Vector3 worldUp)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LookAt(Transform target)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LookAt(Vector3 target, Vector3 worldUp)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void LookAt(Vector3 target)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 TransformDirection(Vector3 direction)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 TransformDirection(float x, float y, float z)
+    {
+        return TransformDirection(new Vector3(x, y, z));
+    }
+
+    public void TransformDirections(
+        ReadOnlySpan<Vector3> directions,
+        Span<Vector3> transformedDirections)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void TransformDirections(Span<Vector3> directions)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 InverseTransformDirection(Vector3 direction)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 InverseTransformDirection(float x, float y, float z)
+    {
+        return InverseTransformDirection(new Vector3(x, y, z));
+    }
+
+    public void InverseTransformDirections(
+        ReadOnlySpan<Vector3> directions,
+        Span<Vector3> transformedDirections)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void InverseTransformDirections(Span<Vector3> directions)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 TransformVector(Vector3 vector)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 TransformVector(float x, float y, float z)
+    {
+        return TransformVector(new Vector3(x, y, z));
+    }
+
+    public void TransformVectors(ReadOnlySpan<Vector3> vectors, Span<Vector3> transformedVectors)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void TransformVectors(Span<Vector3> vectors)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 InverseTransformVector(Vector3 vector)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 InverseTransformVector(float x, float y, float z)
+    {
+        return InverseTransformVector(new Vector3(x, y, z));
+    }
+
+    public void InverseTransformVectors(
+        ReadOnlySpan<Vector3> vectors,
+        Span<Vector3> transformedVectors)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void InverseTransformVectors(Span<Vector3> vectors)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 TransformPoint(Vector3 position)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 TransformPoint(float x, float y, float z)
+    {
+        return TransformPoint(new  Vector3(x, y, z));
+    }
+    
+    
 
     public IEnumerator GetEnumerator()
     {
