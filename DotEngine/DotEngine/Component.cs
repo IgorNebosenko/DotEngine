@@ -126,6 +126,19 @@ public class Component : Object
     }
 
     #endregion
-    
-    
+
+    public int GetComponentIndex()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool CompareTag(string tag)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal bool IsCoupledComponent()
+    {
+        throw new NotImplementedException();
+    }
 }
