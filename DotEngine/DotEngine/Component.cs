@@ -4,9 +4,11 @@ public class Component : Object
 {
     public Transform Transform { get; private set; }
     public GameObject GameObject { get; private set; }
+    public string Tag { get; set; }
     
     public Component GetComponent(System.Type type) => GameObject.GetComponent(type);
 
+    #region TryGetComponent
     public T GetComponent<T>()
     {
         throw new NotImplementedException();
@@ -21,7 +23,9 @@ public class Component : Object
     {
         throw new NotImplementedException();
     }
+    #endregion
 
+    #region GetComponentInChildren
     public Component GetComponentInChildren(System.Type type, bool includeInactive = false)
     {
         throw new NotImplementedException();
@@ -55,6 +59,73 @@ public class Component : Object
     public T[] GetComponentsInChildren<T>() => GetComponentsInChildren<T>(false);
     
     public void GetComponentsInChildren<T>(List<T> results) => GetComponentsInChildren<T>(false, results);
+    #endregion
+    
+    #region GetComponentInParent
+
+    public Component GetComponentInParent(System.Type type, bool includeInactive)
+    {
+        throw new NotImplementedException();
+    }
+    
+    public Component GetComponentInParent(System.Type type) => GetComponentInParent(type, false);
+
+    public T GetComponentInParent<T>(bool includeInactive) where T : Component
+    {
+        return (T) GetComponentInParent(typeof (T), includeInactive);
+    }
+
+    public T GetComponentInParent<T>() where T : Component
+    {
+        return (T)GetComponentInParent(typeof(T), false);
+    }
+    #endregion
+    
+    #region GetComponentsInParent
+
+    public Component[] GetComponentsInParent(System.Type type, bool includeInactive)
+    {
+        throw new NotImplementedException();
+    }
+    
+    public Component[] GetComponentsInParent(System.Type t) => GetComponentsInParent(t, false);
+
+    public T[] GetComponentsInParent<T>(bool includeInactive) where T : Component
+    {
+        return GameObject.GetComponentsInParent<T>(includeInactive);
+    }
+    
+    public void GetComponentsInParent<T>(bool includeInactive, List<T> results)
+    {
+        throw new NotImplementedException();
+    }
+
+    public T[] GetComponentsInParent<T>()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Component[] GetComponents(System.Type type)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GetComponents(System.Type type, List<Component> results)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GetComponents<T>(List<T> results)
+    {
+        throw new NotImplementedException();
+    }
+
+    public T[] GetComponents<T>()
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
     
     
 }

@@ -6,4 +6,9 @@ public class GameObject
     {
         throw new NotImplementedException();
     }
+
+    public T[] GetComponentsInParent<T>(bool includeInactive) where T : Component
+    {
+        throw new NotImplementedException();
+    }
 }
