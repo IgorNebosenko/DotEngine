@@ -122,12 +122,46 @@ public class Transform : Component, IEnumerable
         throw new NotImplementedException();
     }
 
-    public void GetLocalPositionAndRotation(out Vector3 position, out Quaternion rotation)
+    public void GetPositionAndRotation(out Vector3 position, out Quaternion rotation)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GetLocalPositionAndRotation(out Vector3 localPosition, out Quaternion localRotation)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Translate(Vector3 translation, Space relativeTo = Space.Self)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Translate(float x, float y, float z, Space relativeTo = Space.Self)
+    {
+        Translate(new Vector3(x, y, z), relativeTo);
+    }
+
+    public void Translate(Vector3 translation, Transform relateTo)
     {
         throw new NotImplementedException();
     }
     
-    public void GetLocalPositionAndRotation(out Vector3 localPosition, )
+    public void Translate(float x, float y, float z, Transform relativeTo)
+    {
+        Translate(new Vector3(x, y, z), relativeTo);
+    }
+
+    public void Rotate(Vector3 eulers, Space relativeTo = Space.Self)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Rotate(float x, float y, float z, Space relativeTo = Space.Self)
+    {
+        Rotate(new Vector3(x, y, z), relativeTo);
+    }
+
 
     public IEnumerator GetEnumerator()
     {
