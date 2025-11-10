@@ -102,6 +102,33 @@ public class Transform : Component, IEnumerable
         set => _parent = value;
     }
 
+    public Matrix4x4 WorldToLocalMatrix
+    {
+        get => throw new NotImplementedException();
+    }
+
+    public Matrix4x4 LocalToWorldMatrix
+    {
+        get => throw new NotImplementedException();
+    }
+
+    public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetLocalPositionAndRotation(Vector3 localPosition, Quaternion localRotation)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void GetLocalPositionAndRotation(out Vector3 position, out Quaternion rotation)
+    {
+        throw new NotImplementedException();
+    }
+    
+    public void GetLocalPositionAndRotation(out Vector3 localPosition, )
+
     public IEnumerator GetEnumerator()
     {
         throw new NotImplementedException();
