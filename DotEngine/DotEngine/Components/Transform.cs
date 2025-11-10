@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DotEngine;
 
@@ -9,6 +10,7 @@ public class Transform : Component, IEnumerable
     private Vector3 _localScale;
     
     private Transform _parent;
+    private Transform _root;
 
     public event Action<Vector3> LocalPositionChanged;
     public event Action<Vector3> GlobalPositionChanged;
@@ -111,6 +113,11 @@ public class Transform : Component, IEnumerable
     {
         get => throw new NotImplementedException();
     }
+
+    public Transform Root => _root;
+    
+    public int ChildCount => throw new NotImplementedException();
+    public bool HasChanged => throw new NotImplementedException();
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
     {
@@ -287,9 +294,76 @@ public class Transform : Component, IEnumerable
     {
         return TransformPoint(new  Vector3(x, y, z));
     }
-    
-    
 
+    public void TransformPoints(ReadOnlySpan<Vector3> positions, Span<Vector3> transformedPositions)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void TransformPoints(Span<Vector3> positions)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 InverseTransformPoint(Vector3 position)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Vector3 InverseTransformPoint(float x, float y, float z)
+    {
+        return InverseTransformPoint(new Vector3(x, y, z));
+    }
+
+    public void InverseTransformPoints(
+        ReadOnlySpan<Vector3> positions,
+        Span<Vector3> transformedPositions)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void InverseTransformPoints(Span<Vector3> positions)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DetachChildren()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetAsFirstSibling()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetAsLastSibling()
+    {
+        throw new NotImplementedException();
+    }
+
+    public int GetSiblingIndex()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Transform Find(string name)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SetSiblingIndex(int index)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool IsChildOf([NotNull] Transform parent)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Transform FindChild(string name) => Find(name);
+    
     public IEnumerator GetEnumerator()
     {
         throw new NotImplementedException();
