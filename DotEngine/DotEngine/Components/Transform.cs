@@ -1,6 +1,11 @@
-﻿namespace DotEngine;
+﻿using System.Collections;
 
-public class Transform
+namespace DotEngine;
+
+public class Transform : Component, IEnumerable
 {
-    
+    public IEnumerator GetEnumerator()
+    {
+        throw new NotImplementedException();
+    }
 }

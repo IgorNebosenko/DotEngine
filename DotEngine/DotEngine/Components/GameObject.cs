@@ -1,6 +1,6 @@
 ﻿namespace DotEngine;
 
-public class GameObject
+public class GameObject : Object
 {
     public bool IsActive { get; private set; }
     
@@ -9,7 +9,18 @@ public class GameObject
         throw new NotImplementedException();
     }
 
+    public T GetComponent<T>()
+    {
+        throw new NotImplementedException();
+    }
+
     public T[] GetComponentsInParent<T>(bool includeInactive) where T : Component
+    {
+        throw new NotImplementedException();
+    }
+
+
+    public static GameObject CreatePrimitive(PrimitiveType primitiveType)
     {
         throw new NotImplementedException();
     }
