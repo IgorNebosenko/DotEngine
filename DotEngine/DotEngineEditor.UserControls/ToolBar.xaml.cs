@@ -1,58 +1,67 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using DotEngineEditor.UserControls.Interfaces;
 
 namespace DotEngineEditor.UserControls;
 
 public partial class ToolBar : UserControl
 {
+    private readonly INavigationHandler _navigationHandler;
+    private readonly IHelpHandler _helpHandler;
+    private readonly IPlayTabsHandler _playTabsHandler;
+    
     public ToolBar()
     {
         InitializeComponent();
+        
+        _navigationHandler = Application.Current.Windows.OfType<INavigationHandler>().Single();
+        _helpHandler = Application.Current.Windows.OfType<IHelpHandler>().Single();
+        _playTabsHandler = Application.Current.Windows.OfType<IPlayTabsHandler>().Single();
     }
 
     #region Navigation buttons
-    private void LookHandClick(object sender, RoutedEventArgs e)
+    private void OnLookHandClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _navigationHandler.Hand();
     }
     
-    private void MoveObjectClick(object sender, RoutedEventArgs e)
+    private void OnMoveObjectClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _navigationHandler.Move();
     }
 
-    private void RotateObjectClick(object sender, RoutedEventArgs e)
+    private void OnRotateObjectClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _navigationHandler.Rotate();
     }
 
-    private void ScaleObjectClick(object sender, RoutedEventArgs e)
+    private void OnScaleObjectClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _navigationHandler.Scale();
     }
     #endregion
 
     #region Help buttons
-    private void HelpClicked(object sender, RoutedEventArgs e)
+    private void OnHelpClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _helpHandler.Documentation();
     }
     #endregion
 
     #region Play buttons
-    private void PlayClicked(object sender, RoutedEventArgs e)
+    private void OnPlayClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _playTabsHandler.Play();
     }
 
-    private void PauseClicked(object sender, RoutedEventArgs e)
+    private void OnPauseClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _playTabsHandler.Pause();
     }
 
-    private void StepClicked(object sender, RoutedEventArgs e)
+    private void OnStepClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        _playTabsHandler.Step();
     }
     #endregion
 }

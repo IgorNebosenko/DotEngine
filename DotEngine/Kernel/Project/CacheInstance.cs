@@ -13,6 +13,6 @@ public class CacheInstance : IProjectInstance
     
     public void Load()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Loading Cache isn't implemented yet");
     }
 }

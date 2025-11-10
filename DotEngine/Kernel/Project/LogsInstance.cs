@@ -13,6 +13,6 @@ public class LogsInstance : IProjectInstance
     
     public void Load()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Loading Logs isn't implemented yet");
     }
 }

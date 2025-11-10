@@ -13,6 +13,6 @@ public class BinInstance : IProjectInstance
     
     public void Load()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Loading Bin isn't implemented yet");
     }
 }

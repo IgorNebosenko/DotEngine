@@ -1,4 +1,4 @@
-﻿namespace DirectXLayer;
+﻿namespace DirectXLayer.Enums;
 
 public enum DirectXVersion
 {

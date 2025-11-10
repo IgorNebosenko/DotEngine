@@ -2,5 +2,7 @@
 
 public interface IProjectConfig
 {
-    IProjectConfig DefaultInstance { get; }
+    string ConfigFile { get; }
+
+    bool Validate(out List<string> errorMessages);
 }

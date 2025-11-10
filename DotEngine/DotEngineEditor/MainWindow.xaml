@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:userControls="clr-namespace:DotEngineEditor.UserControls;assembly=DotEngineEditor.UserControls"
         xmlns:avalondock="https://github.com/Dirkster99/AvalonDock"
+        xmlns:windows="clr-namespace:DirectXLayer.Windows;assembly=DirectXLayer"
         mc:Ignorable="d"
         Title="Dot Engine"
         Height="800"
@@ -36,18 +37,19 @@
 
                         <avalondock:LayoutDocumentPaneGroup>
                             <avalondock:LayoutDocumentPane>
-                                <avalondock:LayoutDocument Title="Scene View">
+
+                                <avalondock:LayoutDocument Title="Scene View" IsSelected="True">
                                     <Grid Background="{DynamicResource PanelBackgroundBrush}">
-                                        <Button Content="Test"
-                                                Width="120"
-                                                Height="34"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Top"
-                                                Background="{DynamicResource PanelBackgroundBrush}"
-                                                Foreground="{DynamicResource ForegroundBrush}"
-                                                Click="OnTestButtonClick"/>
+                                        <userControls:SceneViewPanel/>
                                     </Grid>
                                 </avalondock:LayoutDocument>
+
+                                <avalondock:LayoutDocument Title="Game">
+                                    <Grid Background="{DynamicResource PanelBackgroundBrush}">
+                                        <userControls:GamePanel/>
+                                    </Grid>
+                                </avalondock:LayoutDocument>
+
                             </avalondock:LayoutDocumentPane>
                         </avalondock:LayoutDocumentPaneGroup>
 

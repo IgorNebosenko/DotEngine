@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:DotEngineEditor.UserControls"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -19,34 +18,34 @@
         <ToolBar>
             <Button Style="{DynamicResource ToolbarButton}" ToolTip="Hand"
                     Tag="pack://application:,,,/DotEngineEditor.Themes;component/Resources/hand.png"
-                    Margin="2" Click="LookHandClick"/>
+                    Margin="2" Click="OnLookHandClick"/>
             <Button Style="{DynamicResource ToolbarButton}" ToolTip="Move"
                     Tag="pack://application:,,,/DotEngineEditor.Themes;component/Resources/move.png"
-                    Margin="2" Click="MoveObjectClick"/>
+                    Margin="2" Click="OnMoveObjectClick"/>
             <Button Style="{DynamicResource ToolbarButton}" ToolTip="Rotate"
                     Tag="pack://application:,,,/DotEngineEditor.Themes;component/Resources/rotate.png"
-                    Margin="2" Click="RotateObjectClick"/>
+                    Margin="2" Click="OnRotateObjectClick"/>
             <Button Style="{DynamicResource ToolbarButton}" ToolTip="Scale"
                     Tag="pack://application:,,,/DotEngineEditor.Themes;component/Resources/scale.png"
-                    Margin="2" Click="ScaleObjectClick"/>
+                    Margin="2" Click="OnScaleObjectClick"/>
 
             <Separator/>
 
             <Button Style="{DynamicResource ToolbarButton}" ToolTip="Help"
                     Tag="pack://application:,,,/DotEngineEditor.Themes;component/Resources/help.png"
-                    Margin="2" Click="HelpClicked"/>
+                    Margin="2" Click="OnHelpClick"/>
 
             <Separator/>
 
             <Button Style="{DynamicResource ToolbarButton}" ToolTip="Play"
                     Tag="pack://application:,,,/DotEngineEditor.Themes;component/Resources/play.png"
-                    Margin="2" Click="PlayClicked"/>
+                    Margin="2" Click="OnPlayClick"/>
             <Button Style="{DynamicResource ToolbarButton}" ToolTip="Pause"
                     Tag="pack://application:,,,/DotEngineEditor.Themes;component/Resources/pause.png"
-                    Margin="2" Click="PauseClicked"/>
+                    Margin="2" Click="OnPauseClick"/>
             <Button Style="{DynamicResource ToolbarButton}" ToolTip="Step"
                     Tag="pack://application:,,,/DotEngineEditor.Themes;component/Resources/step.png"
-                    Margin="2" Click="StepClicked"/>
+                    Margin="2" Click="OnStepClick"/>
         </ToolBar>
     </ToolBarTray>
 </UserControl>
