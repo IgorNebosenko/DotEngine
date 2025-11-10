@@ -29,6 +29,72 @@ public class Object : IEquatable<Object>
     {
         throw new NotImplementedException();
     }
+
+    #region Find Object By Type
+    public T FindAnyObjectByType<T>() where T : Object
+    {
+        throw new NotImplementedException();
+    }
+
+    public Object FindAnyObjectByType<T>(Type type)
+    {
+        throw new NotImplementedException();
+    }
+
+    public T FindAnyObjectByType<T>(FindObjectsInactive findObjectsInactive) where T : Object
+    {
+        throw new NotImplementedException();
+    }
+    
+    public Object FindAnyObjectByType<T>(Type type, FindObjectsInactive findObjectsInactive)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
+    
+    #region Find First Object By Type
+    public T FindFirstObjectByType<T>() where T : Object
+    {
+        throw new NotImplementedException();
+    }
+
+    public Object FindFirstObjectByType<T>(Type type)
+    {
+        throw new NotImplementedException();
+    }
+
+    public T FindFirstObjectByType<T>(FindObjectsInactive findObjectsInactive) where T : Object
+    {
+        throw new NotImplementedException();
+    }
+    
+    public Object FindFirstObjectByType<T>(Type type, FindObjectsInactive findObjectsInactive)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
+
+    #region Find Objects By Type
+    public T[] FindObjectsByType<T>() where T : Object
+    {
+        throw new NotImplementedException();
+    }
+
+    public Object[] FindObjectsByType<T>(Type type)
+    {
+        throw new NotImplementedException();
+    }
+
+    public T[] FindObjectsByType<T>(FindObjectsInactive findObjectsInactive) where T : Object
+    {
+        throw new NotImplementedException();
+    }
+    
+    public Object[] FindObjectsByType<T>(Type type, FindObjectsInactive findObjectsInactive)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
     
     #region Instantiate object
     public static Object Instantiate(Object template)
