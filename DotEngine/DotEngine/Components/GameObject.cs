@@ -8,8 +8,10 @@ public sealed class GameObject : Object
     private bool _isStaticBatchable;
 
     private string _tag;
-
-    private Scene _scene;
+    
+    private GameObject _parent;
+    private List<GameObject> _childs = new List<GameObject>();
+    private List<Component> _components = new List<Component>();
 
     public GameObject()
     {
@@ -66,8 +68,6 @@ public sealed class GameObject : Object
             TagChanged?.Invoke(value);
         }
     }
-    
-    public Scene Scene => _scene;
     
     public ulong SceneCullingMask => throw new NotImplementedException();
 
