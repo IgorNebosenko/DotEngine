@@ -5,6 +5,9 @@ public class Component : Object
     public Transform Transform { get; private set; }
     public GameObject GameObject { get; private set; }
     public string Tag { get; set; }
+    public bool Enabled { get; private set; }
+
+    public event Action<bool> EnableStatusChanged; 
     
     public Component GetComponent(System.Type type) => GameObject.GetComponent(type);
 
@@ -140,5 +143,11 @@ public class Component : Object
     internal bool IsCoupledComponent()
     {
         throw new NotImplementedException();
+    }
+    
+    public void SetEnableStatus(bool enable)
+    {
+        Enabled = enable;
+        EnableStatusChanged?.Invoke(enable);
     }
 }

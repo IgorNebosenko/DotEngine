@@ -2,6 +2,7 @@
 
 public sealed class GameObject : Object
 {
+    #region Fields
     private int _layer;
     private bool _isActive;
     private bool _isStatic;
@@ -12,17 +13,27 @@ public sealed class GameObject : Object
     private GameObject _parent;
     private List<GameObject> _childs = new List<GameObject>();
     private List<Component> _components = new List<Component>();
+    #endregion
 
-    public GameObject(string name = "GameObject", Transform parent = null, params System.Type[] componentTypes)
+    public GameObject(string name = "GameObject", Transform parent = null, params Type[] componentTypes)
     {
-        throw new NotImplementedException();
+        Name = name;
+        Transform = parent == null ? Transform.CreateRoot() : Transform.CreateChild(parent);
+
+        for (var i = 0; i < componentTypes.Length; i++)
+        {
+            AddComponent(componentTypes[i].GetType());
+        }
     }
 
+    #region Events
     public event Action<int> LayerChanged;
     public event Action<bool> ActiveChanged;
     public event Action<bool> StaticChanged;
     public event Action<string> TagChanged; 
-
+    #endregion
+    
+    #region Properties
     public bool IsActive => _isActive;
     
     public Transform Transform { get; private set; }
@@ -62,7 +73,9 @@ public sealed class GameObject : Object
     public ulong SceneCullingMask => throw new NotImplementedException();
 
     public GameObject GameObjectReference => this;
+    #endregion
     
+    #region Set active
     public void SetActive(bool active)
     {
         _isActive = active;
@@ -71,75 +84,173 @@ public sealed class GameObject : Object
 
     public void SetActiveRecursively(bool active)
     {
-        throw new NotImplementedException();
+        _isActive = active;
+
+        var parent = _parent;
+        while (parent != null)
+        {
+            parent._isActive = active;
+            parent = parent._parent;
+        }
     }
+    #endregion
     
     public bool CompareTag(string tag) => _tag == tag;
 
-    public T GetComponent<T>()
+    #region Get Component
+    public T? GetComponent<T>()
     {
-        throw new NotImplementedException();
+        return _components.OfType<T>().FirstOrDefault();
     }
 
-    public Component GetComponent(System.Type type)
+    public Component? GetComponent(Type type)
     {
-        throw new NotImplementedException();
+        return _components.OfType<Component>().FirstOrDefault(c => c.GetType() == type);
     }
+    #endregion
 
-    public T GetComponentInChildren<T>(bool includeInactive)
+    #region Get Component In Children
+    public T? GetComponentInChildren<T>(bool includeInactive = false)
     {
-        throw new NotImplementedException();
+        for (var i = 0; i < _components.Count; i++)
+        {
+            if (!includeInactive && _components[i].Enabled)
+            {
+                var result = _components[i].GetComponent<T>();
+                if (result != null)
+                    return result;
+            }
+        }
+
+        return default;
     }
     
-    public T GetComponentInChildren<T>() => this.GetComponentInChildren<T>(false);
-    
-    public Component GetComponentInChildren(System.Type type, bool includeInactive = false)
+    public Component? GetComponentInChildren(Type type, bool includeInactive = false)
     {
-        throw new NotImplementedException();
+        for (var i = 0; i < _components.Count; i++)
+        {
+            if (!includeInactive && _components[i].Enabled)
+            {
+                var result = _components[i].GetComponent(type);
+                if (result != null)
+                    return result;
+            }
+        }
+
+        return default;
+    }
+    #endregion
+
+    #region Get Compont In Parent
+    public Component? GetComponentInParent(Type type, bool includeInactive = false)
+    {
+        if (_parent == null)
+            return null;
+        
+        var components = _parent.GetComponents(type);
+        
+        if (components == null || components.Length == 0)
+            return null;
+
+        if (includeInactive)
+            return components[0];
+
+        return components.FirstOrDefault(x => x.Enabled);
+
     }
 
-    public Component GetComponentInParent(System.Type type, bool includeInactive)
+    public T? GetComponentInParent<T>() where T : Component
     {
-        throw new NotImplementedException();
+        if (_parent == null)
+            return default;
+        
+        var components = _parent.GetComponents<T>();
+        
+        if (components == null || components.Length == 0)
+            return default;
+
+        return components[0];
     }
+    #endregion
 
-    public T GetComponentInParent<T>(bool includeInactive)
-    {
-        throw new NotImplementedException();
-    }
-
-    public T GetComponentInParent<T>() => this.GetComponentInParent<T>(false);
-
+    #region Get Components
     public T[] GetComponentsInParent<T>(bool includeInactive) where T : Component
     {
-        throw new NotImplementedException();
+        if (_parent == null)
+            return null;
+
+        var components = new List<T>();
+        for (var i = 0; i < _parent._components.Count; i++)
+        {
+            if (_parent._components[i].GetType() == typeof(T))
+            {
+                components.Add((T)_parent._components[i]);
+            }
+        }
+        
+        return components.ToArray();
     }
 
-    public Component[] GetComponents(System.Type type)
+    public Component[] GetComponents(Type type)
+    {
+        var components = new List<Component>();
+        
+        for (var i = 0; i < _components.Count; i++)
+        {
+            if (_components[i].GetType() == type)
+            {
+                components.Add(_components[i]);
+            }
+        }
+        
+        return components.ToArray();
+    }
+
+    public T[] GetComponents<T>() where T : Component
+    {
+        var components = new List<T>();
+        
+        for (var i = 0; i < _components.Count; i++)
+        {
+            if (_components[i].GetType() == typeof(T))
+            {
+                components.Add((T)_components[i]);
+            }
+        }
+        
+        return components.ToArray();
+    }
+
+    public void GetComponents(Type type, List<Component> results)
+    {
+        for (var i = 0; i < _components.Count; i++)
+        {
+            if (_components[i].GetType() == type)
+            {
+                results.Add(_components[i]);
+            }
+        }
+    }
+
+    public void GetComponents<T>(List<T> results) where T : Component
+    {
+        for (var i = 0; i < _components.Count; i++)
+        {
+            if (_components[i].GetType() == typeof(T))
+            {
+                results.Add((T)_components[i]);
+            }
+        }
+    }
+    #endregion
+
+    #region Get Components In Children
+    public Component[] GetComponentsInChildren(Type type)
     {
         throw new NotImplementedException();
     }
 
-    public T[] GetComponents<T>()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void GetComponents(System.Type type, List<Component> results)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void GetComponents<T>(List<T> results)
-    {
-    }
-
-    public Component[] GetComponentsInChildren(System.Type type)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Component[] GetComponentsInChildren(System.Type type, bool includeInactive)
+    public Component[] GetComponentsInChildren(Type type, bool includeInactive)
     {
         throw new NotImplementedException();
     }
@@ -154,14 +265,15 @@ public sealed class GameObject : Object
         throw new NotImplementedException();
     }
     
-    public T[] GetComponentsInChildren<T>() => this.GetComponentsInChildren<T>(false);
+    public T[] GetComponentsInChildren<T>() => GetComponentsInChildren<T>(false);
 
     public void GetComponentsInChildren<T>(List<T> results)
     {
         throw new NotImplementedException();
     }
+    #endregion
 
-    public Component[] GetComponentsInParent(System.Type type)
+    public Component[] GetComponentsInParent(Type type)
     {
         throw new NotImplementedException();
     }
@@ -181,12 +293,12 @@ public sealed class GameObject : Object
         throw new NotImplementedException();
     }
 
-    public bool TryGetComponent(System.Type type, out Component component)
+    public bool TryGetComponent(Type type, out Component component)
     {
         throw new NotImplementedException();
     }
 
-    public Component AddComponent(System.Type type)
+    public Component AddComponent(Type type)
     {
         throw new NotImplementedException();
     }
@@ -228,7 +340,7 @@ public sealed class GameObject : Object
         throw new NotImplementedException();
     }
     
-    public static GameObject FindWithTag(string tag) => GameObject.FindGameObjectWithTag(tag);
+    public static GameObject FindWithTag(string tag) => FindGameObjectWithTag(tag);
 
     public static GameObject[] FindGameObjectsWithTag(string tag)
     {
