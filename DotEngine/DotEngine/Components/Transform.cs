@@ -24,6 +24,18 @@ public class Transform : Component, IEnumerable
     {
     }
 
+    internal static Transform CreateRoot()
+    {
+        return new Transform();
+    }
+
+    internal static Transform CreateChild(Transform parent)
+    {
+        var transform = new Transform();
+        transform._parent = parent;
+        return transform;
+    }
+
     public Vector3 LocalPosition
     {
         get => _localPosition;

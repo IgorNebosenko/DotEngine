@@ -13,17 +13,7 @@ public sealed class GameObject : Object
     private List<GameObject> _childs = new List<GameObject>();
     private List<Component> _components = new List<Component>();
 
-    public GameObject()
-    {
-        throw new NotImplementedException();
-    }
-    
-    public GameObject(string name)
-    {
-        throw new NotImplementedException();
-    }
-
-    public GameObject(string name, params System.Type[] components)
+    public GameObject(string name = "GameObject", Transform parent = null, params System.Type[] componentTypes)
     {
         throw new NotImplementedException();
     }
