@@ -1,32 +1,387 @@
-﻿using SharpDX;
+﻿using System.Runtime.CompilerServices;
 
-namespace DotEngine;
-
-public class Matrix4x4
+namespace DotEngine
 {
-    public float m11;
-    public float m12;
-    public float m13;
-    public float m14;
-    public float m21;
-    public float m22;
-    public float m23;
-    public float m24;
-    public float m31;
-    public float m32;
-    public float m33;
-    public float m34;
-    public float m41;
-    public float m42;
-    public float m43;
-    public float m44;
-    
-    public static implicit operator SharpDX.Matrix(Matrix4x4 matrix)
+    /// <summary>
+    /// Represents a 4x4 matrix using float precision.
+    /// Layout:
+    /// m11 m12 m13 m14
+    /// m21 m22 m23 m24
+    /// m31 m32 m33 m34
+    /// m41 m42 m43 m44
+    /// </summary>
+    public struct Matrix4x4(
+        float m11, float m12, float m13, float m14,
+        float m21, float m22, float m23, float m24,
+        float m31, float m32, float m33, float m34,
+        float m41, float m42, float m43, float m44
+    ) : IEquatable<Matrix4x4>, IFormattable
     {
-        return new Matrix(
-            matrix.m11, matrix.m12, matrix.m13, matrix.m14,
-            matrix.m21, matrix.m22, matrix.m23, matrix.m24,
-            matrix.m31, matrix.m32, matrix.m33, matrix.m34,
-            matrix.m41, matrix.m42, matrix.m43, matrix.m44);
+        #region Static variables
+
+        static readonly Matrix4x4 _zeroMatrix = new(
+            0f, 0f, 0f, 0f,
+            0f, 0f, 0f, 0f,
+            0f, 0f, 0f, 0f,
+            0f, 0f, 0f, 0f
+        );
+
+        static readonly Matrix4x4 _identityMatrix = new(
+            1f, 0f, 0f, 0f,
+            0f, 1f, 0f, 0f,
+            0f, 0f, 1f, 0f,
+            0f, 0f, 0f, 1f
+        );
+
+        /// <summary>
+        /// Epsilon used for matrix equality comparison.
+        /// </summary>
+        public const float kEpsilon = 1e-6f;
+
+        #endregion
+
+        #region Static properties
+
+        /// <summary>
+        /// Returns the zero matrix.
+        /// </summary>
+        public static Matrix4x4 Zero
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => _zeroMatrix;
+        }
+
+        /// <summary>
+        /// Returns the identity matrix.
+        /// </summary>
+        public static Matrix4x4 Identity
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => _identityMatrix;
+        }
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        /// Matrix element at row 0, column 0.
+        /// </summary>
+        public float m11 = m11;
+        /// <summary>
+        /// Matrix element at row 0, column 1.
+        /// </summary>
+        public float m12 = m12;
+        /// <summary>
+        /// Matrix element at row 0, column 2.
+        /// </summary>
+        public float m13 = m13;
+        /// <summary>
+        /// Matrix element at row 0, column 3.
+        /// </summary>
+        public float m14 = m14;
+
+        /// <summary>
+        /// Matrix element at row 1, column 0.
+        /// </summary>
+        public float m21 = m21;
+        /// <summary>
+        /// Matrix element at row 1, column 1.
+        /// </summary>
+        public float m22 = m22;
+        /// <summary>
+        /// Matrix element at row 1, column 2.
+        /// </summary>
+        public float m23 = m23;
+        /// <summary>
+        /// Matrix element at row 1, column 3.
+        /// </summary>
+        public float m24 = m24;
+
+        /// <summary>
+        /// Matrix element at row 2, column 0.
+        /// </summary>
+        public float m31 = m31;
+        /// <summary>
+        /// Matrix element at row 2, column 1.
+        /// </summary>
+        public float m32 = m32;
+        /// <summary>
+        /// Matrix element at row 2, column 2.
+        /// </summary>
+        public float m33 = m33;
+        /// <summary>
+        /// Matrix element at row 2, column 3.
+        /// </summary>
+        public float m34 = m34;
+
+        /// <summary>
+        /// Matrix element at row 3, column 0.
+        /// </summary>
+        public float m41 = m41;
+        /// <summary>
+        /// Matrix element at row 3, column 1.
+        /// </summary>
+        public float m42 = m42;
+        /// <summary>
+        /// Matrix element at row 3, column 2.
+        /// </summary>
+        public float m43 = m43;
+        /// <summary>
+        /// Matrix element at row 3, column 3.
+        /// </summary>
+        public float m44 = m44;
+
+        #endregion
+
+        #region Indexer
+
+        /// <summary>
+        /// Access matrix element by row and column index.
+        /// Row and column must be in range [0..3].
+        /// </summary>
+        /// <param name="row">Row index in range [0..3].</param>
+        /// <param name="column">Column index in range [0..3].</param>
+        /// <exception cref="IndexOutOfRangeException"></exception>
+        public float this[int row, int column]
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get
+            {
+                return (row, column) switch
+                {
+                    (0, 0) => m11,
+                    (0, 1) => m12,
+                    (0, 2) => m13,
+                    (0, 3) => m14,
+
+                    (1, 0) => m21,
+                    (1, 1) => m22,
+                    (1, 2) => m23,
+                    (1, 3) => m24,
+
+                    (2, 0) => m31,
+                    (2, 1) => m32,
+                    (2, 2) => m33,
+                    (2, 3) => m34,
+
+                    (3, 0) => m41,
+                    (3, 1) => m42,
+                    (3, 2) => m43,
+                    (3, 3) => m44,
+
+                    _ => throw new IndexOutOfRangeException("Invalid Matrix4x4 index!")
+                };
+            }
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            set
+            {
+                switch (row, column)
+                {
+                    case (0, 0): m11 = value; break;
+                    case (0, 1): m12 = value; break;
+                    case (0, 2): m13 = value; break;
+                    case (0, 3): m14 = value; break;
+
+                    case (1, 0): m21 = value; break;
+                    case (1, 1): m22 = value; break;
+                    case (1, 2): m23 = value; break;
+                    case (1, 3): m24 = value; break;
+
+                    case (2, 0): m31 = value; break;
+                    case (2, 1): m32 = value; break;
+                    case (2, 2): m33 = value; break;
+                    case (2, 3): m34 = value; break;
+
+                    case (3, 0): m41 = value; break;
+                    case (3, 1): m42 = value; break;
+                    case (3, 2): m43 = value; break;
+                    case (3, 3): m44 = value; break;
+
+                    default: throw new IndexOutOfRangeException("Invalid Matrix4x4 index!");
+                }
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Returns the determinant of this matrix.
+        /// </summary>
+        public float Determinant
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get
+            {
+                return ((SharpDX.Matrix)(this)).Determinant();
+            }
+        }
+
+        #endregion
+
+        #region Static methods
+
+        /// <summary>
+        /// Returns the determinant of the given matrix.
+        /// </summary>
+        public static float DeterminantOf(Matrix4x4 m)
+        {
+            return ((SharpDX.Matrix)(m)).Determinant();
+        }
+
+        /// <summary>
+        /// Returns the transpose of the given matrix.
+        /// </summary>
+        public static Matrix4x4 Transpose(Matrix4x4 m)
+        {
+            var sharp = (SharpDX.Matrix)m;
+            var t = SharpDX.Matrix.Transpose(sharp);
+            return FromSharpDX(t);
+        }
+
+        /// <summary>
+        /// Returns the inverse of the given matrix.
+        /// </summary>
+        public static Matrix4x4 Inverse(Matrix4x4 m)
+        {
+            var sharp = (SharpDX.Matrix)m;
+            var inv = SharpDX.Matrix.Invert(sharp);
+            return FromSharpDX(inv);
+        }
+
+        #endregion
+
+        #region Operators
+
+        /// <summary>
+        /// Multiplies two matrices.
+        /// </summary>
+        public static Matrix4x4 operator *(Matrix4x4 a, Matrix4x4 b)
+        {
+            var sa = (SharpDX.Matrix)a;
+            var sb = (SharpDX.Matrix)b;
+            var sr = SharpDX.Matrix.Multiply(sa, sb);
+            return FromSharpDX(sr);
+        }
+
+        /// <summary>
+        /// Compares matrices using epsilon tolerance.
+        /// </summary>
+        public static bool operator ==(Matrix4x4 a, Matrix4x4 b)
+        {
+            return MathF.Abs(a.m11 - b.m11) < kEpsilon &&
+                   MathF.Abs(a.m12 - b.m12) < kEpsilon &&
+                   MathF.Abs(a.m13 - b.m13) < kEpsilon &&
+                   MathF.Abs(a.m14 - b.m14) < kEpsilon &&
+
+                   MathF.Abs(a.m21 - b.m21) < kEpsilon &&
+                   MathF.Abs(a.m22 - b.m22) < kEpsilon &&
+                   MathF.Abs(a.m23 - b.m23) < kEpsilon &&
+                   MathF.Abs(a.m24 - b.m24) < kEpsilon &&
+
+                   MathF.Abs(a.m31 - b.m31) < kEpsilon &&
+                   MathF.Abs(a.m32 - b.m32) < kEpsilon &&
+                   MathF.Abs(a.m33 - b.m33) < kEpsilon &&
+                   MathF.Abs(a.m34 - b.m34) < kEpsilon &&
+
+                   MathF.Abs(a.m41 - b.m41) < kEpsilon &&
+                   MathF.Abs(a.m42 - b.m42) < kEpsilon &&
+                   MathF.Abs(a.m43 - b.m43) < kEpsilon &&
+                   MathF.Abs(a.m44 - b.m44) < kEpsilon;
+        }
+
+        /// <summary>
+        /// Compares matrices for inequality.
+        /// </summary>
+        public static bool operator !=(Matrix4x4 a, Matrix4x4 b) => !(a == b);
+
+        #endregion
+
+        #region Helpers
+
+        /// <summary>
+        /// Creates DotEngine.Matrix4x4 from SharpDX.Matrix.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static Matrix4x4 FromSharpDX(SharpDX.Matrix m)
+        {
+            return new Matrix4x4(
+                m.M11, m.M12, m.M13, m.M14,
+                m.M21, m.M22, m.M23, m.M24,
+                m.M31, m.M32, m.M33, m.M34,
+                m.M41, m.M42, m.M43, m.M44
+            );
+        }
+
+        #endregion
+
+        #region Interface implementations
+
+        /// <summary>
+        /// Returns string representation of the matrix.
+        /// </summary>
+        public override string ToString()
+        {
+            return
+                $"({m11}, {m12}, {m13}, {m14}) " +
+                $"({m21}, {m22}, {m23}, {m24}) " +
+                $"({m31}, {m32}, {m33}, {m34}) " +
+                $"({m41}, {m42}, {m43}, {m44})";
+        }
+
+        /// <summary>
+        /// Returns formatted string representation of the matrix.
+        /// </summary>
+        public string ToString(string? str, IFormatProvider? formatProvider)
+        {
+            return
+                $"({m11}, {m12}, {m13}, {m14}) " +
+                $"({m21}, {m22}, {m23}, {m24}) " +
+                $"({m31}, {m32}, {m33}, {m34}) " +
+                $"({m41}, {m42}, {m43}, {m44})";
+        }
+
+        /// <summary>
+        /// Compares matrices for equality.
+        /// </summary>
+        public bool Equals(Matrix4x4 other) => this == other;
+
+        /// <summary>
+        /// Compares matrices for equality.
+        /// </summary>
+        public override bool Equals(object? obj) => obj is Matrix4x4 m && Equals(m);
+
+        /// <summary>
+        /// Returns hash code for this matrix.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(m11); hash.Add(m12); hash.Add(m13); hash.Add(m14);
+            hash.Add(m21); hash.Add(m22); hash.Add(m23); hash.Add(m24);
+            hash.Add(m31); hash.Add(m32); hash.Add(m33); hash.Add(m34);
+            hash.Add(m41); hash.Add(m42); hash.Add(m43); hash.Add(m44);
+            return hash.ToHashCode();
+        }
+
+        #endregion
+
+        #region SharpDX conversion
+
+        /// <summary>
+        /// Converts DotEngine.Matrix4x4 to SharpDX.Matrix.
+        /// </summary>
+        public static implicit operator SharpDX.Matrix(Matrix4x4 matrix)
+        {
+            return new SharpDX.Matrix(
+                matrix.m11, matrix.m12, matrix.m13, matrix.m14,
+                matrix.m21, matrix.m22, matrix.m23, matrix.m24,
+                matrix.m31, matrix.m32, matrix.m33, matrix.m34,
+                matrix.m41, matrix.m42, matrix.m43, matrix.m44);
+        }
+
+        #endregion
     }
 }
