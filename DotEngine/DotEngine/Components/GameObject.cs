@@ -371,9 +371,21 @@ public sealed class GameObject : Object
     #region Add Component
     public Component? AddComponent(Type type)
     {
+        if (!typeof(Component).IsAssignableFrom(type))
+            return null;
+
+        var component = (Component)Activator.CreateInstance(type);
+        _components.Add(component);
+        return component;
     }
-    
-    public T? AddComponent<T>() where T : Component => AddComponent(typeof (T)) as T;
+
+    public T AddComponent<T>() where T : Component, new()
+    {
+        var component = new T();
+        _components.Add(component);
+        return component;
+    }
+
     #endregion
     
     public int GetComponentCount()
