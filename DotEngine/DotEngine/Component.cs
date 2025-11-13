@@ -4,7 +4,6 @@ public class Component : Object
 {
     public Transform Transform { get; private set; }
     public GameObject GameObject { get; private set; }
-    public string Tag { get; set; }
     public bool Enabled { get; private set; }
 
     public event Action<bool> EnableStatusChanged; 
