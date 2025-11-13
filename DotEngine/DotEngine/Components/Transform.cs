@@ -9,6 +9,8 @@ public class Transform : Component, IEnumerable
     private Vector3 _localEulerAngles;
     private Vector3 _localScale;
     
+    private GameObject _gameObject;
+    
     private Transform _parent;
     private Transform _root;
 
@@ -20,18 +22,18 @@ public class Transform : Component, IEnumerable
     
     public event Action<Vector3> LocalScaleChanged;
     
-    protected Transform()
+    protected Transform(GameObject gameObject)
     {
     }
 
-    internal static Transform CreateRoot()
+    internal static Transform CreateRoot(GameObject gameObject)
     {
-        return new Transform();
+        return new Transform(gameObject);
     }
 
-    internal static Transform CreateChild(Transform parent)
+    internal static Transform CreateChild(Transform parent, GameObject gameObject)
     {
-        var transform = new Transform();
+        var transform = new Transform(gameObject);
         transform._parent = parent;
         return transform;
     }

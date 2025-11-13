@@ -22,8 +22,8 @@ public sealed class GameObject : Object
         Name = name;
 
         Transform = parent == null
-            ? Transform.CreateRoot()
-            : Transform.CreateChild(parent);
+            ? Transform.CreateRoot(this)
+            : Transform.CreateChild(parent, this);
 
         if (Transform.Parent != null)
             _parent = Transform.Parent.GameObject;
