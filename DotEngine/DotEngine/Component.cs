@@ -1,152 +1,97 @@
 ﻿namespace DotEngine;
 
+using System;
+using System.Collections.Generic;
+
 public class Component : Object
 {
-    public Transform Transform { get; private set; }
-    public GameObject GameObject { get; private set; }
-    public bool Enabled { get; private set; }
+    private bool _enabled = true;
 
-    public event Action<bool> EnableStatusChanged; 
-    
-    public Component GetComponent(System.Type type) => GameObject.GetComponent(type);
+    public Transform Transform => GameObject.Transform;
+    public GameObject GameObject { get; set; }
+
+    public bool Enabled => _enabled;
+
+    public event Action<bool> EnableStatusChanged;
+
+    public Component? GetComponent(Type type) => GameObject.GetComponent(type);
 
     #region TryGetComponent
-    public T GetComponent<T>()
-    {
-        throw new NotImplementedException();
-    }
+    public T? GetComponent<T>() => GameObject.GetComponent<T>();
 
-    public bool TryGetComponent<T>(System.Type type, out Component component)
-    {
-        throw new NotImplementedException();
-    }
+    public bool TryGetComponent(Type type, out Component component) =>
+        GameObject.TryGetComponent(type, out component);
 
-    public bool TryGetComponent<T>(out T component)
-    {
-        throw new NotImplementedException();
-    }
+    public bool TryGetComponent<T>(out T component) =>
+        GameObject.TryGetComponent<T>(out component);
     #endregion
 
     #region GetComponentInChildren
-    public Component GetComponentInChildren(System.Type type, bool includeInactive = false)
-    {
-        throw new NotImplementedException();
-    }
+    public Component? GetComponentInChildren(Type type, bool includeInactive = false) =>
+        GameObject.GetComponentInChildren(type, includeInactive);
 
-    public T GetComponentInChildren<T>(bool includeInactive = false)
-    {
-        throw new NotImplementedException();
-    }
+    public T? GetComponentInChildren<T>(bool includeInactive = false) =>
+        GameObject.GetComponentInChildren<T>(includeInactive);
 
-    public Component[] GetComponentsInChildren(System.Type type, bool includeInactive = false)
-    {
-        throw new NotImplementedException();
-    }
-    
-    public Component[] GetComponentsInChildren(System.Type type)
-    {
-        return GetComponentsInChildren(type, false);
-    }
+    public Component[]? GetComponentsInChildren(Type type, bool includeInactive = false) =>
+        GameObject.GetComponentsInChildren(type, includeInactive);
 
-    public T[] GetComponentsInChildren<T>(bool includeInactive)
-    {
-        throw new NotImplementedException();
-    }
+    public Component[]? GetComponentsInChildren(Type type) =>
+        GameObject.GetComponentsInChildren(type);
 
-    public void GetComponentsInChildren<T>(bool includeInactive, List<T> result)
-    {
-        throw new NotImplementedException();
-    }
+    public T[]? GetComponentsInChildren<T>(bool includeInactive) where T : Component =>
+        GameObject.GetComponentsInChildren<T>(includeInactive);
 
-    public T[] GetComponentsInChildren<T>() => GetComponentsInChildren<T>(false);
-    
-    public void GetComponentsInChildren<T>(List<T> results) => GetComponentsInChildren<T>(false, results);
+    public T[]? GetComponentsInChildren<T>() where T : Component =>
+        GameObject.GetComponentsInChildren<T>(false);
     #endregion
-    
+
     #region GetComponentInParent
+    public Component? GetComponentInParent(Type type, bool includeInactive) =>
+        GameObject.GetComponentInParent(type, includeInactive);
 
-    public Component GetComponentInParent(System.Type type, bool includeInactive)
-    {
-        throw new NotImplementedException();
-    }
-    
-    public Component GetComponentInParent(System.Type type) => GetComponentInParent(type, false);
+    public Component? GetComponentInParent(Type type) =>
+        GameObject.GetComponentInParent(type);
 
-    public T GetComponentInParent<T>(bool includeInactive) where T : Component
-    {
-        return (T) GetComponentInParent(typeof (T), includeInactive);
-    }
-
-    public T GetComponentInParent<T>() where T : Component
-    {
-        return (T)GetComponentInParent(typeof(T), false);
-    }
+    public T? GetComponentInParent<T>() where T : Component =>
+        GameObject.GetComponentInParent<T>();
     #endregion
-    
+
     #region GetComponentsInParent
+    public Component[]? GetComponentsInParent(Type t) =>
+        GameObject.GetComponentsInParent(t);
 
-    public Component[] GetComponentsInParent(System.Type type, bool includeInactive)
-    {
-        throw new NotImplementedException();
-    }
-    
-    public Component[] GetComponentsInParent(System.Type t) => GetComponentsInParent(t, false);
+    public T[] GetComponentsInParent<T>(bool includeInactive) where T : Component =>
+        GameObject.GetComponentsInParent<T>(includeInactive);
 
-    public T[] GetComponentsInParent<T>(bool includeInactive) where T : Component
-    {
-        return GameObject.GetComponentsInParent<T>(includeInactive);
-    }
-    
-    public void GetComponentsInParent<T>(bool includeInactive, List<T> results)
-    {
-        throw new NotImplementedException();
-    }
+    public T[]? GetComponentsInParent<T>() where T : Component =>
+        GameObject.GetComponentsInParent<T>();
 
-    public T[] GetComponentsInParent<T>()
-    {
-        throw new NotImplementedException();
-    }
+    public Component[] GetComponents(Type type) =>
+        GameObject.GetComponents(type);
 
-    public Component[] GetComponents(System.Type type)
-    {
-        throw new NotImplementedException();
-    }
+    public void GetComponents(Type type, List<Component> results) =>
+        GameObject.GetComponents(type, results);
 
-    public void GetComponents(System.Type type, List<Component> results)
-    {
-        throw new NotImplementedException();
-    }
+    public void GetComponents<T>(List<T> results) where T : Component =>
+        GameObject.GetComponents(results);
 
-    public void GetComponents<T>(List<T> results)
-    {
-        throw new NotImplementedException();
-    }
-
-    public T[] GetComponents<T>()
-    {
-        throw new NotImplementedException();
-    }
-
+    public T[] GetComponents<T>() where T : Component =>
+        GameObject.GetComponents<T>();
     #endregion
 
-    public int GetComponentIndex()
-    {
-        throw new NotImplementedException();
-    }
+    public int GetComponentIndex() =>
+        GameObject.GetComponentIndex(this);
 
-    public bool CompareTag(string tag)
-    {
-        throw new NotImplementedException();
-    }
+    public bool CompareTag(string tag) =>
+        GameObject.CompareTag(tag);
 
-    internal bool IsCoupledComponent()
-    {
-        throw new NotImplementedException();
-    }
-    
     public void SetEnableStatus(bool enable)
     {
-        Enabled = enable;
+        if (_enabled == enable)
+            return;
+
+        _enabled = enable;
         EnableStatusChanged?.Invoke(enable);
     }
 }

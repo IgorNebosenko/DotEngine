@@ -1,15 +1,17 @@
 ﻿namespace DotEngine;
 
+using System;
+using System.Collections.Generic;
+
 public sealed class GameObject : Object
 {
     #region Fields
     private int _layer;
-    private bool _isActive;
+    private bool _isActive = true;
     private bool _isStatic;
     private bool _isStaticBatchable;
+    private string _tag = string.Empty;
 
-    private string _tag;
-    
     private GameObject? _parent;
     private List<GameObject> _childs = new List<GameObject>();
     private List<Component> _components = new List<Component>();
@@ -18,24 +20,30 @@ public sealed class GameObject : Object
     public GameObject(string name = "GameObject", Transform parent = null, params Type[] componentTypes)
     {
         Name = name;
-        Transform = parent == null ? Transform.CreateRoot() : Transform.CreateChild(parent);
+
+        Transform = parent == null
+            ? Transform.CreateRoot()
+            : Transform.CreateChild(parent);
+
+        if (Transform.Parent != null)
+            _parent = Transform.Parent.GameObject;
+
+        _parent?._childs.Add(this);
 
         for (var i = 0; i < componentTypes.Length; i++)
-        {
-            AddComponent(componentTypes[i].GetType());
-        }
+            AddComponent(componentTypes[i]);
     }
 
     #region Events
     public event Action<int> LayerChanged;
     public event Action<bool> ActiveChanged;
     public event Action<bool> StaticChanged;
-    public event Action<string> TagChanged; 
+    public event Action<string> TagChanged;
     #endregion
-    
+
     #region Properties
     public bool IsActive => _isActive;
-    
+
     public Transform Transform { get; private set; }
 
     public int Layer
@@ -57,7 +65,7 @@ public sealed class GameObject : Object
             StaticChanged?.Invoke(value);
         }
     }
-    
+
     public bool IsStaticBatchable => _isStaticBatchable;
 
     public string Tag
@@ -69,12 +77,12 @@ public sealed class GameObject : Object
             TagChanged?.Invoke(value);
         }
     }
-    
-    public ulong SceneCullingMask => throw new NotImplementedException();
+
+    public ulong SceneCullingMask => 0;
 
     public GameObject GameObjectReference => this;
     #endregion
-    
+
     #region Set active
     public void SetActive(bool active)
     {
@@ -84,151 +92,173 @@ public sealed class GameObject : Object
 
     public void SetActiveRecursively(bool active)
     {
-        _isActive = active;
+        SetActive(active);
 
-        var parent = _parent;
-        while (parent != null)
-        {
-            parent._isActive = active;
-            parent = parent._parent;
-        }
+        for (var i = 0; i < _childs.Count; i++)
+            _childs[i].SetActiveRecursively(active);
     }
     #endregion
-    
+
     public bool CompareTag(string tag) => _tag == tag;
 
     #region Get Component
     public T? GetComponent<T>()
     {
-        return _components.OfType<T>().FirstOrDefault();
+        for (var i = 0; i < _components.Count; i++)
+        {
+            if (_components[i] is T t)
+                return t;
+        }
+
+        return default;
     }
 
     public Component? GetComponent(Type type)
     {
-        return _components.OfType<Component>().FirstOrDefault(c => c.GetType() == type);
+        for (var i = 0; i < _components.Count; i++)
+        {
+            if (type.IsAssignableFrom(_components[i].GetType()))
+                return _components[i];
+        }
+
+        return null;
     }
     #endregion
 
     #region Get Component In Children
     public T? GetComponentInChildren<T>(bool includeInactive = false)
     {
-        for (var i = 0; i < _components.Count; i++)
+        var result = GetComponent<T>();
+        if (result != null)
+            return result;
+
+        for (var i = 0; i < _childs.Count; i++)
         {
-            if (!includeInactive && _components[i].Enabled)
-            {
-                var result = _components[i].GetComponent<T>();
-                if (result != null)
-                    return result;
-            }
+            var child = _childs[i];
+            if (!includeInactive && !child._isActive)
+                continue;
+
+            var r = child.GetComponentInChildren<T>(includeInactive);
+            if (r != null)
+                return r;
         }
 
         return default;
     }
-    
+
     public Component? GetComponentInChildren(Type type, bool includeInactive = false)
     {
-        for (var i = 0; i < _components.Count; i++)
+        var result = GetComponent(type);
+        if (result != null)
+            return result;
+
+        for (var i = 0; i < _childs.Count; i++)
         {
-            if (!includeInactive && _components[i].Enabled)
-            {
-                var result = _components[i].GetComponent(type);
-                if (result != null)
-                    return result;
-            }
+            var child = _childs[i];
+            if (!includeInactive && !child._isActive)
+                continue;
+
+            var r = child.GetComponentInChildren(type, includeInactive);
+            if (r != null)
+                return r;
         }
 
-        return default;
+        return null;
     }
     #endregion
 
     #region Get Compont In Parent
     public Component? GetComponentInParent(Type type, bool includeInactive = false)
     {
-        if (_parent == null)
-            return null;
-        
-        var components = _parent.GetComponents(type);
-        
-        if (components == null || components.Length == 0)
-            return null;
+        var p = _parent;
 
-        if (includeInactive)
-            return components[0];
+        while (p != null)
+        {
+            if (includeInactive || p._isActive)
+            {
+                var c = p.GetComponent(type);
+                if (c != null)
+                    return c;
+            }
 
-        return components.FirstOrDefault(x => x.Enabled);
+            p = p._parent;
+        }
 
+        return null;
     }
 
     public T? GetComponentInParent<T>() where T : Component
     {
-        if (_parent == null)
-            return default;
-        
-        var components = _parent.GetComponents<T>();
-        
-        if (components == null || components.Length == 0)
-            return default;
+        var p = _parent;
 
-        return components[0];
+        while (p != null)
+        {
+            var c = p.GetComponent<T>();
+            if (c != null)
+                return c;
+
+            p = p._parent;
+        }
+
+        return default;
     }
     #endregion
 
     #region Get Components
     public T[] GetComponentsInParent<T>(bool includeInactive) where T : Component
     {
-        if (_parent == null)
-            return null;
+        var list = new List<T>();
+        var p = _parent;
 
-        var components = new List<T>();
-        for (var i = 0; i < _parent._components.Count; i++)
+        while (p != null)
         {
-            if (_parent._components[i].GetType() == typeof(T))
+            if (includeInactive || p._isActive)
             {
-                components.Add((T)_parent._components[i]);
+                for (var i = 0; i < p._components.Count; i++)
+                {
+                    if (p._components[i] is T t)
+                        list.Add(t);
+                }
             }
+
+            p = p._parent;
         }
-        
-        return components.ToArray();
+
+        return list.ToArray();
     }
 
     public Component[] GetComponents(Type type)
     {
-        var components = new List<Component>();
-        
+        var list = new List<Component>();
+
         for (var i = 0; i < _components.Count; i++)
         {
-            if (_components[i].GetType() == type)
-            {
-                components.Add(_components[i]);
-            }
+            if (type.IsAssignableFrom(_components[i].GetType()))
+                list.Add(_components[i]);
         }
-        
-        return components.ToArray();
+
+        return list.ToArray();
     }
 
     public T[] GetComponents<T>() where T : Component
     {
-        var components = new List<T>();
-        
+        var list = new List<T>();
+
         for (var i = 0; i < _components.Count; i++)
         {
-            if (_components[i].GetType() == typeof(T))
-            {
-                components.Add((T)_components[i]);
-            }
+            if (_components[i] is T t)
+                list.Add(t);
         }
-        
-        return components.ToArray();
+
+        return list.ToArray();
     }
 
     public void GetComponents(Type type, List<Component> results)
     {
         for (var i = 0; i < _components.Count; i++)
         {
-            if (_components[i].GetType() == type)
-            {
+            if (type.IsAssignableFrom(_components[i].GetType()))
                 results.Add(_components[i]);
-            }
         }
     }
 
@@ -236,10 +266,8 @@ public sealed class GameObject : Object
     {
         for (var i = 0; i < _components.Count; i++)
         {
-            if (_components[i].GetType() == typeof(T))
-            {
-                results.Add((T)_components[i]);
-            }
+            if (_components[i] is T t)
+                results.Add(t);
         }
     }
     #endregion
@@ -247,78 +275,55 @@ public sealed class GameObject : Object
     #region Get Components In Children
     public Component[]? GetComponentsInChildren(Type type)
     {
-        if (_childs.Count == 0)
-            return null;
-
-        var listResult = new List<Component>();
+        var list = new List<Component>();
 
         for (var i = 0; i < _childs.Count; i++)
-        {
-            listResult.AddRange(_childs[i].GetComponents(type));
-        }
+            list.AddRange(_childs[i].GetComponents(type));
 
-        return listResult.ToArray();
+        return list.Count == 0 ? null : list.ToArray();
     }
 
     public Component[]? GetComponentsInChildren(Type type, bool includeInactive)
     {
-        if (_childs.Count == 0)
-            return null;
-
-        var listResult = new List<Component>();
+        var list = new List<Component>();
 
         for (var i = 0; i < _childs.Count; i++)
         {
-            var sublist = _childs[i].GetComponents(type).ToList();
+            var child = _childs[i];
+            if (!includeInactive && !child._isActive)
+                continue;
 
-            if (!includeInactive)
-            {
-                sublist.RemoveAll(x => !x.Enabled);
-            }
-            
-            listResult.AddRange(sublist);
+            list.AddRange(child.GetComponents(type));
         }
 
-        return listResult.ToArray();
+        return list.Count == 0 ? null : list.ToArray();
     }
 
     public T[]? GetComponentsInChildren<T>(bool includeInactive) where T : Component
     {
-        if (_childs.Count == 0)
-            return null;
-
-        var listResult = new List<T>();
+        var list = new List<T>();
 
         for (var i = 0; i < _childs.Count; i++)
         {
-            var sublist = _childs[i].GetComponents<T>().ToList();
+            var child = _childs[i];
+            if (!includeInactive && !child._isActive)
+                continue;
 
-            if (!includeInactive)
-            {
-                sublist.RemoveAll(x => !x.Enabled);
-            }
-            
-            listResult.AddRange(sublist);
+            list.AddRange(child.GetComponents<T>());
         }
 
-        return listResult.ToArray();
+        return list.Count == 0 ? null : list.ToArray();
     }
 
     public void GetComponentsInChildren<T>(bool includeInactive, List<T> results) where T : Component
     {
-        if (_childs.Count == 0)
-            return;
-
         for (var i = 0; i < _childs.Count; i++)
         {
-            var sublist = _childs[i].GetComponents<T>().ToList();
+            var child = _childs[i];
+            if (!includeInactive && !child._isActive)
+                continue;
 
-            if (!includeInactive)
-            {
-                sublist.RemoveAll(x => !x.Enabled);
-            }
-            
-            results.AddRange(sublist);
+            results.AddRange(child.GetComponents<T>());
         }
     }
     #endregion
@@ -326,45 +331,57 @@ public sealed class GameObject : Object
     #region Get Components In Parent
     public Component[]? GetComponentsInParent(Type type)
     {
-        if (_parent == null)
-            return null;
+        var list = new List<Component>();
+        var p = _parent;
 
-        return _parent.GetComponents(type);
+        while (p != null)
+        {
+            list.AddRange(p.GetComponents(type));
+            p = p._parent;
+        }
+
+        return list.Count == 0 ? null : list.ToArray();
     }
 
     public void GetComponentsInParent<T>(bool includeInactive, List<T> results) where T : Component
     {
-        if (_parent == null)
-            return;
+        var p = _parent;
 
-        results.AddRange(_parent.GetComponents<T>());
-        results.RemoveAll(x => !x.Enabled);
+        while (p != null)
+        {
+            if (includeInactive || p._isActive)
+                results.AddRange(p.GetComponents<T>());
+
+            p = p._parent;
+        }
     }
 
     public T[]? GetComponentsInParent<T>() where T : Component
     {
-        if (_parent == null)
-            return null;
-        
-        return _parent.GetComponents<T>().ToArray();
+        var list = new List<T>();
+        var p = _parent;
+
+        while (p != null)
+        {
+            list.AddRange(p.GetComponents<T>());
+            p = p._parent;
+        }
+
+        return list.Count == 0 ? null : list.ToArray();
     }
     #endregion
 
     #region Try Get Component
     public bool TryGetComponent<T>(out T? component)
     {
-        var result = GetComponent<T>();
-        component = result;
-        
-        return result != null;
+        component = GetComponent<T>();
+        return component != null;
     }
 
     public bool TryGetComponent(Type type, out Component? component)
     {
-        var result = GetComponent(type);
-        component = result;
-        
-        return result != null;
+        component = GetComponent(type);
+        return component != null;
     }
     #endregion
 
@@ -375,6 +392,7 @@ public sealed class GameObject : Object
             return null;
 
         var component = (Component)Activator.CreateInstance(type);
+        component.GameObject = this;
         _components.Add(component);
         return component;
     }
@@ -382,12 +400,12 @@ public sealed class GameObject : Object
     public T AddComponent<T>() where T : Component, new()
     {
         var component = new T();
+        component.GameObject = this;
         _components.Add(component);
         return component;
     }
-
     #endregion
-    
+
     public int GetComponentCount()
     {
         return _components.Count;
@@ -396,10 +414,8 @@ public sealed class GameObject : Object
     public Component? GetComponentAtIndex(int index)
     {
         if (index < 0 || index >= _components.Count)
-        {
             return null;
-        }
-        
+
         return _components[index];
     }
 
@@ -407,7 +423,7 @@ public sealed class GameObject : Object
     {
         if (index < 0 || index >= _components.Count)
             return null;
-        
+
         return _components[index] as T;
     }
 
@@ -416,9 +432,7 @@ public sealed class GameObject : Object
         for (var i = 0; i < _components.Count; i++)
         {
             if (_components[i].GetType() == component.GetType())
-            {
                 return i;
-            }
         }
 
         return -1;
@@ -438,7 +452,7 @@ public sealed class GameObject : Object
     {
         throw new NotImplementedException();
     }
-    
+
     public static GameObject FindWithTag(string tag) => FindGameObjectWithTag(tag);
 
     public static GameObject[] FindGameObjectsWithTag(Scene scene, string tag)
@@ -449,11 +463,9 @@ public sealed class GameObject : Object
         for (var i = 0; i < rootGameObjects.Length; i++)
         {
             if (rootGameObjects[i]._tag == tag)
-            {
                 resultList.Add(rootGameObjects[i]);
-            }
         }
-        
+
         return resultList.ToArray();
     }
 
@@ -464,9 +476,7 @@ public sealed class GameObject : Object
         for (var i = 0; i < rootGameObjects.Length; i++)
         {
             if (rootGameObjects[i].Name == name)
-            {
                 return rootGameObjects[i];
-            }
         }
 
         return null;
