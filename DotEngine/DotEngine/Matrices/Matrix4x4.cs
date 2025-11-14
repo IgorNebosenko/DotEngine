@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace DotEngine
 {
@@ -10,6 +11,7 @@ namespace DotEngine
     /// m31 m32 m33 m34
     /// m41 m42 m43 m44
     /// </summary>
+    [StructLayout((LayoutKind.Sequential), Pack = 4)]
     public struct Matrix4x4(
         float m11, float m12, float m13, float m14,
         float m21, float m22, float m23, float m24,
@@ -219,6 +221,89 @@ namespace DotEngine
             }
         }
 
+        /// <summary>
+        /// Gets or sets the up Vector3 of the matrix; that is M21, M22, and M23.
+        /// </summary>
+        public Vector3 Up
+        {
+            get => new Vector3(m21, m22, m23);
+            set
+            {
+                m21 = value.x;
+                m22 = value.y;
+                m23 = value.z;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the down Vector3 of the matrix; that is -M21, -M22, and -M23.
+        /// </summary>
+        public Vector3 Down
+        {
+            get => new Vector3(-m21, -m22, -m23);
+            set
+            {
+                m21 = -value.x;
+                m22 = -value.y;
+                m23 = -value.z;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the right Vector3 of the matrix; that is M11, M12, and M13.
+        /// </summary>
+        public Vector3 Right
+        {
+            get => new Vector3(m11, m12, m13);
+            set
+            {
+                m11 = value.x;
+                m12 = value.y;
+                m13 = value.z;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the left Vector3 of the matrix; that is M11, M12, and M13.
+        /// </summary>
+        public Vector3 Left
+        {
+            get => new Vector3(-m11, -m12, -m13);
+            set
+            {
+                m11 = -value.x;
+                m12 = -value.y;
+                m13 = -value.z;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the forward Vector3 of the matrix; that is -M31, -M32, and -M33.
+        /// </summary>
+        public Vector3 Forward
+        {
+            get => new Vector3(m31, m32, m33);
+            set
+            {
+                m31 = value.x;
+                m32 = value.y;
+                m33 = value.z;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the backward Vector3 of the matrix; that is -M31, -M32, and -M33.
+        /// </summary>
+        public Vector3 Backward
+        {
+            get => new Vector3(-m31, -m32, -m33);
+            set
+            {
+                m31 = -value.x;
+                m32 = -value.y;
+                m33 = -value.z;
+            }
+        }
         #endregion
 
         #region Static methods
