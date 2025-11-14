@@ -363,6 +363,34 @@ namespace DotEngine
                 m33 = -value.z;
             }
         }
+        
+        /// <summary>
+        /// Gets or sets the translation of the matrix; that is M41, M42, and M43.
+        /// </summary>
+        public Vector3 TranslationVector
+        {
+            get => new Vector3(m41, m42, m43);
+            set
+            {
+                m41 = value.x;
+                m42 = value.y;
+                m43 = value.z;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the scale of the matrix; that is M11, M22, and M33.
+        /// </summary>
+        public Vector3 ScaleVector
+        {
+            get => new Vector3(m11, m22, m33);
+            set
+            {
+                m11 = value.x;
+                m22 = value.y;
+                m33 = value.z;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the first row in the matrix; that is M11, M12, M13, and M14.
