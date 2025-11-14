@@ -512,7 +512,14 @@ namespace DotEngine
             }
         }
         
-        
+        /// <summary>
+        /// Gets a value indicating whether this instance is an identity matrix.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is an identity matrix; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsIdentity => Equals(Identity);
+
         #endregion
 
         #region Static methods
