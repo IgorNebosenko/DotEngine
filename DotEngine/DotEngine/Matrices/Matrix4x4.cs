@@ -263,8 +263,6 @@ namespace DotEngine
             m43 = values[14];
             m44 = values[15];
         }
-        
-        
 
         #endregion
         
@@ -365,6 +363,128 @@ namespace DotEngine
                 m33 = -value.z;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the first row in the matrix; that is M11, M12, M13, and M14.
+        /// </summary>
+        public Vector4 Row1
+        {
+            get => new Vector4(m11, m12, m13, m14);
+            set
+            {
+                m11 = value.x;
+                m12 = value.y;
+                m13 = value.z;
+                m14 = value.w;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the second row in the matrix; that is M11, M12, M13, and M14.
+        /// </summary>
+        public Vector4 Row2
+        {
+            get => new Vector4(m21, m22, m23, m24);
+            set
+            {
+                m21 = value.x;
+                m22 = value.y;
+                m23 = value.z;
+                m24 = value.w;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the third row in the matrix; that is M11, M12, M13, and M14.
+        /// </summary>
+        public Vector4 Row3
+        {
+            get => new Vector4(m31, m32, m33, m34);
+            set
+            {
+                m31 = value.x;
+                m32 = value.y;
+                m33 = value.z;
+                m34 = value.w;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the fourth row in the matrix; that is M11, M12, M13, and M14.
+        /// </summary>
+        public Vector4 Row4
+        {
+            get => new Vector4(m41, m42, m43, m44);
+            set
+            {
+                m41 = value.x;
+                m42 = value.y;
+                m43 = value.z;
+                m44 = value.w;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the first column in the matrix; that is M11, M12, M13, and M14.
+        /// </summary>
+        public Vector4 Column1
+        {
+            get => new Vector4(m11, m21, m31, m41);
+            set
+            {
+                m11 = value.x;
+                m21 = value.y;
+                m31 = value.z;
+                m41 = value.w;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the second column in the matrix; that is M11, M12, M13, and M14.
+        /// </summary>
+        public Vector4 Column2
+        {
+            get => new Vector4(m12, m22, m32, m42);
+            set
+            {
+                m12 = value.x;
+                m22 = value.y;
+                m32 = value.z;
+                m42 = value.w;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the first column in the matrix; that is M11, M12, M13, and M14.
+        /// </summary>
+        public Vector4 Column3
+        {
+            get => new Vector4(m13, m23, m33, m43);
+            set
+            {
+                m13 = value.x;
+                m23 = value.y;
+                m33 = value.z;
+                m43 = value.w;
+            }
+        }
+        
+        /// <summary>
+        /// Gets or sets the fourth column in the matrix; that is M11, M12, M13, and M14.
+        /// </summary>
+        public Vector4 Column4
+        {
+            get => new Vector4(m14, m24, m34, m44);
+            set
+            {
+                m14 = value.x;
+                m24 = value.y;
+                m34 = value.z;
+                m44 = value.w;
+            }
+        }
+        
+        
         #endregion
 
         #region Static methods
