@@ -12,12 +12,7 @@ namespace DotEngine
     /// m41 m42 m43 m44
     /// </summary>
     [StructLayout((LayoutKind.Sequential), Pack = 4)]
-    public struct Matrix4x4(
-        float m11, float m12, float m13, float m14,
-        float m21, float m22, float m23, float m24,
-        float m31, float m32, float m33, float m34,
-        float m41, float m42, float m43, float m44
-    ) : IEquatable<Matrix4x4>, IFormattable
+    public struct Matrix4x4 : IEquatable<Matrix4x4>, IFormattable
     {
         #region Static variables
 
@@ -69,70 +64,70 @@ namespace DotEngine
         /// <summary>
         /// Matrix element at row 0, column 0.
         /// </summary>
-        public float m11 = m11;
+        public float m11;
         /// <summary>
         /// Matrix element at row 0, column 1.
         /// </summary>
-        public float m12 = m12;
+        public float m12;
         /// <summary>
         /// Matrix element at row 0, column 2.
         /// </summary>
-        public float m13 = m13;
+        public float m13;
         /// <summary>
         /// Matrix element at row 0, column 3.
         /// </summary>
-        public float m14 = m14;
+        public float m14;
 
         /// <summary>
         /// Matrix element at row 1, column 0.
         /// </summary>
-        public float m21 = m21;
+        public float m21;
         /// <summary>
         /// Matrix element at row 1, column 1.
         /// </summary>
-        public float m22 = m22;
+        public float m22;
         /// <summary>
         /// Matrix element at row 1, column 2.
         /// </summary>
-        public float m23 = m23;
+        public float m23;
         /// <summary>
         /// Matrix element at row 1, column 3.
         /// </summary>
-        public float m24 = m24;
+        public float m24;
 
         /// <summary>
         /// Matrix element at row 2, column 0.
         /// </summary>
-        public float m31 = m31;
+        public float m31;
         /// <summary>
         /// Matrix element at row 2, column 1.
         /// </summary>
-        public float m32 = m32;
+        public float m32;
         /// <summary>
         /// Matrix element at row 2, column 2.
         /// </summary>
-        public float m33 = m33;
+        public float m33;
         /// <summary>
         /// Matrix element at row 2, column 3.
         /// </summary>
-        public float m34 = m34;
+        public float m34;
 
         /// <summary>
         /// Matrix element at row 3, column 0.
         /// </summary>
-        public float m41 = m41;
+        public float m41;
         /// <summary>
         /// Matrix element at row 3, column 1.
         /// </summary>
-        public float m42 = m42;
+        public float m42;
         /// <summary>
         /// Matrix element at row 3, column 2.
         /// </summary>
-        public float m43 = m43;
+        public float m43;
         /// <summary>
         /// Matrix element at row 3, column 3.
         /// </summary>
-        public float m44 = m44;
+        public float m44;
 
         #endregion
 
@@ -207,6 +202,72 @@ namespace DotEngine
 
         #endregion
 
+        #region Constructors
+
+        public Matrix4x4(float m11, float m12, float m13, float m14,
+            float m21, float m22, float m23, float m24,
+            float m31, float m32, float m33, float m34,
+            float m41, float m42, float m43, float m44
+        )
+        {
+            this.m11 = m11;
+            this.m12 = m12;
+            this.m13 = m13;
+            this.m14 = m14;
+            this.m21 = m21;
+            this.m22 = m22;
+            this.m23 = m23;
+            this.m24 = m24;
+            this.m31 = m31;
+            this.m32 = m32;
+            this.m33 = m33;
+            this.m34 = m34;
+            this.m41 = m41;
+            this.m42 = m42;
+            this.m43 = m43;
+            this.m44 = m44;
+        }
+
+        public Matrix4x4(float value)
+        {
+            m11 = m12 = m13 = m14 = m21 = m22 = m23 = m24 = m31 = m32 = m33 = m34 = m41 = m42 = m43 = m44 = value;
+        }
+
+        public Matrix4x4(float[] values)
+        {
+            if (values == null)
+            {
+                throw new ArgumentNullException(nameof (values)); 
+            }
+            
+            if (values.Length != 16)
+            {
+                throw new ArgumentOutOfRangeException(nameof(values),
+                    "There must be sixteen and only sixteen input values for Matrix4x4.");
+            }
+
+            m11 = values[0];
+            m12 = values[1];
+            m13 = values[2];
+            m14 = values[3];
+            m21 = values[4];
+            m22 = values[5];
+            m23 = values[6];
+            m24 = values[7];
+            m31 = values[8];
+            m32 = values[9];
+            m33 = values[10];
+            m34 = values[11];
+            m41 = values[12];
+            m42 = values[13];
+            m43 = values[14];
+            m44 = values[15];
+        }
+        
+        
+
+        #endregion
+        
         #region Properties
 
         /// <summary>
