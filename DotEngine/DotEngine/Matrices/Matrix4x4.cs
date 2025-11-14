@@ -19,14 +19,14 @@ namespace DotEngine
     {
         #region Static variables
 
-        static readonly Matrix4x4 _zeroMatrix = new(
+        private static readonly Matrix4x4 zeroMatrix = new(
             0f, 0f, 0f, 0f,
             0f, 0f, 0f, 0f,
             0f, 0f, 0f, 0f,
             0f, 0f, 0f, 0f
         );
 
-        static readonly Matrix4x4 _identityMatrix = new(
+        private static readonly Matrix4x4 identityMatrix = new(
             1f, 0f, 0f, 0f,
             0f, 1f, 0f, 0f,
             0f, 0f, 1f, 0f,
@@ -48,7 +48,7 @@ namespace DotEngine
         public static Matrix4x4 Zero
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => _zeroMatrix;
+            get => zeroMatrix;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace DotEngine
         public static Matrix4x4 Identity
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => _identityMatrix;
+            get => identityMatrix;
         }
 
         #endregion
