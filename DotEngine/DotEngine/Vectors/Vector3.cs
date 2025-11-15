@@ -205,6 +205,11 @@ namespace DotEngine
         /// Compares vectors for inequality.
         /// </summary>
         public static bool operator !=(Vector3 a, Vector3 b) => !(a == b);
+        
+        /// <summary>Reverses the direction of a given vector.</summary>
+        /// <param name="value">The vector to negate.</param>
+        /// <returns>A vector facing in the opposite direction.</returns>
+        public static Vector3 operator -(Vector3 value) => new Vector3(-value.x, -value.y, -value.z);
 
         #endregion
 
@@ -247,6 +252,11 @@ namespace DotEngine
                 this = Zero;
             }
         }
+        
+        public float LengthSquared()
+        {
+            return (float) ((double) x * x + (double) y * y + (double) z * z);
+        }
 
         #endregion
 
@@ -257,6 +267,16 @@ namespace DotEngine
         /// </summary>
         public static float Dot(Vector3 a, Vector3 b) =>
             a.x * b.x + a.y * b.y + a.z * b.z;
+        
+        /// <summary>Calculates the dot product of two vectors.</summary>
+        /// <param name="left">First source vector.</param>
+        /// <param name="right">Second source vector.</param>
+        /// <param name="result">When the method completes, contains the dot product of the two vectors.</param>
+        public static void Dot(ref Vector3 left, ref Vector3 right, out float result)
+        {
+            result = (float) ((double) left.x * right.x + (double) left.y * right.y + (double) left.z * right.z);
+        }
+
 
         /// <summary>
         /// Cross product of two vectors.
@@ -348,6 +368,26 @@ namespace DotEngine
         /// </summary>
         public static Vector3 Max(Vector3 a, Vector3 b) =>
             new(MathF.Max(a.x, b.x), MathF.Max(a.y, b.y), MathF.Max(a.z, b.z));
+        
+        /// <summary>Calculates the cross product of two vectors.</summary>
+        /// <param name="left">First source vector.</param>
+        /// <param name="right">Second source vector.</param>
+        /// <param name="result">When the method completes, contains he cross product of the two vectors.</param>
+        public static void Cross(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        {
+            result = new Vector3((float) ((double) left.y * right.z - (double) left.z *  right.y),
+                (float) ((double) left.z * right.x - (double) left.x *  right.z),
+                (float) ((double) left.x * right.y - (double) left.y * right.x));
+        }
+        
+        /// <summary>Subtracts two vectors.</summary>
+        /// <param name="left">The first vector to subtract.</param>
+        /// <param name="right">The second vector to subtract.</param>
+        /// <param name="result">When the method completes, contains the difference of the two vectors.</param>
+        public static void Subtract(ref Vector3 left, ref Vector3 right, out Vector3 result)
+        {
+            result = new Vector3(left.x - right.x, left.y - right.y, left.z - right.z);
+        }
 
         #endregion
 

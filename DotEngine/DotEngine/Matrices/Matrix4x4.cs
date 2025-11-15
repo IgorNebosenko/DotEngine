@@ -1243,7 +1243,915 @@ namespace DotEngine
             Orthonormalize(ref value, out var result);
             return result;
         }
+        
+        /// <summary>
+        /// Brings the matrix into upper triangular form using elementary row operations.
+        /// </summary>
+        /// <param name="value">The matrix to put into upper triangular form.</param>
+        /// <param name="result">When the method completes, contains the upper triangular matrix.</param>
+        /// <remarks>
+        /// If the matrix is not invertible (i.e. its determinant is zero) than the result of this
+        /// method may produce Single.Nan and Single.Inf values. When the matrix represents a system
+        /// of linear equations, than this often means that either no solution exists or an infinite
+        /// number of solutions exist.
+        /// </remarks>
+        public static void UpperTriangularForm(ref Matrix4x4 value, out Matrix4x4 result)
+        {
+            result = value;
+            var column = 0;
+            var num1 = 4;
+            var num2 = 4;
+            for (var index = 0; index < num1 && num2 > column; ++index)
+            {
+                var num3 = index;
+                while (MathUtil.IsZero(result[num3, column]))
+                {
+                    ++num3;
+                    if (num3 == num1)
+                    {
+                        num3 = index;
+                        ++column;
+                        if (column == num2)
+                            return;
+                    }
+                }
+                if (num3 != index)
+                    result.ExchangeRows(num3, index);
+                var num4 = 1f / result[index, column];
+                for (; num3 < num1; ++num3)
+                {
+                    if (num3 != index)
+                    {
+                        result[num3, 0] -= result[index, 0] * num4 * result[num3, column];
+                        result[num3, 1] -= result[index, 1] * num4 * result[num3, column];
+                        result[num3, 2] -= result[index, 2] * num4 * result[num3, column];
+                        result[num3, 3] -= result[index, 3] * num4 * result[num3, column];
+                    }
+                }
+                ++column;
+            }
+        }
+        
+        /// <summary>
+        /// Brings the matrix into upper triangular form using elementary row operations.
+        /// </summary>
+        /// <param name="value">The matrix to put into upper triangular form.</param>
+        /// <returns>The upper triangular matrix.</returns>
+        /// <remarks>
+        /// If the matrix is not invertible (i.e. its determinant is zero) than the result of this
+        /// method may produce Single.Nan and Single.Inf values. When the matrix represents a system
+        /// of linear equations, than this often means that either no solution exists or an infinite
+        /// number of solutions exist.
+        /// </remarks>
+        public static Matrix4x4 UpperTriangularForm(Matrix4x4 value)
+        {
+            UpperTriangularForm(ref value, out var result);
+            return result;
+        }
 
+        /// <summary>
+        /// Brings the matrix into lower triangular form using elementary row operations.
+        /// </summary>
+        /// <param name="value">The matrix to put into lower triangular form.</param>
+        /// <param name="result">When the method completes, contains the lower triangular matrix.</param>
+        /// <remarks>
+        /// If the matrix is not invertible (i.e. its determinant is zero) than the result of this
+        /// method may produce Single.Nan and Single.Inf values. When the matrix represents a system
+        /// of linear equations, than this often means that either no solution exists or an infinite
+        /// number of solutions exist.
+        /// </remarks>
+        public static void LowerTriangularForm(ref Matrix4x4 value, out Matrix4x4 result)
+        {
+            var matrix = value;
+            Transpose(ref matrix, out result);
+            var column = 0;
+            var num1 = 4;
+            var num2 = 4;
+            for (var index = 0; index < num1; ++index)
+            {
+                if (num2 <= column)
+                    return;
+                var num3 = index;
+                while (MathUtil.IsZero(result[num3, column]))
+                {
+                    ++num3;
+                    if (num3 == num1)
+                    {
+                        num3 = index;
+                        ++column;
+                        if (column == num2)
+                            return;
+                    }
+                }
+                if (num3 != index)
+                    result.ExchangeRows(num3, index);
+                var num4 = 1f / result[index, column];
+                for (; num3 < num1; ++num3)
+                {
+                    if (num3 != index)
+                    {
+                        result[num3, 0] -= result[index, 0] * num4 * result[num3, column];
+                        result[num3, 1] -= result[index, 1] * num4 * result[num3, column];
+                        result[num3, 2] -= result[index, 2] * num4 * result[num3, column];
+                        result[num3, 3] -= result[index, 3] * num4 * result[num3, column];
+                    }
+                }
+                ++column;
+            }
+            Transpose(ref result, out result);
+        }
+        
+        /// <summary>
+        /// Brings the matrix into lower triangular form using elementary row operations.
+        /// </summary>
+        /// <param name="value">The matrix to put into lower triangular form.</param>
+        /// <returns>The lower triangular matrix.</returns>
+        /// <remarks>
+        /// If the matrix is not invertible (i.e. its determinant is zero) than the result of this
+        /// method may produce Single.Nan and Single.Inf values. When the matrix represents a system
+        /// of linear equations, than this often means that either no solution exists or an infinite
+        /// number of solutions exist.
+        /// </remarks>
+        public static Matrix4x4 LowerTriangularForm(Matrix4x4 value)
+        {
+            LowerTriangularForm(ref value, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Brings the matrix into row echelon form using elementary row operations;
+        /// </summary>
+        /// <param name="value">The matrix to put into row echelon form.</param>
+        /// <param name="result">When the method completes, contains the row echelon form of the matrix.</param>
+        public static void RowEchelonForm(ref Matrix4x4 value, out Matrix4x4 result)
+        {
+            result = value;
+            var column = 0;
+            var num1 = 4;
+            var num2 = 4;
+            for (var index = 0; index < num1 && num2 > column; ++index)
+            {
+                var num3 = index;
+                while (MathUtil.IsZero(result[num3, column]))
+                {
+                    ++num3;
+                    if (num3 == num1)
+                    {
+                        num3 = index;
+                        ++column;
+                        if (column == num2)
+                            return;
+                    }
+                }
+                if (num3 != index)
+                    result.ExchangeRows(num3, index);
+                var num4 = 1f / result[index, column];
+                result[index, 0] *= num4;
+                result[index, 1] *= num4;
+                result[index, 2] *= num4;
+                result[index, 3] *= num4;
+                for (; num3 < num1; ++num3)
+                {
+                    if (num3 != index)
+                    {
+                        result[num3, 0] -= result[index, 0] * result[num3, column];
+                        result[num3, 1] -= result[index, 1] * result[num3, column];
+                        result[num3, 2] -= result[index, 2] * result[num3, column];
+                        result[num3, 3] -= result[index, 3] * result[num3, column];
+                    }
+                }
+                ++column;
+            }
+        }
+        
+        /// <summary>
+        /// Brings the matrix into row echelon form using elementary row operations;
+        /// </summary>
+        /// <param name="value">The matrix to put into row echelon form.</param>
+        /// <returns>When the method completes, contains the row echelon form of the matrix.</returns>
+        public static Matrix4x4 RowEchelonForm(Matrix4x4 value)
+        {
+            RowEchelonForm(ref value, out var result);
+            return result;
+        }
+
+        /// <summary>
+        /// Brings the matrix into reduced row echelon form using elementary row operations.
+        /// </summary>
+        /// <param name="value">The matrix to put into reduced row echelon form.</param>
+        /// <param name="augment">The fifth column of the matrix.</param>
+        /// <param name="result">When the method completes, contains the resultant matrix after the operation.</param>
+        /// <param name="augmentResult">When the method completes, contains the resultant fifth column of the matrix.</param>
+        /// <remarks>
+        /// <para>The fifth column is often called the augmented part of the matrix. This is because the fifth
+        /// column is really just an extension of the matrix so that there is a place to put all of the
+        /// non-zero components after the operation is complete.</para>
+        /// <para>Often times the resultant matrix will the identity matrix or a matrix similar to the identity
+        /// matrix. Sometimes, however, that is not possible and numbers other than zero and one may appear.</para>
+        /// <para>This method can be used to solve systems of linear equations. Upon completion of this method,
+        /// the <paramref name="augmentResult" /> will contain the solution for the system. It is up to the user
+        /// to analyze both the input and the result to determine if a solution really exists.</para>
+        /// </remarks>
+        public static void ReducedRowEchelonForm(
+            ref Matrix4x4 value,
+            ref Vector4 augment,
+            out Matrix4x4 result,
+            out Vector4 augmentResult)
+        {
+            var numArray = new float[4, 5]
+            {
+                {
+                    value[0, 0],
+                    value[0, 1],
+                    value[0, 2],
+                    value[0, 3],
+                    augment[0]
+                },
+                {
+                    value[1, 0],
+                    value[1, 1],
+                    value[1, 2],
+                    value[1, 3],
+                    augment[1]
+                },
+                {
+                    value[2, 0],
+                    value[2, 1],
+                    value[2, 2],
+                    value[2, 3],
+                    augment[2]
+                },
+                {
+                    value[3, 0],
+                    value[3, 1],
+                    value[3, 2],
+                    value[3, 3],
+                    augment[3]
+                }
+            };
+            var index1 = 0;
+            var num1 = 4;
+            var num2 = 5;
+            for (var index2 = 0; index2 < num1 && num2 > index1; ++index2)
+            {
+                var index3 = index2;
+                while ((double)numArray[index3, index1] == 0.0)
+                {
+                    ++index3;
+                    if (index3 == num1)
+                    {
+                        index3 = index2;
+                        ++index1;
+                        if (num2 == index1)
+                            break;
+                    }
+                }
+
+                for (var index4 = 0; index4 < num2; ++index4)
+                {
+                    var num3 = numArray[index2, index4];
+                    numArray[index2, index4] = numArray[index3, index4];
+                    numArray[index3, index4] = num3;
+                }
+
+                var num4 = numArray[index2, index1];
+                for (var index5 = 0; index5 < num2; ++index5)
+                    numArray[index2, index5] /= num4;
+                for (var index6 = 0; index6 < num1; ++index6)
+                {
+                    if (index6 != index2)
+                    {
+                        var num5 = numArray[index6, index1];
+                        for (var index7 = 0; index7 < num2; ++index7)
+                            numArray[index6, index7] -= num5 * numArray[index2, index7];
+                    }
+                }
+
+                ++index1;
+            }
+
+            result.m11 = numArray[0, 0];
+            result.m12 = numArray[0, 1];
+            result.m13 = numArray[0, 2];
+            result.m14 = numArray[0, 3];
+            result.m21 = numArray[1, 0];
+            result.m22 = numArray[1, 1];
+            result.m23 = numArray[1, 2];
+            result.m24 = numArray[1, 3];
+            result.m31 = numArray[2, 0];
+            result.m32 = numArray[2, 1];
+            result.m33 = numArray[2, 2];
+            result.m34 = numArray[2, 3];
+            result.m41 = numArray[3, 0];
+            result.m42 = numArray[3, 1];
+            result.m43 = numArray[3, 2];
+            result.m44 = numArray[3, 3];
+            augmentResult.x = numArray[0, 4];
+            augmentResult.y = numArray[1, 4];
+            augmentResult.z = numArray[2, 4];
+            augmentResult.w = numArray[3, 4];
+        }
+
+        /// <summary>
+        /// Creates a left-handed spherical billboard that rotates around a specified object position.
+        /// </summary>
+        /// <param name="objectPosition">The position of the object around which the billboard will rotate.</param>
+        /// <param name="cameraPosition">The position of the camera.</param>
+        /// <param name="cameraUpVector">The up vector of the camera.</param>
+        /// <param name="cameraForwardVector">The forward vector of the camera.</param>
+        /// <param name="result">When the method completes, contains the created billboard matrix.</param>
+        public static void BillboardLH(
+            ref Vector3 objectPosition,
+            ref Vector3 cameraPosition,
+            ref Vector3 cameraUpVector,
+            ref Vector3 cameraForwardVector,
+            out Matrix4x4 result)
+        {
+            var vector3_1 = cameraPosition - objectPosition;
+            var num = vector3_1.LengthSquared();
+            var vector3_2 = !MathUtil.IsZero(num) ? vector3_1 * (float) (1.0 / Math.Sqrt((double) num)) : -cameraForwardVector;
+            Vector3 result1;
+            Vector3.Cross(ref cameraUpVector, ref vector3_2, out result1);
+            result1.Normalize();
+            Vector3 result2;
+            Vector3.Cross(ref vector3_2, ref result1, out result2);
+            result.m11 = result1.x;
+            result.m12 = result1.y;
+            result.m13 = result1.z;
+            result.m14 = 0.0f;
+            result.m21 = result2.x;
+            result.m22 = result2.y;
+            result.m23 = result2.z;
+            result.m24 = 0.0f;
+            result.m31 = vector3_2.x;
+            result.m32 = vector3_2.y;
+            result.m33 = vector3_2.z;
+            result.m34 = 0.0f;
+            result.m41 = objectPosition.x;
+            result.m42 = objectPosition.y;
+            result.m43 = objectPosition.z;
+            result.m44 = 1f;
+        }
+        
+        /// <summary>
+        /// Creates a left-handed spherical billboard that rotates around a specified object position.
+        /// </summary>
+        /// <param name="objectPosition">The position of the object around which the billboard will rotate.</param>
+        /// <param name="cameraPosition">The position of the camera.</param>
+        /// <param name="cameraUpVector">The up vector of the camera.</param>
+        /// <param name="cameraForwardVector">The forward vector of the camera.</param>
+        /// <returns>The created billboard matrix.</returns>
+        public static Matrix4x4 BillboardLH(
+            Vector3 objectPosition,
+            Vector3 cameraPosition,
+            Vector3 cameraUpVector,
+            Vector3 cameraForwardVector)
+        {
+            BillboardLH(ref objectPosition, ref cameraPosition, ref cameraUpVector, ref cameraForwardVector, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a right-handed spherical billboard that rotates around a specified object position.
+        /// </summary>
+        /// <param name="objectPosition">The position of the object around which the billboard will rotate.</param>
+        /// <param name="cameraPosition">The position of the camera.</param>
+        /// <param name="cameraUpVector">The up vector of the camera.</param>
+        /// <param name="cameraForwardVector">The forward vector of the camera.</param>
+        /// <param name="result">When the method completes, contains the created billboard matrix.</param>
+        public static void BillboardRH(
+            ref Vector3 objectPosition,
+            ref Vector3 cameraPosition,
+            ref Vector3 cameraUpVector,
+            ref Vector3 cameraForwardVector,
+            out Matrix4x4 result)
+        {
+            var vector3_1 = objectPosition - cameraPosition;
+            var num = vector3_1.LengthSquared();
+            var vector3_2 = !MathUtil.IsZero(num) ? vector3_1 * (float) (1.0 / Math.Sqrt((double) num)) : -cameraForwardVector;
+            Vector3 result1;
+            Vector3.Cross(ref cameraUpVector, ref vector3_2, out result1);
+            result1.Normalize();
+            Vector3 result2;
+            Vector3.Cross(ref vector3_2, ref result1, out result2);
+            result.m11 = result1.x;
+            result.m12 = result1.y;
+            result.m13 = result1.z;
+            result.m14 = 0.0f;
+            result.m21 = result2.x;
+            result.m22 = result2.y;
+            result.m23 = result2.z;
+            result.m24 = 0.0f;
+            result.m31 = vector3_2.x;
+            result.m32 = vector3_2.y;
+            result.m33 = vector3_2.z;
+            result.m34 = 0.0f;
+            result.m41 = objectPosition.x;
+            result.m42 = objectPosition.y;
+            result.m43 = objectPosition.z;
+            result.m44 = 1f;
+        }
+        
+        /// <summary>
+        /// Creates a right-handed spherical billboard that rotates around a specified object position.
+        /// </summary>
+        /// <param name="objectPosition">The position of the object around which the billboard will rotate.</param>
+        /// <param name="cameraPosition">The position of the camera.</param>
+        /// <param name="cameraUpVector">The up vector of the camera.</param>
+        /// <param name="cameraForwardVector">The forward vector of the camera.</param>
+        /// <returns>The created billboard matrix.</returns>
+        public static Matrix4x4 BillboardRH(
+            Vector3 objectPosition,
+            Vector3 cameraPosition,
+            Vector3 cameraUpVector,
+            Vector3 cameraForwardVector)
+        {
+            BillboardRH(ref objectPosition, ref cameraPosition, ref cameraUpVector, ref cameraForwardVector, out var result);
+            return result;
+        }
+        
+        /// <summary>Creates a left-handed, look-at matrix.</summary>
+        /// <param name="eye">The position of the viewer's eye.</param>
+        /// <param name="target">The camera look-at target.</param>
+        /// <param name="up">The camera's up vector.</param>
+        /// <param name="result">When the method completes, contains the created look-at matrix.</param>
+        public static void LookAtLH(
+            ref Vector3 eye,
+            ref Vector3 target,
+            ref Vector3 up,
+            out Matrix4x4 result)
+        {
+            Vector3 result1;
+            Vector3.Subtract(ref target, ref eye, out result1);
+            result1.Normalize();
+            Vector3 result2;
+            Vector3.Cross(ref up, ref result1, out result2);
+            result2.Normalize();
+            Vector3 result3;
+            Vector3.Cross(ref result1, ref result2, out result3);
+            result = Matrix4x4.Identity;
+            result.m11 = result2.x;
+            result.m21 = result2.y;
+            result.m31 = result2.z;
+            result.m12 = result3.x;
+            result.m22 = result3.y;
+            result.m32 = result3.z;
+            result.m13 = result1.x;
+            result.m23 = result1.y;
+            result.m33 = result1.z;
+            Vector3.Dot(ref result2, ref eye, out result.m41);
+            Vector3.Dot(ref result3, ref eye, out result.m42);
+            Vector3.Dot(ref result1, ref eye, out result.m43);
+            result.m41 = -result.m41;
+            result.m42 = -result.m42;
+            result.m43 = -result.m43;
+        }
+        
+        /// <summary>Creates a left-handed, look-at matrix.</summary>
+        /// <param name="eye">The position of the viewer's eye.</param>
+        /// <param name="target">The camera look-at target.</param>
+        /// <param name="up">The camera's up vector.</param>
+        /// <returns>The created look-at matrix.</returns>
+        public static Matrix4x4 LookAtLH(Vector3 eye, Vector3 target, Vector3 up)
+        {
+            LookAtLH(ref eye, ref target, ref up, out var result);
+            return result;
+        }
+        
+        /// <summary>Creates a right-handed, look-at matrix.</summary>
+        /// <param name="eye">The position of the viewer's eye.</param>
+        /// <param name="target">The camera look-at target.</param>
+        /// <param name="up">The camera's up vector.</param>
+        /// <param name="result">When the method completes, contains the created look-at matrix.</param>
+        public static void LookAtRH(
+            ref Vector3 eye,
+            ref Vector3 target,
+            ref Vector3 up,
+            out Matrix4x4 result)
+        {
+            Vector3 result1;
+            Vector3.Subtract(ref eye, ref target, out result1);
+            result1.Normalize();
+            Vector3 result2;
+            Vector3.Cross(ref up, ref result1, out result2);
+            result2.Normalize();
+            Vector3 result3;
+            Vector3.Cross(ref result1, ref result2, out result3);
+            result = Matrix4x4.Identity;
+            result.m11 = result2.x;
+            result.m21 = result2.y;
+            result.m31 = result2.z;
+            result.m12 = result3.x;
+            result.m22 = result3.y;
+            result.m32 = result3.z;
+            result.m13 = result1.x;
+            result.m23 = result1.y;
+            result.m33 = result1.z;
+            Vector3.Dot(ref result2, ref eye, out result.m41);
+            Vector3.Dot(ref result3, ref eye, out result.m42);
+            Vector3.Dot(ref result1, ref eye, out result.m43);
+            result.m41 = -result.m41;
+            result.m42 = -result.m42;
+            result.m43 = -result.m43;
+        }
+        
+        /// <summary>Creates a right-handed, look-at matrix.</summary>
+        /// <param name="eye">The position of the viewer's eye.</param>
+        /// <param name="target">The camera look-at target.</param>
+        /// <param name="up">The camera's up vector.</param>
+        /// <returns>The created look-at matrix.</returns>
+        public static Matrix4x4 LookAtRH(Vector3 eye, Vector3 target, Vector3 up)
+        {
+            LookAtRH(ref eye, ref target, ref up, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a left-handed, customized orthographic projection matrix.
+        /// </summary>
+        /// <param name="left">Minimum x-value of the viewing volume.</param>
+        /// <param name="right">Maximum x-value of the viewing volume.</param>
+        /// <param name="bottom">Minimum y-value of the viewing volume.</param>
+        /// <param name="top">Maximum y-value of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void OrthoOffCenterLH(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            var num = (float) (1.0 / ((double) zfar - (double) znear));
+            result = Matrix4x4.Identity;
+            result.m11 = (float) (2.0 / ((double) right - (double) left));
+            result.m22 = (float) (2.0 / ((double) top - (double) bottom));
+            result.m33 = num;
+            result.m41 = (float) (((double) left + (double) right) / ((double) left - (double) right));
+            result.m42 = (float) (((double) top + (double) bottom) / ((double) bottom - (double) top));
+            result.m43 = -znear * num;
+        }
+        
+        /// <summary>
+        /// Creates a left-handed, customized orthographic projection matrix.
+        /// </summary>
+        /// <param name="left">Minimum x-value of the viewing volume.</param>
+        /// <param name="right">Maximum x-value of the viewing volume.</param>
+        /// <param name="bottom">Minimum y-value of the viewing volume.</param>
+        /// <param name="top">Maximum y-value of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <returns>The created projection matrix.</returns>
+        public static Matrix4x4 OrthoOffCenterLH(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float znear,
+            float zfar)
+        {
+            OrthoOffCenterLH(left, right, bottom, top, znear, zfar, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a left-handed, orthographic projection matrix.
+        /// </summary>
+        /// <param name="width">Width of the viewing volume.</param>
+        /// <param name="height">Height of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void OrthoLH(
+            float width,
+            float height,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            var right = width * 0.5f;
+            var top = height * 0.5f;
+            OrthoOffCenterLH(-right, right, -top, top, znear, zfar, out result);
+        }
+        
+        /// <summary>
+        /// Creates a right-handed, customized orthographic projection matrix.
+        /// </summary>
+        /// <param name="left">Minimum x-value of the viewing volume.</param>
+        /// <param name="right">Maximum x-value of the viewing volume.</param>
+        /// <param name="bottom">Minimum y-value of the viewing volume.</param>
+        /// <param name="top">Maximum y-value of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void OrthoOffCenterRH(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            OrthoOffCenterLH(left, right, bottom, top, znear, zfar, out result);
+            result.m33 *= -1f;
+        }
+
+        /// <summary>
+        /// Creates a left-handed, orthographic projection matrix.
+        /// </summary>
+        /// <param name="width">Width of the viewing volume.</param>
+        /// <param name="height">Height of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <returns>The created projection matrix.</returns>
+        public static Matrix4x4 OrthoLH(float width, float height, float znear, float zfar)
+        {
+            OrthoLH(width, height, znear, zfar, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a right-handed, orthographic projection matrix.
+        /// </summary>
+        /// <param name="width">Width of the viewing volume.</param>
+        /// <param name="height">Height of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void OrthoRH(
+            float width,
+            float height,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            var right = width * 0.5f;
+            var top = height * 0.5f;
+            OrthoOffCenterRH(-right, right, -top, top, znear, zfar, out result);
+        }
+
+        /// <summary>
+        /// Creates a right-handed, orthographic projection matrix.
+        /// </summary>
+        /// <param name="width">Width of the viewing volume.</param>
+        /// <param name="height">Height of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <returns>The created projection matrix.</returns>
+        public static Matrix4x4 OrthoRH(float width, float height, float znear, float zfar)
+        {
+            OrthoRH(width, height, znear, zfar, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a right-handed, customized orthographic projection matrix.
+        /// </summary>
+        /// <param name="left">Minimum x-value of the viewing volume.</param>
+        /// <param name="right">Maximum x-value of the viewing volume.</param>
+        /// <param name="bottom">Minimum y-value of the viewing volume.</param>
+        /// <param name="top">Maximum y-value of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <returns>The created projection matrix.</returns>
+        public static Matrix OrthoOffCenterRH(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float znear,
+            float zfar)
+        {
+            OrthoOffCenterRH(left, right, bottom, top, znear, zfar, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a left-handed, customized perspective projection matrix.
+        /// </summary>
+        /// <param name="left">Minimum x-value of the viewing volume.</param>
+        /// <param name="right">Maximum x-value of the viewing volume.</param>
+        /// <param name="bottom">Minimum y-value of the viewing volume.</param>
+        /// <param name="top">Maximum y-value of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void PerspectiveOffCenterLH(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            var num = zfar / (zfar - znear);
+            result = new Matrix4x4();
+            result.m11 = (float) (2.0 * (double) znear / ((double) right - (double) left));
+            result.m22 = (float) (2.0 * (double) znear / ((double) top - (double) bottom));
+            result.m31 = (float) (((double) left + (double) right) / ((double) left - (double) right));
+            result.m32 = (float) (((double) top + (double) bottom) / ((double) bottom - (double) top));
+            result.m33 = num;
+            result.m34 = 1f;
+            result.m43 = -znear * num;
+        }
+        
+        /// <summary>Creates a left-handed, perspective projection matrix.</summary>
+        /// <param name="width">Width of the viewing volume.</param>
+        /// <param name="height">Height of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void PerspectiveLH(
+            float width,
+            float height,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            var right = width * 0.5f;
+            var top = height * 0.5f;
+            PerspectiveOffCenterLH(-right, right, -top, top, znear, zfar, out result);
+        }
+        
+        /// <summary>
+        /// Creates a left-handed, customized perspective projection matrix.
+        /// </summary>
+        /// <param name="left">Minimum x-value of the viewing volume.</param>
+        /// <param name="right">Maximum x-value of the viewing volume.</param>
+        /// <param name="bottom">Minimum y-value of the viewing volume.</param>
+        /// <param name="top">Maximum y-value of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <returns>The created projection matrix.</returns>
+        public static Matrix PerspectiveOffCenterLH(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float znear,
+            float zfar)
+        {
+            Matrix.PerspectiveOffCenterLH(left, right, bottom, top, znear, zfar, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a right-handed, customized perspective projection matrix.
+        /// </summary>
+        /// <param name="left">Minimum x-value of the viewing volume.</param>
+        /// <param name="right">Maximum x-value of the viewing volume.</param>
+        /// <param name="bottom">Minimum y-value of the viewing volume.</param>
+        /// <param name="top">Maximum y-value of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void PerspectiveOffCenterRH(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            PerspectiveOffCenterLH(left, right, bottom, top, znear, zfar, out result);
+            result.m31 *= -1f;
+            result.m32 *= -1f;
+            result.m33 *= -1f;
+            result.m34 *= -1f;
+        }
+        
+        /// <summary>Creates a left-handed, perspective projection matrix.</summary>
+        /// <param name="width">Width of the viewing volume.</param>
+        /// <param name="height">Height of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <returns>The created projection matrix.</returns>
+        public static Matrix4x4 PerspectiveLH(float width, float height, float znear, float zfar)
+        {
+            PerspectiveLH(width, height, znear, zfar, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a right-handed, perspective projection matrix.
+        /// </summary>
+        /// <param name="width">Width of the viewing volume.</param>
+        /// <param name="height">Height of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void PerspectiveRH(
+            float width,
+            float height,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            var right = width * 0.5f;
+            var top = height * 0.5f;
+            PerspectiveOffCenterRH(-right, right, -top, top, znear, zfar, out result);
+        }
+        
+        /// <summary>
+        /// Creates a right-handed, perspective projection matrix.
+        /// </summary>
+        /// <param name="width">Width of the viewing volume.</param>
+        /// <param name="height">Height of the viewing volume.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <returns>The created projection matrix.</returns>
+        public static Matrix4x4 PerspectiveRH(float width, float height, float znear, float zfar)
+        {
+            PerspectiveRH(width, height, znear, zfar, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a left-handed, perspective projection matrix based on a field of view.
+        /// </summary>
+        /// <param name="fov">Field of view in the y direction, in radians.</param>
+        /// <param name="aspect">Aspect ratio, defined as view space width divided by height.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void PerspectiveFovLH(
+            float fov,
+            float aspect,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            var num1 = (float) (1.0 / Math.Tan((double) fov * 0.5));
+            var num2 = zfar / (zfar - znear);
+            result = new Matrix4x4();
+            result.m11 = num1 / aspect;
+            result.m22 = num1;
+            result.m33 = num2;
+            result.m34 = 1f;
+            result.m43 = -num2 * znear;
+        }
+        
+        /// <summary>
+        /// Creates a left-handed, perspective projection matrix based on a field of view.
+        /// </summary>
+        /// <param name="fov">Field of view in the y direction, in radians.</param>
+        /// <param name="aspect">Aspect ratio, defined as view space width divided by height.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <returns>The created projection matrix.</returns>
+        public static Matrix4x4 PerspectiveFovLH(float fov, float aspect, float znear, float zfar)
+        {
+            PerspectiveFovLH(fov, aspect, znear, zfar, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a right-handed, perspective projection matrix based on a field of view.
+        /// </summary>
+        /// <param name="fov">Field of view in the y direction, in radians.</param>
+        /// <param name="aspect">Aspect ratio, defined as view space width divided by height.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <param name="result">When the method completes, contains the created projection matrix.</param>
+        public static void PerspectiveFovRH(
+            float fov,
+            float aspect,
+            float znear,
+            float zfar,
+            out Matrix4x4 result)
+        {
+            var num1 = (float) (1.0 / Math.Tan((double) fov * 0.5));
+            var num2 = zfar / (znear - zfar);
+            result = new Matrix4x4();
+            result.m11 = num1 / aspect;
+            result.m22 = num1;
+            result.m33 = num2;
+            result.m34 = -1f;
+            result.m43 = num2 * znear;
+        }
+
+        /// <summary>
+        /// Creates a right-handed, perspective projection matrix based on a field of view.
+        /// </summary>
+        /// <param name="fov">Field of view in the y direction, in radians.</param>
+        /// <param name="aspect">Aspect ratio, defined as view space width divided by height.</param>
+        /// <param name="znear">Minimum z-value of the viewing volume.</param>
+        /// <param name="zfar">Maximum z-value of the viewing volume.</param>
+        /// <returns>The created projection matrix.</returns>
+        public static Matrix4x4 PerspectiveFovRH(float fov, float aspect, float znear, float zfar)
+        {
+            PerspectiveFovRH(fov, aspect, znear, zfar, out var result);
+            return result;
+        }
+        
+        
+        
         #endregion
 
         #region Operators
