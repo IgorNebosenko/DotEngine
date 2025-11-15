@@ -402,15 +402,6 @@ namespace DotEngine
         #region Properties
 
         /// <summary>
-        /// Returns the determinant of this matrix.
-        /// </summary>
-        public float Determinant
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => DeterminantOf(this);
-        }
-
-        /// <summary>
         /// Gets or sets the up Vector3 of the matrix; that is M21, M22, and M23.
         /// </summary>
         public Vector3 Up
@@ -659,7 +650,7 @@ namespace DotEngine
         /// </summary>
         public static float DeterminantOf(Matrix4x4 m)
         {
-            return ((SharpDX.Matrix)(m)).Determinant();
+            return m.Determinant();
         }
 
         /// <summary>
@@ -667,9 +658,8 @@ namespace DotEngine
         /// </summary>
         public static Matrix4x4 Transpose(Matrix4x4 m)
         {
-            var sharp = (SharpDX.Matrix)m;
-            var t = SharpDX.Matrix.Transpose(sharp);
-            return FromSharpDX(t);
+            m.Transpose();
+            return m;
         }
 
         /// <summary>
@@ -677,9 +667,8 @@ namespace DotEngine
         /// </summary>
         public static Matrix4x4 Inverse(Matrix4x4 m)
         {
-            var sharp = (SharpDX.Matrix)m;
-            var inv = SharpDX.Matrix.Invert(sharp);
-            return FromSharpDX(inv);
+            m.Invert();
+            return m;
         }
         
         /// <summary>Determines the sum of two matrices.</summary>
@@ -897,14 +886,14 @@ namespace DotEngine
             if (exponent < 0)
                 throw new ArgumentOutOfRangeException(nameof (exponent), "The exponent can not be negative.");
             if (exponent == 0)
-                result = Matrix4x4.Identity;
+                result = Identity;
             else if (exponent == 1)
             {
                 result = value;
             }
             else
             {
-                var identity = Matrix4x4.Identity;
+                var identity = Identity;
                 var matrix = value;
                 while (true)
                 {
@@ -1095,7 +1084,7 @@ namespace DotEngine
                                 (double)value.m14 * num10);
             if (MathUtil.IsZero(num11))
             {
-                result = Matrix4x4.Zero;
+                result = Zero;
             }
             else
             {
@@ -1714,7 +1703,7 @@ namespace DotEngine
             result2.Normalize();
             Vector3 result3;
             Vector3.Cross(ref result1, ref result2, out result3);
-            result = Matrix4x4.Identity;
+            result = Identity;
             result.m11 = result2.x;
             result.m21 = result2.y;
             result.m31 = result2.z;
@@ -1762,7 +1751,7 @@ namespace DotEngine
             result2.Normalize();
             Vector3 result3;
             Vector3.Cross(ref result1, ref result2, out result3);
-            result = Matrix4x4.Identity;
+            result = Identity;
             result.m11 = result2.x;
             result.m21 = result2.y;
             result.m31 = result2.z;
@@ -1811,7 +1800,7 @@ namespace DotEngine
             out Matrix4x4 result)
         {
             var num = (float) (1.0 / ((double) zfar - (double) znear));
-            result = Matrix4x4.Identity;
+            result = Identity;
             result.m11 = (float) (2.0 / ((double) right - (double) left));
             result.m22 = (float) (2.0 / ((double) top - (double) bottom));
             result.m33 = num;
@@ -2440,7 +2429,7 @@ namespace DotEngine
         /// <param name="result">When the method completes, contains the created translation matrix.</param>
         public static void Translation(ref Vector3 value, out Matrix4x4 result)
         {
-            Matrix4x4.Translation(value.x, value.y, value.z, out result);
+            Translation(value.x, value.y, value.z, out result);
         }
 
         /// <summary>
@@ -2738,7 +2727,7 @@ namespace DotEngine
         /// <param name="left">The first matrix to add.</param>
         /// <param name="right">The second matrix to add.</param>
         /// <returns>The sum of the two matrices.</returns>
-        public static Matrix operator +(Matrix4x4 left, Matrix4x4 right)
+        public static Matrix4x4 operator +(Matrix4x4 left, Matrix4x4 right)
         {
             Add(ref left, ref right, out var result);
             return result;
@@ -2840,7 +2829,7 @@ namespace DotEngine
         /// Creates DotEngine.Matrix4x4 from SharpDX.Matrix.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static Matrix4x4 FromSharpDX(SharpDX.Matrix m)
+        static Matrix4x4 FromSharpDX(Matrix m)
         {
             return new Matrix4x4(
                 m.M11, m.M12, m.M13, m.M14,
@@ -2863,7 +2852,7 @@ namespace DotEngine
         /// </summary>
         public void Transpose()
         {
-            Matrix4x4.Transpose(ref this, out this);
+            Transpose(ref this, out this);
         }
         
         /// <summary>Orthogonalizes the specified matrix.</summary>
@@ -2878,7 +2867,7 @@ namespace DotEngine
         /// If you wish for this operation to be performed on the columns, first transpose the
         /// input and than transpose the output.</para>
         /// </remarks>
-        public void Orthogonalize() => Matrix4x4.Orthogonalize(ref this, out this);
+        public void Orthogonalize() => Orthogonalize(ref this, out this);
 
         /// <summary>Orthonormalizes the specified matrix.</summary>
         /// <remarks>
@@ -2894,7 +2883,7 @@ namespace DotEngine
         /// If you wish for this operation to be performed on the columns, first transpose the
         /// input and than transpose the output.</para>
         /// </remarks>
-        public void Orthonormalize() => Matrix4x4.Orthonormalize(ref this, out this);
+        public void Orthonormalize() => Orthonormalize(ref this, out this);
 
         /// <summary>
         /// Decomposes a matrix into an orthonormalized matrix Q and a right triangular matrix R.
@@ -2905,7 +2894,7 @@ namespace DotEngine
         {
             var matrix = this;
             matrix.Transpose();
-            Matrix4x4.Orthonormalize(ref matrix, out q);
+            Orthonormalize(ref matrix, out q);
             q.Transpose();
             r = new Matrix4x4();
 
@@ -2928,7 +2917,7 @@ namespace DotEngine
         /// <param name="q">When the method completes, contains the orthonormalized matrix of the decomposition.</param>
         public void DecomposeLQ(out Matrix4x4 l, out Matrix4x4 q)
         {
-            Matrix4x4.Orthonormalize(ref this, out q);
+            Orthonormalize(ref this, out q);
             l = new Matrix4x4();
             l.m11 = Vector4.Dot(q.Row1, Row1);
             l.m21 = Vector4.Dot(q.Row1, Row2);
@@ -3123,6 +3112,22 @@ namespace DotEngine
             return result;
         }
 
+        /// <summary>Calculates the determinant of the matrix.</summary>
+        /// <returns>The determinant of the matrix.</returns>
+        public float Determinant()
+        {
+            var num1 = (float) ((double) m33 * m44 - (double) m34 * m43);
+            var num2 = (float) ((double) m32 * m44 - (double) m34 * m42);
+            var num3 = (float) ((double) m32 * m43 - (double) m33 * m42);
+            var num4 = (float) ((double) m31 * m44 - (double) m34 * m41);
+            var num5 = (float) ((double) m31 * m43 - (double) m33 * m41);
+            var num6 = (float) ((double) m31 * m42 - (double) m32 * m41);
+            return (float) (m11 * ((double) m22 * num1 - (double) m23 * num2 + (double) m24 * num3) -
+                m12 * ((double) m21 * num1 - (double) m23 * num4 + (double) m24 * num5) +
+                m13 * ((double) m21 * num2 - (double) m22 * num4 + (double) m24 * num6) -
+                m14 * ((double) m21 * num3 - (double) m22 * num5 + (double) m23 * num6));
+        }
+        
         #endregion
 
         #region Interface implementations
