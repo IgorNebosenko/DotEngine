@@ -2302,8 +2302,84 @@ namespace DotEngine
             RotationZ(angle, out var result);
             return result;
         }
+
+        /// <summary>
+        /// Creates a matrix that rotates around an arbitrary axis.
+        /// </summary>
+        /// <param name="axis">The axis around which to rotate. This parameter is assumed to be normalized.</param>
+        /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
+        /// <param name="result">When the method completes, contains the created rotation matrix.</param>
+        public static void RotationAxis(ref Vector3 axis, float angle, out Matrix4x4 result)
+        {
+            var x = axis.x;
+            var y = axis.y;
+            var z = axis.z;
+            var num1 = (float)Math.Cos((double)angle);
+            var num2 = (float)Math.Sin((double)angle);
+            var num3 = x * x;
+            var num4 = y * y;
+            var num5 = z * z;
+            var num6 = x * y;
+            var num7 = x * z;
+            var num8 = y * z;
+            result = Identity;
+            result.m11 = num3 + num1 * (1f - num3);
+            result.m12 = (float)((double)num6 - (double)num1 * (double)num6 + (double)num2 * (double)z);
+            result.m13 = (float)((double)num7 - (double)num1 * (double)num7 - (double)num2 * (double)y);
+            result.m21 = (float)((double)num6 - (double)num1 * (double)num6 - (double)num2 * (double)z);
+            result.m22 = num4 + num1 * (1f - num4);
+            result.m23 = (float)((double)num8 - (double)num1 * (double)num8 + (double)num2 * (double)x);
+            result.m31 = (float)((double)num7 - (double)num1 * (double)num7 + (double)num2 * (double)y);
+            result.m32 = (float)((double)num8 - (double)num1 * (double)num8 - (double)num2 * (double)x);
+            result.m33 = num5 + num1 * (1f - num5);
+        }
+
+        /// <summary>
+        /// Creates a matrix that rotates around an arbitrary axis.
+        /// </summary>
+        /// <param name="axis">The axis around which to rotate. This parameter is assumed to be normalized.</param>
+        /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
+        /// <returns>The created rotation matrix.</returns>
+        public static Matrix4x4 RotationAxis(Vector3 axis, float angle)
+        {
+            RotationAxis(ref axis, angle, out var result);
+            return result;
+        }
         
-        
+        /// <summary>Creates a rotation matrix from a quaternion.</summary>
+        /// <param name="rotation">The quaternion to use to build the matrix.</param>
+        /// <param name="result">The created rotation matrix.</param>
+        public static void RotationQuaternion(ref Quaternion rotation, out Matrix4x4 result)
+        {
+            var num1 = rotation.x * rotation.x;
+            var num2 = rotation.y * rotation.y;
+            var num3 = rotation.z * rotation.z;
+            var num4 = rotation.x * rotation.y;
+            var num5 = rotation.z * rotation.w;
+            var num6 = rotation.z * rotation.x;
+            var num7 = rotation.y * rotation.w;
+            var num8 = rotation.y * rotation.z;
+            var num9 = rotation.x * rotation.w;
+            result = Identity;
+            result.m11 = (float) (1.0 - 2.0 * ((double) num2 + (double) num3));
+            result.m12 = (float) (2.0 * ((double) num4 + (double) num5));
+            result.m13 = (float) (2.0 * ((double) num6 - (double) num7));
+            result.m21 = (float) (2.0 * ((double) num4 - (double) num5));
+            result.m22 = (float) (1.0 - 2.0 * ((double) num3 + (double) num1));
+            result.m23 = (float) (2.0 * ((double) num8 + (double) num9));
+            result.m31 = (float) (2.0 * ((double) num6 + (double) num7));
+            result.m32 = (float) (2.0 * ((double) num8 - (double) num9));
+            result.m33 = (float) (1.0 - 2.0 * ((double) num2 + (double) num1));
+        }
+
+        /// <summary>Creates a rotation matrix from a quaternion.</summary>
+        /// <param name="rotation">The quaternion to use to build the matrix.</param>
+        /// <returns>The created rotation matrix.</returns>
+        public static Matrix4x4 RotationQuaternion(Quaternion rotation)
+        {
+            RotationQuaternion(ref rotation, out var result);
+            return result;
+        }
         
         #endregion
 
