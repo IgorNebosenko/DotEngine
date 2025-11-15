@@ -2234,6 +2234,77 @@ namespace DotEngine
             return result;
         }
         
+        /// <summary>Creates a matrix that rotates around the x-axis.</summary>
+        /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
+        /// <param name="result">When the method completes, contains the created rotation matrix.</param>
+        public static void RotationX(float angle, out Matrix4x4 result)
+        {
+            var num1 = (float) Math.Cos((double) angle);
+            var num2 = (float) Math.Sin((double) angle);
+            result = Identity;
+            result.m22 = num1;
+            result.m23 = num2;
+            result.m32 = -num2;
+            result.m33 = num1;
+        }
+        
+        /// <summary>Creates a matrix that rotates around the x-axis.</summary>
+        /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
+        /// <returns>The created rotation matrix.</returns>
+        public static Matrix4x4 RotationX(float angle)
+        {
+            RotationX(angle, out var result);
+            return result;
+        }
+        
+        /// <summary>Creates a matrix that rotates around the y-axis.</summary>
+        /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
+        /// <param name="result">When the method completes, contains the created rotation matrix.</param>
+        public static void RotationY(float angle, out Matrix4x4 result)
+        {
+            var num1 = (float) Math.Cos((double) angle);
+            var num2 = (float) Math.Sin((double) angle);
+            result = Identity;
+            result.m11 = num1;
+            result.m13 = -num2;
+            result.m31 = num2;
+            result.m33 = num1;
+        }
+
+        /// <summary>Creates a matrix that rotates around the y-axis.</summary>
+        /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
+        /// <returns>The created rotation matrix.</returns>
+        public static Matrix4x4 RotationY(float angle)
+        {
+            RotationY(angle, out var result);
+            return result;
+        }
+        
+        /// <summary>Creates a matrix that rotates around the z-axis.</summary>
+        /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
+        /// <param name="result">When the method completes, contains the created rotation matrix.</param>
+        public static void RotationZ(float angle, out Matrix4x4 result)
+        {
+            var num1 = (float) Math.Cos((double) angle);
+            var num2 = (float) Math.Sin((double) angle);
+            result = Identity;
+            result.m11 = num1;
+            result.m12 = num2;
+            result.m21 = -num2;
+            result.m22 = num1;
+        }
+
+        /// <summary>Creates a matrix that rotates around the z-axis.</summary>
+        /// <param name="angle">Angle of rotation in radians. Angles are measured clockwise when looking along the rotation axis toward the origin.</param>
+        /// <returns>The created rotation matrix.</returns>
+        public static Matrix4x4 RotationZ(float angle)
+        {
+            RotationZ(angle, out var result);
+            return result;
+        }
+        
+        
+        
         #endregion
 
         #region Operators
