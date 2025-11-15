@@ -737,44 +737,130 @@ namespace DotEngine
             Multiply(ref left, right, out var result);
             return result;
         }
-        
-          /// <summary>Determines the product of two matrices.</summary>
-          /// <param name="left">The first matrix to multiply.</param>
-          /// <param name="right">The second matrix to multiply.</param>
-          /// <param name="result">The product of the two matrices.</param>
-          public static void Multiply(ref Matrix4x4 left, ref Matrix4x4 right, out Matrix4x4 result)
-          {
+
+        /// <summary>Determines the product of two matrices.</summary>
+        /// <param name="left">The first matrix to multiply.</param>
+        /// <param name="right">The second matrix to multiply.</param>
+        /// <param name="result">The product of the two matrices.</param>
+        public static void Multiply(ref Matrix4x4 left, ref Matrix4x4 right, out Matrix4x4 result)
+        {
             result = new Matrix4x4()
             {
-              m11 = (float) ((double) left.m11 * right.m11 + left.m12 * right.m21 + left.m13 * right.m31 + left.m14 * right.m41),
-              m12 = (float) ((double) left.m11 * right.m12 + left.m12 * right.m22 + left.m13 * right.m32 + left.m14 * right.m42),
-              m13 = (float) ((double) left.m11 * right.m13 + left.m12 * right.m23 + left.m13 * right.m33 + left.m14 * right.m43),
-              m14 = (float) ((double) left.m11 * right.m14 + left.m12 * right.m24 + left.m13 * right.m34 + left.m14 * right.m44),
-              m21 = (float) ((double) left.m21 * right.m11 + left.m22 * right.m21 + left.m23 * right.m31 + left.m24 * right.m41),
-              m22 = (float) ((double) left.m21 * right.m12 + left.m22 * right.m22 + left.m23 * right.m32 + left.m24 * right.m42),
-              m23 = (float) ((double) left.m21 * right.m13 + left.m22 * right.m23 + left.m23 * right.m33 + left.m24 * right.m43),
-              m24 = (float) ((double) left.m21 * right.m14 + left.m22 * right.m24 + left.m23 * right.m34 + left.m24 * right.m44),
-              m31 = (float) ((double) left.m31 * right.m11 + left.m32 * right.m21 + left.m33 * right.m31 + left.m34 * right.m41),
-              m32 = (float) ((double) left.m31 * right.m12 + left.m32 * right.m22 + left.m33 * right.m32 + left.m34 * right.m42),
-              m33 = (float) ((double) left.m31 * right.m13 + left.m32 * right.m23 + left.m33 * right.m33 + left.m34 * right.m43),
-              m34 = (float) ((double) left.m31 * right.m14 + left.m32 * right.m24 + left.m33 * right.m34 + left.m34 * right.m44),
-              m41 = (float) ((double) left.m41 * right.m11 + left.m42 * right.m21 + left.m43 * right.m31 + left.m44 * right.m41),
-              m42 = (float) ((double) left.m41 * right.m12 + left.m42 * right.m22 + left.m43 * right.m32 + left.m44 * right.m42),
-              m43 = (float) ((double) left.m41 * right.m13 + left.m42 * right.m23 + left.m43 * right.m33 + left.m44 * right.m43),
-              m44 = (float) ((double) left.m41 * right.m14 + left.m42 * right.m24 + left.m43 * right.m34 + left.m44 * right.m44)
+                m11 = (float)((double)left.m11 * right.m11 + left.m12 * right.m21 + left.m13 * right.m31 +
+                              left.m14 * right.m41),
+                m12 = (float)((double)left.m11 * right.m12 + left.m12 * right.m22 + left.m13 * right.m32 +
+                              left.m14 * right.m42),
+                m13 = (float)((double)left.m11 * right.m13 + left.m12 * right.m23 + left.m13 * right.m33 +
+                              left.m14 * right.m43),
+                m14 = (float)((double)left.m11 * right.m14 + left.m12 * right.m24 + left.m13 * right.m34 +
+                              left.m14 * right.m44),
+                m21 = (float)((double)left.m21 * right.m11 + left.m22 * right.m21 + left.m23 * right.m31 +
+                              left.m24 * right.m41),
+                m22 = (float)((double)left.m21 * right.m12 + left.m22 * right.m22 + left.m23 * right.m32 +
+                              left.m24 * right.m42),
+                m23 = (float)((double)left.m21 * right.m13 + left.m22 * right.m23 + left.m23 * right.m33 +
+                              left.m24 * right.m43),
+                m24 = (float)((double)left.m21 * right.m14 + left.m22 * right.m24 + left.m23 * right.m34 +
+                              left.m24 * right.m44),
+                m31 = (float)((double)left.m31 * right.m11 + left.m32 * right.m21 + left.m33 * right.m31 +
+                              left.m34 * right.m41),
+                m32 = (float)((double)left.m31 * right.m12 + left.m32 * right.m22 + left.m33 * right.m32 +
+                              left.m34 * right.m42),
+                m33 = (float)((double)left.m31 * right.m13 + left.m32 * right.m23 + left.m33 * right.m33 +
+                              left.m34 * right.m43),
+                m34 = (float)((double)left.m31 * right.m14 + left.m32 * right.m24 + left.m33 * right.m34 +
+                              left.m34 * right.m44),
+                m41 = (float)((double)left.m41 * right.m11 + left.m42 * right.m21 + left.m43 * right.m31 +
+                              left.m44 * right.m41),
+                m42 = (float)((double)left.m41 * right.m12 + left.m42 * right.m22 + left.m43 * right.m32 +
+                              left.m44 * right.m42),
+                m43 = (float)((double)left.m41 * right.m13 + left.m42 * right.m23 + left.m43 * right.m33 +
+                              left.m44 * right.m43),
+                m44 = (float)((double)left.m41 * right.m14 + left.m42 * right.m24 + left.m43 * right.m34 +
+                              left.m44 * right.m44)
             };
-          }
+        }
 
-          /// <summary>Determines the product of two matrices.</summary>
-          /// <param name="left">The first matrix to multiply.</param>
-          /// <param name="right">The second matrix to multiply.</param>
-          /// <returns>The product of the two matrices.</returns>
-          public static Matrix4x4 Multiply(Matrix4x4 left, Matrix4x4 right)
-          {
-              Multiply(ref left, ref right, out var result);
-              return result;
-          }
-          
+        /// <summary>Determines the product of two matrices.</summary>
+        /// <param name="left">The first matrix to multiply.</param>
+        /// <param name="right">The second matrix to multiply.</param>
+        /// <returns>The product of the two matrices.</returns>
+        public static Matrix4x4 Multiply(Matrix4x4 left, Matrix4x4 right)
+        {
+            Multiply(ref left, ref right, out var result);
+            return result;
+        }
+        
+        /// <summary>Scales a matrix by the given value.</summary>
+        /// <param name="left">The matrix to scale.</param>
+        /// <param name="right">The amount by which to scale.</param>
+        /// <param name="result">When the method completes, contains the scaled matrix.</param>
+        public static void Divide(ref Matrix4x4 left, float right, out Matrix4x4 result)
+        {
+            var num = 1 / right;
+            
+            result.m11 = left.m11 * num;
+            result.m12 = left.m12 * num;
+            result.m13 = left.m13 * num;
+            result.m14 = left.m14 * num;
+            result.m21 = left.m21 * num;
+            result.m22 = left.m22 * num;
+            result.m23 = left.m23 * num;
+            result.m24 = left.m24 * num;
+            result.m31 = left.m31 * num;
+            result.m32 = left.m32 * num;
+            result.m33 = left.m33 * num;
+            result.m34 = left.m34 * num;
+            result.m41 = left.m41 * num;
+            result.m42 = left.m42 * num;
+            result.m43 = left.m43 * num;
+            result.m44 = left.m44 * num;
+        }
+        
+        /// <summary>Scales a matrix by the given value.</summary>
+        /// <param name="left">The matrix to scale.</param>
+        /// <param name="right">The amount by which to scale.</param>
+        /// <returns>The scaled matrix.</returns>
+        public static Matrix4x4 Divide(Matrix4x4 left, float right)
+        {
+            Divide(ref left, right, out var result);
+            return result;
+        }
+        
+        /// <summary>Determines the quotient of two matrices.</summary>
+        /// <param name="left">The first matrix to divide.</param>
+        /// <param name="right">The second matrix to divide.</param>
+        /// <param name="result">When the method completes, contains the quotient of the two matrices.</param>
+        public static void Divide(ref Matrix4x4 left, ref Matrix4x4 right, out Matrix4x4 result)
+        {
+            result.m11 = left.m11 / right.m11;
+            result.m12 = left.m12 / right.m12;
+            result.m13 = left.m13 / right.m13;
+            result.m14 = left.m14 / right.m14;
+            result.m21 = left.m21 / right.m21;
+            result.m22 = left.m22 / right.m22;
+            result.m23 = left.m23 / right.m23;
+            result.m24 = left.m24 / right.m24;
+            result.m31 = left.m31 / right.m31;
+            result.m32 = left.m32 / right.m32;
+            result.m33 = left.m33 / right.m33;
+            result.m34 = left.m34 / right.m34;
+            result.m41 = left.m41 / right.m41;
+            result.m42 = left.m42 / right.m42;
+            result.m43 = left.m43 / right.m43;
+            result.m44 = left.m44 / right.m44;
+        }
+        
+        /// <summary>Determines the quotient of two matrices.</summary>
+        /// <param name="left">The first matrix to divide.</param>
+        /// <param name="right">The second matrix to divide.</param>
+        /// <returns>The quotient of the two matrices.</returns>
+        public static Matrix4x4 Divide(Matrix4x4 left, Matrix4x4 right)
+        {
+            Divide(ref left, ref right, out var result);
+            return result;
+        }
+
         #endregion
 
         #region Operators
