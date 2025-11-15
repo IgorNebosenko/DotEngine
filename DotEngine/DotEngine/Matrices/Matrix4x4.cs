@@ -2026,6 +2026,18 @@ namespace DotEngine
             result.m34 *= -1f;
         }
         
+        public static Matrix4x4 PerspectiveOffCenterRH(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float znear,
+            float zfar)
+        {
+            PerspectiveOffCenterRH(left, right, bottom, top, znear, zfar, out var result);
+            return result;
+        }
+        
         /// <summary>Creates a left-handed, perspective projection matrix.</summary>
         /// <param name="width">Width of the viewing volume.</param>
         /// <param name="height">Height of the viewing volume.</param>
@@ -2150,7 +2162,77 @@ namespace DotEngine
             return result;
         }
         
+        /// <summary>
+        /// Creates a matrix that scales along the x-axis, y-axis, and y-axis.
+        /// </summary>
+        /// <param name="scale">Scaling factor for all three axes.</param>
+        /// <param name="result">When the method completes, contains the created scaling matrix.</param>
+        public static void Scaling(ref Vector3 scale, out Matrix4x4 result)
+        {
+            Scaling(scale.x, scale.y, scale.z, out result);
+        }
         
+        /// <summary>
+        /// Creates a matrix that scales along the x-axis, y-axis, and y-axis.
+        /// </summary>
+        /// <param name="scale">Scaling factor for all three axes.</param>
+        /// <returns>The created scaling matrix.</returns>
+        public static Matrix4x4 Scaling(Vector3 scale)
+        {
+            Scaling(ref scale, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a matrix that scales along the x-axis, y-axis, and y-axis.
+        /// </summary>
+        /// <param name="x">Scaling factor that is applied along the x-axis.</param>
+        /// <param name="y">Scaling factor that is applied along the y-axis.</param>
+        /// <param name="z">Scaling factor that is applied along the z-axis.</param>
+        /// <param name="result">When the method completes, contains the created scaling matrix.</param>
+        public static void Scaling(float x, float y, float z, out Matrix4x4 result)
+        {
+            result = Identity;
+            result.m11 = x;
+            result.m22 = y;
+            result.m33 = z;
+        }
+        
+        /// <summary>
+        /// Creates a matrix that scales along the x-axis, y-axis, and y-axis.
+        /// </summary>
+        /// <param name="x">Scaling factor that is applied along the x-axis.</param>
+        /// <param name="y">Scaling factor that is applied along the y-axis.</param>
+        /// <param name="z">Scaling factor that is applied along the z-axis.</param>
+        /// <returns>The created scaling matrix.</returns>
+        public static Matrix Scaling(float x, float y, float z)
+        {
+            Matrix4x4 result;
+            Scaling(x, y, z, out result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a matrix that uniformly scales along all three axis.
+        /// </summary>
+        /// <param name="scale">The uniform scale that is applied along all axis.</param>
+        /// <param name="result">When the method completes, contains the created scaling matrix.</param>
+        public static void Scaling(float scale, out Matrix4x4 result)
+        {
+            result = Identity;
+            result.m11 = result.m22 = result.m33 = scale;
+        }
+        
+        /// <summary>
+        /// Creates a matrix that uniformly scales along all three axis.
+        /// </summary>
+        /// <param name="scale">The uniform scale that is applied along all axis.</param>
+        /// <returns>The created scaling matrix.</returns>
+        public static Matrix4x4 Scaling(float scale)
+        {
+            Scaling(scale, out var result);
+            return result;
+        }
         
         #endregion
 
