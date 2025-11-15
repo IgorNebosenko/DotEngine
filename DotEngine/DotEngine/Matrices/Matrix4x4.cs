@@ -132,6 +132,110 @@ namespace DotEngine
         #endregion
 
         #region Indexer
+          /// <summary>Gets or sets the component at the specified index.</summary>
+          /// <value>The value of the matrix component, depending on the index.</value>
+          /// <param name="index">The zero-based index of the component to access.</param>
+          /// <returns>The value of the component at the specified index.</returns>
+          /// <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <paramref name="index" /> is out of the range [0, 15].</exception>
+          public float this[int index]
+          {
+            get
+            {
+              switch (index)
+              {
+                case 0:
+                  return m11;
+                case 1:
+                  return m12;
+                case 2:
+                  return m13;
+                case 3:
+                  return m14;
+                case 4:
+                  return m21;
+                case 5:
+                  return m22;
+                case 6:
+                  return m23;
+                case 7:
+                  return m24;
+                case 8:
+                  return m31;
+                case 9:
+                  return m32;
+                case 10:
+                  return m33;
+                case 11:
+                  return m34;
+                case 12:
+                  return m41;
+                case 13:
+                  return m42;
+                case 14:
+                  return m43;
+                case 15:
+                  return m44;
+                default:
+                  throw new ArgumentOutOfRangeException(nameof (index), "Indices for Matrix run from 0 to 15, inclusive.");
+              }
+            }
+            set
+            {
+              switch (index)
+              {
+                case 0:
+                  m11 = value;
+                  break;
+                case 1:
+                  m12 = value;
+                  break;
+                case 2:
+                  m13 = value;
+                  break;
+                case 3:
+                  m14 = value;
+                  break;
+                case 4:
+                  m21 = value;
+                  break;
+                case 5:
+                  m22 = value;
+                  break;
+                case 6:
+                  m23 = value;
+                  break;
+                case 7:
+                  m24 = value;
+                  break;
+                case 8:
+                  m31 = value;
+                  break;
+                case 9:
+                  m32 = value;
+                  break;
+                case 10:
+                  m33 = value;
+                  break;
+                case 11:
+                  m34 = value;
+                  break;
+                case 12:
+                  m41 = value;
+                  break;
+                case 13:
+                  m42 = value;
+                  break;
+                case 14:
+                  m43 = value;
+                  break;
+                case 15:
+                  m44 = value;
+                  break;
+                default:
+                  throw new ArgumentOutOfRangeException(nameof (index), "Indices for Matrix run from 0 to 15, inclusive.");
+              }
+            }
+          }
 
         /// <summary>
         /// Access matrix element by row and column index.
@@ -551,7 +655,126 @@ namespace DotEngine
             var inv = SharpDX.Matrix.Invert(sharp);
             return FromSharpDX(inv);
         }
+        
+        /// <summary>Determines the sum of two matrices.</summary>
+        /// <param name="left">The first matrix to add.</param>
+        /// <param name="right">The second matrix to add.</param>
+        /// <param name="result">When the method completes, contains the sum of the two matrices.</param>
+        public static void Add(ref Matrix4x4 left, ref Matrix4x4 right, out Matrix4x4 result)
+        {
+            result.m11 = left.m11 + right.m11;
+            result.m12 = left.m12 + right.m12;
+            result.m13 = left.m13 + right.m13;
+            result.m14 = left.m14 + right.m14;
+            result.m21 = left.m21 + right.m21;
+            result.m22 = left.m22 + right.m22;
+            result.m23 = left.m23 + right.m23;
+            result.m24 = left.m24 + right.m24;
+            result.m31 = left.m31 + right.m31;
+            result.m32 = left.m32 + right.m32;
+            result.m33 = left.m33 + right.m33;
+            result.m34 = left.m34 + right.m34;
+            result.m41 = left.m41 + right.m41;
+            result.m42 = left.m42 + right.m42;
+            result.m43 = left.m43 + right.m43;
+            result.m44 = left.m44 + right.m44;
+        }
+        
+        /// <summary>Determines the difference between two matrices.</summary>
+        /// <param name="left">The first matrix to subtract.</param>
+        /// <param name="right">The second matrix to subtract.</param>
+        /// <returns>The difference between the two matrices.</returns>
+        public static void Subtract(ref Matrix4x4 left, ref Matrix4x4 right, out Matrix4x4 result)
+        {
+            result.m11 = left.m11 - right.m11;
+            result.m12 = left.m12 - right.m12;
+            result.m13 = left.m13 - right.m13;
+            result.m14 = left.m14 - right.m14;
+            result.m21 = left.m21 - right.m21;
+            result.m22 = left.m22 - right.m22;
+            result.m23 = left.m23 - right.m23;
+            result.m24 = left.m24 - right.m24;
+            result.m31 = left.m31 - right.m31;
+            result.m32 = left.m32 - right.m32;
+            result.m33 = left.m33 - right.m33;
+            result.m34 = left.m34 - right.m34;
+            result.m41 = left.m41 - right.m41;
+            result.m42 = left.m42 - right.m42;
+            result.m43 = left.m43 - right.m43;
+            result.m44 = left.m44 - right.m44;
+        }
+        
+        /// <summary>Scales a matrix by the given value.</summary>
+        /// <param name="left">The matrix to scale.</param>
+        /// <param name="right">The amount by which to scale.</param>
+        /// <param name="result">When the method completes, contains the scaled matrix.</param>
+        public static void Multiply(ref Matrix4x4 left, float right, out Matrix4x4 result)
+        {
+            result.m11 = left.m11 * right;
+            result.m12 = left.m12 * right;
+            result.m13 = left.m13 * right;
+            result.m14 = left.m14 * right;
+            result.m21 = left.m21 * right;
+            result.m22 = left.m22 * right;
+            result.m23 = left.m23 * right;
+            result.m24 = left.m24 * right;
+            result.m31 = left.m31 * right;
+            result.m32 = left.m32 * right;
+            result.m33 = left.m33 * right;
+            result.m34 = left.m34 * right;
+            result.m41 = left.m41 * right;
+            result.m42 = left.m42 * right;
+            result.m43 = left.m43 * right;
+            result.m44 = left.m44 * right;
+        }
+        
+        /// <summary>Scales a matrix by the given value.</summary>
+        /// <param name="left">The matrix to scale.</param>
+        /// <param name="right">The amount by which to scale.</param>
+        /// <returns>The scaled matrix.</returns>
+        public static Matrix4x4 Multiply(Matrix4x4 left, float right)
+        {
+            Multiply(ref left, right, out var result);
+            return result;
+        }
+        
+          /// <summary>Determines the product of two matrices.</summary>
+          /// <param name="left">The first matrix to multiply.</param>
+          /// <param name="right">The second matrix to multiply.</param>
+          /// <param name="result">The product of the two matrices.</param>
+          public static void Multiply(ref Matrix4x4 left, ref Matrix4x4 right, out Matrix4x4 result)
+          {
+            result = new Matrix4x4()
+            {
+              m11 = (float) ((double) left.m11 * right.m11 + left.m12 * right.m21 + left.m13 * right.m31 + left.m14 * right.m41),
+              m12 = (float) ((double) left.m11 * right.m12 + left.m12 * right.m22 + left.m13 * right.m32 + left.m14 * right.m42),
+              m13 = (float) ((double) left.m11 * right.m13 + left.m12 * right.m23 + left.m13 * right.m33 + left.m14 * right.m43),
+              m14 = (float) ((double) left.m11 * right.m14 + left.m12 * right.m24 + left.m13 * right.m34 + left.m14 * right.m44),
+              m21 = (float) ((double) left.m21 * right.m11 + left.m22 * right.m21 + left.m23 * right.m31 + left.m24 * right.m41),
+              m22 = (float) ((double) left.m21 * right.m12 + left.m22 * right.m22 + left.m23 * right.m32 + left.m24 * right.m42),
+              m23 = (float) ((double) left.m21 * right.m13 + left.m22 * right.m23 + left.m23 * right.m33 + left.m24 * right.m43),
+              m24 = (float) ((double) left.m21 * right.m14 + left.m22 * right.m24 + left.m23 * right.m34 + left.m24 * right.m44),
+              m31 = (float) ((double) left.m31 * right.m11 + left.m32 * right.m21 + left.m33 * right.m31 + left.m34 * right.m41),
+              m32 = (float) ((double) left.m31 * right.m12 + left.m32 * right.m22 + left.m33 * right.m32 + left.m34 * right.m42),
+              m33 = (float) ((double) left.m31 * right.m13 + left.m32 * right.m23 + left.m33 * right.m33 + left.m34 * right.m43),
+              m34 = (float) ((double) left.m31 * right.m14 + left.m32 * right.m24 + left.m33 * right.m34 + left.m34 * right.m44),
+              m41 = (float) ((double) left.m41 * right.m11 + left.m42 * right.m21 + left.m43 * right.m31 + left.m44 * right.m41),
+              m42 = (float) ((double) left.m41 * right.m12 + left.m42 * right.m22 + left.m43 * right.m32 + left.m44 * right.m42),
+              m43 = (float) ((double) left.m41 * right.m13 + left.m42 * right.m23 + left.m43 * right.m33 + left.m44 * right.m43),
+              m44 = (float) ((double) left.m41 * right.m14 + left.m42 * right.m24 + left.m43 * right.m34 + left.m44 * right.m44)
+            };
+          }
 
+          /// <summary>Determines the product of two matrices.</summary>
+          /// <param name="left">The first matrix to multiply.</param>
+          /// <param name="right">The second matrix to multiply.</param>
+          /// <returns>The product of the two matrices.</returns>
+          public static Matrix4x4 Multiply(Matrix4x4 left, Matrix4x4 right)
+          {
+              Multiply(ref left, ref right, out var result);
+              return result;
+          }
+          
         #endregion
 
         #region Operators
@@ -600,7 +823,7 @@ namespace DotEngine
 
         #endregion
 
-        #region Helpers
+        #region Methods
 
         /// <summary>
         /// Creates DotEngine.Matrix4x4 from SharpDX.Matrix.
@@ -614,6 +837,279 @@ namespace DotEngine
                 m.M31, m.M32, m.M33, m.M34,
                 m.M41, m.M42, m.M43, m.M44
             );
+        }
+
+        /// <summary>
+        /// Inverts matrix
+        /// </summary>
+        public void Invert()
+        {
+            Matrix4x4.Inverse(ref this, out this);
+        }
+
+        /// <summary>
+        /// Transposes matrix
+        /// </summary>
+        public void Transpose()
+        {
+            Matrix4x4.Transpose(ref this, out this);
+        }
+        
+        /// <summary>Orthogonalizes the specified matrix.</summary>
+        /// <remarks>
+        /// <para>Orthogonalization is the process of making all rows orthogonal to each other. This
+        /// means that any given row in the matrix will be orthogonal to any other given row in the
+        /// matrix.</para>
+        /// <para>Because this method uses the modified Gram-Schmidt process, the resulting matrix
+        /// tends to be numerically unstable. The numeric stability decreases according to the rows
+        /// so that the first row is the most stable and the last row is the least stable.</para>
+        /// <para>This operation is performed on the rows of the matrix rather than the columns.
+        /// If you wish for this operation to be performed on the columns, first transpose the
+        /// input and than transpose the output.</para>
+        /// </remarks>
+        public void Orthogonalize() => Matrix4x4.Orthogonalize(ref this, out this);
+
+        /// <summary>Orthonormalizes the specified matrix.</summary>
+        /// <remarks>
+        /// <para>Orthonormalization is the process of making all rows and columns orthogonal to each
+        /// other and making all rows and columns of unit length. This means that any given row will
+        /// be orthogonal to any other given row and any given column will be orthogonal to any other
+        /// given column. Any given row will not be orthogonal to any given column. Every row and every
+        /// column will be of unit length.</para>
+        /// <para>Because this method uses the modified Gram-Schmidt process, the resulting matrix
+        /// tends to be numerically unstable. The numeric stability decreases according to the rows
+        /// so that the first row is the most stable and the last row is the least stable.</para>
+        /// <para>This operation is performed on the rows of the matrix rather than the columns.
+        /// If you wish for this operation to be performed on the columns, first transpose the
+        /// input and than transpose the output.</para>
+        /// </remarks>
+        public void Orthonormalize() => Matrix4x4.Orthonormalize(ref this, out this);
+
+        /// <summary>
+        /// Decomposes a matrix into an orthonormalized matrix Q and a right triangular matrix R.
+        /// </summary>
+        /// <param name="q">When the method completes, contains the orthonormalized matrix of the decomposition.</param>
+        /// <param name="r">When the method completes, contains the right triangular matrix of the decomposition.</param>
+        public void DecomposeQR(out Matrix4x4 q, out Matrix4x4 r)
+        {
+            var matrix = this;
+            matrix.Transpose();
+            Matrix4x4.Orthonormalize(ref matrix, out q);
+            q.Transpose();
+            r = new Matrix4x4();
+
+            r.m11 = Vector4.Dot(q.Column1, Column1);
+            r.m12 = Vector4.Dot(q.Column1, Column2);
+            r.m13 = Vector4.Dot(q.Column1, Column3);
+            r.m14 = Vector4.Dot(q.Column1, Column4);
+            r.m22 = Vector4.Dot(q.Column2, Column2);
+            r.m23 = Vector4.Dot(q.Column2, Column3);
+            r.m24 = Vector4.Dot(q.Column2, Column4);
+            r.m33 = Vector4.Dot(q.Column3, Column3);
+            r.m34 = Vector4.Dot(q.Column3, Column4);
+            r.m44 = Vector4.Dot(q.Column4, Column4);
+        }
+        
+        /// <summary>
+        /// Decomposes a matrix into a lower triangular matrix L and an orthonormalized matrix Q.
+        /// </summary>
+        /// <param name="l">When the method completes, contains the lower triangular matrix of the decomposition.</param>
+        /// <param name="q">When the method completes, contains the orthonormalized matrix of the decomposition.</param>
+        public void DecomposeLQ(out Matrix4x4 l, out Matrix4x4 q)
+        {
+            Matrix4x4.Orthonormalize(ref this, out q);
+            l = new Matrix4x4();
+            l.m11 = Vector4.Dot(q.Row1, Row1);
+            l.m21 = Vector4.Dot(q.Row1, Row2);
+            l.m22 = Vector4.Dot(q.Row2, Row2);
+            l.m31 = Vector4.Dot(q.Row1, Row3);
+            l.m32 = Vector4.Dot(q.Row2, Row3);
+            l.m33 = Vector4.Dot(q.Row3, Row3);
+            l.m41 = Vector4.Dot(q.Row1, Row4);
+            l.m42 = Vector4.Dot(q.Row2, Row4);
+            l.m43 = Vector4.Dot(q.Row3, Row4);
+            l.m44 = Vector4.Dot(q.Row4, Row4);
+        }
+        
+        /// <summary>
+        /// Decomposes a matrix into a scale, rotation, and translation.
+        /// </summary>
+        /// <param name="scale">When the method completes, contains the scaling component of the decomposed matrix.</param>
+        /// <param name="rotation">When the method completes, contains the rotation component of the decomposed matrix.</param>
+        /// <param name="translation">When the method completes, contains the translation component of the decomposed matrix.</param>
+        /// <remarks>
+        /// This method is designed to decompose an SRT transformation matrix only.
+        /// </remarks>
+        public bool Decompose(out Vector3 scale, out Quaternion rotation, out Vector3 translation)
+        {
+            translation.x = m41;
+            translation.y = m42;
+            translation.z = m43;
+            scale.x = (float) Math.Sqrt((double) m11 * m11 + m12 * m12 + m13 * m13);
+            scale.y = (float) Math.Sqrt((double) m21 * m21 + m22 * m22 + m23 * m23);
+            scale.z = (float) Math.Sqrt((double) m31 * m31 + m32 * m32 + m33 * m33);
+            if (IsCloseToZero(scale.x) || IsCloseToZero(scale.y) || IsCloseToZero(scale.z))
+            {
+                rotation = Quaternion.Identity;
+                return false;
+            }
+
+            var matrix = new Matrix4x4()
+            {
+                m11 = m11 / scale.x,
+                m12 = m12 / scale.x,
+                m13 = m13 / scale.x,
+                m21 = m21 / scale.y,
+                m22 = m22 / scale.y,
+                m23 = m23 / scale.y,
+                m31 = m31 / scale.z,
+                m32 = m32 / scale.z,
+                m33 = m33 / scale.z,
+                m44 = 1f
+            };
+            Quaternion.RotationMatrix(ref matrix, out rotation);
+            return true;
+        }
+        
+        /// <summary>
+        /// Decomposes a uniform scale matrix into a scale, rotation, and translation.
+        /// A uniform scale matrix has the same scale in every axis.
+        /// </summary>
+        /// <param name="scale">When the method completes, contains the scaling component of the decomposed matrix.</param>
+        /// <param name="rotation">When the method completes, contains the rotation component of the decomposed matrix.</param>
+        /// <param name="translation">When the method completes, contains the translation component of the decomposed matrix.</param>
+        /// <remarks>
+        /// This method is designed to decompose only an SRT transformation matrix that has the same scale in every axis.
+        /// </remarks>
+        public bool DecomposeUniformScale(
+            out float scale,
+            out Quaternion rotation,
+            out Vector3 translation)
+        {
+            translation.x = m41;
+            translation.y = m42;
+            translation.z = m43;
+            scale = (float) Math.Sqrt((double) m11 * m11 + m12 * m12 + m13 * m13);
+            var num = 1f / scale;
+            
+            if (IsCloseToZero(scale))
+            {
+                rotation = Quaternion.Identity;
+                return false;
+            }
+
+            var matrix = new Matrix4x4()
+            {
+                m11 = m11 * num,
+                m12 = m12 * num,
+                m13 = m13 * num,
+                m21 = m21 * num,
+                m22 = m22 * num,
+                m23 = m23 * num,
+                m31 = m31 * num,
+                m32 = m32 * num,
+                m33 = m33 * num,
+                m44 = 1f
+            };
+            Quaternion.RotationMatrix(ref matrix, out rotation);
+            return true;
+        }
+        
+        /// <summary>Exchanges two rows in the matrix.</summary>
+        /// <param name="firstRow">The first row to exchange. This is an index of the row starting at zero.</param>
+        /// <param name="secondRow">The second row to exchange. This is an index of the row starting at zero.</param>
+        public void ExchangeRows(int firstRow, int secondRow)
+        {
+            if (firstRow < 0)
+                throw new ArgumentOutOfRangeException(nameof (firstRow), "The parameter firstRow must be greater than or equal to zero.");
+            if (firstRow > 3)
+                throw new ArgumentOutOfRangeException(nameof (firstRow), "The parameter firstRow must be less than or equal to three.");
+            if (secondRow < 0)
+                throw new ArgumentOutOfRangeException(nameof (secondRow), "The parameter secondRow must be greater than or equal to zero.");
+            if (secondRow > 3)
+                throw new ArgumentOutOfRangeException(nameof (secondRow), "The parameter secondRow must be less than or equal to three.");
+            if (firstRow == secondRow)
+                return;
+            
+            var num1 = this[secondRow, 0];
+            var num2 = this[secondRow, 1];
+            var num3 = this[secondRow, 2];
+            var num4 = this[secondRow, 3];
+            
+            this[secondRow, 0] = this[firstRow, 0];
+            this[secondRow, 1] = this[firstRow, 1];
+            this[secondRow, 2] = this[firstRow, 2];
+            this[secondRow, 3] = this[firstRow, 3];
+            
+            this[firstRow, 0] = num1;
+            this[firstRow, 1] = num2;
+            this[firstRow, 2] = num3;
+            this[firstRow, 3] = num4;
+        }
+        
+        /// <summary>Exchanges two columns in the matrix.</summary>
+        /// <param name="firstColumn">The first column to exchange. This is an index of the column starting at zero.</param>
+        /// <param name="secondColumn">The second column to exchange. This is an index of the column starting at zero.</param>
+        public void ExchangeColumns(int firstColumn, int secondColumn)
+        {
+            if (firstColumn < 0)
+                throw new ArgumentOutOfRangeException(nameof (firstColumn), "The parameter firstColumn must be greater than or equal to zero.");
+            if (firstColumn > 3)
+                throw new ArgumentOutOfRangeException(nameof (firstColumn), "The parameter firstColumn must be less than or equal to three.");
+            if (secondColumn < 0)
+                throw new ArgumentOutOfRangeException(nameof (secondColumn), "The parameter secondColumn must be greater than or equal to zero.");
+            if (secondColumn > 3)
+                throw new ArgumentOutOfRangeException(nameof (secondColumn), "The parameter secondColumn must be less than or equal to three.");
+            if (firstColumn == secondColumn)
+                return;
+            
+            float num1 = this[0, secondColumn];
+            float num2 = this[1, secondColumn];
+            float num3 = this[2, secondColumn];
+            float num4 = this[3, secondColumn];
+            
+            this[0, secondColumn] = this[0, firstColumn];
+            this[1, secondColumn] = this[1, firstColumn];
+            this[2, secondColumn] = this[2, firstColumn];
+            this[3, secondColumn] = this[3, firstColumn];
+            
+            this[0, firstColumn] = num1;
+            this[1, firstColumn] = num2;
+            this[2, firstColumn] = num3;
+            this[3, firstColumn] = num4;
+        }
+        
+        /// <summary>
+        /// Creates an array containing the elements of the matrix.
+        /// </summary>
+        /// <returns>A sixteen-element array containing the components of the matrix.</returns>
+        public float[] ToArray()
+        {
+            return new []
+            {
+                m11, m12, m13, m14, m21, m22, m23, m24,
+                m31, m32, m33, m34, m41, m42, m43, m44
+            };
+        }
+        
+        /// <summary>Determines the sum of two matrices.</summary>
+        /// <param name="left">The first matrix to add.</param>
+        /// <param name="right">The second matrix to add.</param>
+        /// <returns>The sum of the two matrices.</returns>
+        public static Matrix4x4 Add(Matrix4x4 left, Matrix4x4 right)
+        {
+            Add(ref left, ref right, out var result);
+            return result;
+        }
+
+        /// <summary>Determines the difference between two matrices.</summary>
+        /// <param name="left">The first matrix to subtract.</param>
+        /// <param name="right">The second matrix to subtract.</param>
+        /// <returns>The difference between the two matrices.</returns>
+        public static Matrix4x4 Subtract(Matrix4x4 left, Matrix4x4 right)
+        {
+            Subtract(ref left, ref right, out var result);
+            return result;
         }
 
         #endregion
@@ -681,6 +1177,15 @@ namespace DotEngine
                 matrix.m21, matrix.m22, matrix.m23, matrix.m24,
                 matrix.m31, matrix.m32, matrix.m33, matrix.m34,
                 matrix.m41, matrix.m42, matrix.m43, matrix.m44);
+        }
+
+        #endregion
+        
+        #region Misc methodes
+
+        private static bool IsCloseToZero(float val)
+        {
+            return (double) Math.Abs(val) < 9.999999974752427E-07;
         }
 
         #endregion

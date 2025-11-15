@@ -404,6 +404,47 @@ namespace DotEngine
 
             return q;
         }
+        
+        public static void RotationMatrix(ref Matrix4x4 matrix, out Quaternion result)
+        {
+            var num1 = matrix.m11 + matrix.m22 + matrix.m33;
+            if (num1 > 0.0)
+            {
+                var num2 = (float) Math.Sqrt((double) num1 + 1.0);
+                result.w = num2 * 0.5f;
+                var num3 = 0.5f / num2;
+                result.x = (matrix.m23 - matrix.m32) * num3;
+                result.y = (matrix.m31 - matrix.m13) * num3;
+                result.z = (matrix.m12 - matrix.m21) * num3;
+            }
+            else if ((double)matrix.m11 >= matrix.m22 && (double)matrix.m11 >= matrix.m33)
+            {
+                var num4 = (float) Math.Sqrt(1.0 + matrix.m11 - matrix.m22 - (double) matrix.m33);
+                var num5 = 0.5f / num4;
+                result.x = 0.5f * num4;
+                result.y= (matrix.m12 + matrix.m21) * num5;
+                result.z = (matrix.m13 + matrix.m31) * num5;
+                result.w = (matrix.m23 - matrix.m32) * num5;
+            }
+            else if ((double) matrix.m22 > matrix.m33)
+            {
+                var num6 = (float) Math.Sqrt(1.0 + matrix.m22 - matrix.m11 - matrix.m33);
+                var num7 = 0.5f / num6;
+                result.x = (matrix.m21 + matrix.m12) * num7;
+                result.y = 0.5f * num6;
+                result.z = (matrix.m32 + matrix.m23) * num7;
+                result.w = (matrix.m31 - matrix.m13) * num7;
+            }
+            else
+            {
+                var num8 = (float) Math.Sqrt(1.0 + matrix.m33 - matrix.m11 - matrix.m22);
+                var num9 = 0.5f / num8;
+                result.x = (matrix.m31 + matrix.m13) * num9;
+                result.y = (matrix.m32 + matrix.m23) * num9;
+                result.z = 0.5f * num8;
+                result.w = (matrix.m12 - matrix.m21) * num9;
+            }
+        }
 
         #endregion
 
