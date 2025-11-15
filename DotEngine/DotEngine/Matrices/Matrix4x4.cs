@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using SharpDX;
 
 namespace DotEngine
 {
@@ -746,38 +747,38 @@ namespace DotEngine
         {
             result = new Matrix4x4()
             {
-                m11 = (float)((double)left.m11 * right.m11 + left.m12 * right.m21 + left.m13 * right.m31 +
-                              left.m14 * right.m41),
-                m12 = (float)((double)left.m11 * right.m12 + left.m12 * right.m22 + left.m13 * right.m32 +
-                              left.m14 * right.m42),
-                m13 = (float)((double)left.m11 * right.m13 + left.m12 * right.m23 + left.m13 * right.m33 +
-                              left.m14 * right.m43),
-                m14 = (float)((double)left.m11 * right.m14 + left.m12 * right.m24 + left.m13 * right.m34 +
-                              left.m14 * right.m44),
-                m21 = (float)((double)left.m21 * right.m11 + left.m22 * right.m21 + left.m23 * right.m31 +
-                              left.m24 * right.m41),
-                m22 = (float)((double)left.m21 * right.m12 + left.m22 * right.m22 + left.m23 * right.m32 +
-                              left.m24 * right.m42),
-                m23 = (float)((double)left.m21 * right.m13 + left.m22 * right.m23 + left.m23 * right.m33 +
-                              left.m24 * right.m43),
-                m24 = (float)((double)left.m21 * right.m14 + left.m22 * right.m24 + left.m23 * right.m34 +
-                              left.m24 * right.m44),
-                m31 = (float)((double)left.m31 * right.m11 + left.m32 * right.m21 + left.m33 * right.m31 +
-                              left.m34 * right.m41),
-                m32 = (float)((double)left.m31 * right.m12 + left.m32 * right.m22 + left.m33 * right.m32 +
-                              left.m34 * right.m42),
-                m33 = (float)((double)left.m31 * right.m13 + left.m32 * right.m23 + left.m33 * right.m33 +
-                              left.m34 * right.m43),
-                m34 = (float)((double)left.m31 * right.m14 + left.m32 * right.m24 + left.m33 * right.m34 +
-                              left.m34 * right.m44),
-                m41 = (float)((double)left.m41 * right.m11 + left.m42 * right.m21 + left.m43 * right.m31 +
-                              left.m44 * right.m41),
-                m42 = (float)((double)left.m41 * right.m12 + left.m42 * right.m22 + left.m43 * right.m32 +
-                              left.m44 * right.m42),
-                m43 = (float)((double)left.m41 * right.m13 + left.m42 * right.m23 + left.m43 * right.m33 +
-                              left.m44 * right.m43),
-                m44 = (float)((double)left.m41 * right.m14 + left.m42 * right.m24 + left.m43 * right.m34 +
-                              left.m44 * right.m44)
+                m11 = (float)((double)left.m11 * right.m11 + (double)left.m12 * right.m21 + (double)left.m13 * right.m31 +
+                              (double)left.m14 * right.m41),
+                m12 = (float)((double)left.m11 * right.m12 + (double)left.m12 * right.m22 + (double)left.m13 * right.m32 +
+                              (double)left.m14 * right.m42),
+                m13 = (float)((double)left.m11 * right.m13 + (double)left.m12 * right.m23 + (double)left.m13 * right.m33 +
+                              (double)left.m14 * right.m43),
+                m14 = (float)((double)left.m11 * right.m14 + (double)left.m12 * right.m24 + (double)left.m13 * right.m34 +
+                              (double)left.m14 * right.m44),
+                m21 = (float)((double)left.m21 * right.m11 + (double)left.m22 * right.m21 + (double)left.m23 * right.m31 +
+                              (double)left.m24 * right.m41),
+                m22 = (float)((double)left.m21 * right.m12 + (double)left.m22 * right.m22 + (double)left.m23 * right.m32 +
+                              (double)left.m24 * right.m42),
+                m23 = (float)((double)left.m21 * right.m13 + (double)left.m22 * right.m23 + (double)left.m23 * right.m33 +
+                              (double)left.m24 * right.m43),
+                m24 = (float)((double)left.m21 * right.m14 + (double)left.m22 * right.m24 + (double)left.m23 * right.m34 +
+                              (double)left.m24 * right.m44),
+                m31 = (float)((double)left.m31 * right.m11 + (double)left.m32 * right.m21 + (double)left.m33 * right.m31 +
+                              (double)left.m34 * right.m41),
+                m32 = (float)((double)left.m31 * right.m12 +(double)left.m32 * right.m22 + (double)left.m33 * right.m32 +
+                              (double)left.m34 * right.m42),
+                m33 = (float)((double)left.m31 * right.m13 + (double)left.m32 * right.m23 + (double)left.m33 * right.m33 +
+                              (double)left.m34 * right.m43),
+                m34 = (float)((double)left.m31 * right.m14 + (double) left.m32 * right.m24 + (double)left.m33 * right.m34 +
+                              (double)left.m34 * right.m44),
+                m41 = (float)((double)left.m41 * right.m11 + (double)left.m42 * right.m21 + (double)left.m43 * right.m31 +
+                              (double)left.m44 * right.m41),
+                m42 = (float)((double)left.m41 * right.m12 +(double)left.m42 * right.m22 + (double)left.m43 * right.m32 +
+                              (double)left.m44 * right.m42),
+                m43 = (float)((double)left.m41 * right.m13 + (double)left.m42 * right.m23 + (double)left.m43 * right.m33 +
+                              (double)left.m44 * right.m43),
+                m44 = (float)((double)left.m41 * right.m14 + (double)left.m42 * right.m24 + (double)left.m43 * right.m34 +
+                              (double)left.m44 * right.m44)
             };
         }
 
@@ -858,6 +859,388 @@ namespace DotEngine
         public static Matrix4x4 Divide(Matrix4x4 left, Matrix4x4 right)
         {
             Divide(ref left, ref right, out var result);
+            return result;
+        }
+        
+        /// <summary>Performs the exponential operation on a matrix.</summary>
+        /// <param name="value">The matrix to perform the operation on.</param>
+        /// <param name="exponent">The exponent to raise the matrix to.</param>
+        /// <param name="result">When the method completes, contains the exponential matrix.</param>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <paramref name="exponent" /> is negative.</exception>
+        public static void Exponent(ref Matrix4x4 value, int exponent, out Matrix4x4 result)
+        {
+            if (exponent < 0)
+                throw new ArgumentOutOfRangeException(nameof (exponent), "The exponent can not be negative.");
+            if (exponent == 0)
+                result = Matrix4x4.Identity;
+            else if (exponent == 1)
+            {
+                result = value;
+            }
+            else
+            {
+                var identity = Matrix4x4.Identity;
+                var matrix = value;
+                while (true)
+                {
+                    if ((exponent & 1) != 0)
+                        identity *= matrix;
+                    exponent /= 2;
+                    if (exponent > 0)
+                        matrix *= matrix;
+                    else
+                        break;
+                }
+                result = identity;
+            }
+        }
+        
+        /// <summary>Performs the exponential operation on a matrix.</summary>
+        /// <param name="value">The matrix to perform the operation on.</param>
+        /// <param name="exponent">The exponent to raise the matrix to.</param>
+        /// <returns>The exponential matrix.</returns>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <paramref name="exponent" /> is negative.</exception>
+        public static Matrix4x4 Exponent(Matrix4x4 value, int exponent)
+        {
+            Exponent(ref value, exponent, out var result);
+            return result;
+        }
+        
+        /// <summary>Negates a matrix.</summary>
+        /// <param name="value">The matrix to be negated.</param>
+        /// <param name="result">When the method completes, contains the negated matrix.</param>
+        public static void Negate(ref Matrix4x4 value, out Matrix4x4 result)
+        {
+            result.m11 = -value.m11;
+            result.m12 = -value.m12;
+            result.m13 = -value.m13;
+            result.m14 = -value.m14;
+            result.m21 = -value.m21;
+            result.m22 = -value.m22;
+            result.m23 = -value.m23;
+            result.m24 = -value.m24;
+            result.m31 = -value.m31;
+            result.m32 = -value.m32;
+            result.m33 = -value.m33;
+            result.m34 = -value.m34;
+            result.m41 = -value.m41;
+            result.m42 = -value.m42;
+            result.m43 = -value.m43;
+            result.m44 = -value.m44;
+        }
+        
+        /// <summary>Negates a matrix.</summary>
+        /// <param name="value">The matrix to be negated.</param>
+        /// <returns>The negated matrix.</returns>
+        public static Matrix4x4 Negate(Matrix4x4 value)
+        {
+            Negate(ref value, out var result);
+            return result;
+        }
+        
+        /// <summary>Performs a linear interpolation between two matrices.</summary>
+        /// <param name="start">Start matrix.</param>
+        /// <param name="end">End matrix.</param>
+        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end" />.</param>
+        /// <param name="result">When the method completes, contains the linear interpolation of the two matrices.</param>
+        /// <remarks>
+        /// Passing <paramref name="amount" /> a value of 0 will cause <paramref name="start" /> to be returned; a value of 1 will cause <paramref name="end" /> to be returned.
+        /// </remarks>
+        public static void Lerp(ref Matrix4x4 start, ref Matrix4x4 end, float amount, out Matrix4x4 result)
+        {
+            result.m11 = MathUtil.Lerp(start.m11, end.m11, amount);
+            result.m12 = MathUtil.Lerp(start.m12, end.m12, amount);
+            result.m13 = MathUtil.Lerp(start.m13, end.m13, amount);
+            result.m14 = MathUtil.Lerp(start.m14, end.m14, amount);
+            result.m21 = MathUtil.Lerp(start.m21, end.m21, amount);
+            result.m22 = MathUtil.Lerp(start.m22, end.m22, amount);
+            result.m23 = MathUtil.Lerp(start.m23, end.m23, amount);
+            result.m24 = MathUtil.Lerp(start.m24, end.m24, amount);
+            result.m31 = MathUtil.Lerp(start.m31, end.m31, amount);
+            result.m32 = MathUtil.Lerp(start.m32, end.m32, amount);
+            result.m33 = MathUtil.Lerp(start.m33, end.m33, amount);
+            result.m34 = MathUtil.Lerp(start.m34, end.m34, amount);
+            result.m41 = MathUtil.Lerp(start.m41, end.m41, amount);
+            result.m42 = MathUtil.Lerp(start.m42, end.m42, amount);
+            result.m43 = MathUtil.Lerp(start.m43, end.m43, amount);
+            result.m44 = MathUtil.Lerp(start.m44, end.m44, amount);
+        }
+        
+        /// <summary>Performs a linear interpolation between two matrices.</summary>
+        /// <param name="start">Start matrix.</param>
+        /// <param name="end">End matrix.</param>
+        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end" />.</param>
+        /// <returns>The linear interpolation of the two matrices.</returns>
+        /// <remarks>
+        /// Passing <paramref name="amount" /> a value of 0 will cause <paramref name="start" /> to be returned; a value of 1 will cause <paramref name="end" /> to be returned.
+        /// </remarks>
+        public static Matrix4x4 Lerp(Matrix4x4 start, Matrix4x4 end, float amount)
+        {
+            Lerp(ref start, ref end, amount, out var result);
+            return result;
+        }
+        
+        /// <summary>Performs a cubic interpolation between two matrices.</summary>
+        /// <param name="start">Start matrix.</param>
+        /// <param name="end">End matrix.</param>
+        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end" />.</param>
+        /// <param name="result">When the method completes, contains the cubic interpolation of the two matrices.</param>
+        public static void SmoothStep(ref Matrix4x4 start, ref Matrix4x4 end, float amount, out Matrix4x4 result)
+        {
+            amount = MathUtil.SmoothStep(amount);
+            Lerp(ref start, ref end, amount, out result);
+        }
+        
+        /// <summary>Performs a cubic interpolation between two matrices.</summary>
+        /// <param name="start">Start matrix.</param>
+        /// <param name="end">End matrix.</param>
+        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end" />.</param>
+        /// <returns>The cubic interpolation of the two matrices.</returns>
+        public static Matrix4x4 SmoothStep(Matrix4x4 start, Matrix4x4 end, float amount)
+        {
+            SmoothStep(ref start, ref end, amount, out var result);
+            return result;
+        }
+
+        /// <summary>Calculates the transpose of the specified matrix.</summary>
+        /// <param name="value">The matrix whose transpose is to be calculated.</param>
+        /// <param name="result">When the method completes, contains the transpose of the specified matrix.</param>
+        public static void Transpose(ref Matrix4x4 value, out Matrix4x4 result)
+        {
+            result = new Matrix4x4()
+            {
+                m11 = value.m11,
+                m12 = value.m21,
+                m13 = value.m31,
+                m14 = value.m41,
+                m21 = value.m12,
+                m22 = value.m22,
+                m23 = value.m32,
+                m24 = value.m42,
+                m31 = value.m13,
+                m32 = value.m23,
+                m33 = value.m33,
+                m34 = value.m43,
+                m41 = value.m14,
+                m42 = value.m24,
+                m43 = value.m34,
+                m44 = value.m44
+            };
+        }
+        
+        /// <summary>Calculates the transpose of the specified matrix.</summary>
+        /// <param name="value">The matrix whose transpose is to be calculated.</param>
+        /// <param name="result">When the method completes, contains the transpose of the specified matrix.</param>
+        public static void TransposeByRef(ref Matrix4x4 value, ref Matrix4x4 result)
+        {
+            result.m11 = value.m11;
+            result.m12 = value.m21;
+            result.m13 = value.m31;
+            result.m14 = value.m41;
+            result.m21 = value.m12;
+            result.m22 = value.m22;
+            result.m23 = value.m32;
+            result.m24 = value.m42;
+            result.m31 = value.m13;
+            result.m32 = value.m23;
+            result.m33 = value.m33;
+            result.m34 = value.m43;
+            result.m41 = value.m14;
+            result.m42 = value.m24;
+            result.m43 = value.m34;
+            result.m44 = value.m44;
+        }
+
+        /// <summary>Calculates the inverse of the specified matrix.</summary>
+        /// <param name="value">The matrix whose inverse is to be calculated.</param>
+        /// <param name="result">When the method completes, contains the inverse of the specified matrix.</param>
+        public static void Invert(ref Matrix4x4 value, out Matrix4x4 result)
+        {
+            var num1 = (float)((double)value.m31 * value.m42 - (double)value.m32 * value.m41);
+            var num2 = (float)((double)value.m31 * value.m43 - (double)value.m33 * value.m41);
+            var num3 = (float)((double)value.m34 * value.m41 - (double)value.m31 * value.m44);
+            var num4 = (float)((double)value.m32 * value.m43 - (double)value.m33 * value.m42);
+            var num5 = (float)((double)value.m34 * value.m42 - (double)value.m32 * value.m44);
+            var num6 = (float)((double)value.m33 * value.m44 - (double)value.m34 * value.m43);
+            var num7 = (float)((double)value.m22 * num6 + (double)value.m23 * num5 + (double)value.m24 * num4);
+            var num8 = (float)((double)value.m21 * num6 + (double)value.m23 * num3 + (double)value.m24 * num2);
+            var num9 = (float)((double)value.m21 * -num5 + (double)value.m22 * num3 + (double)value.m24 * num1);
+            var num10 = (float)((double)value.m21 * num4 + (double)value.m22 * -num2 + (double)value.m23 * num1);
+            var num11 = (float)((double)value.m11 * num7 - (double)value.m12 * num8 + (double)value.m13 * num9 -
+                                (double)value.m14 * num10);
+            if (IsCloseToZero(num11))
+            {
+                result = Matrix4x4.Zero;
+            }
+            else
+            {
+                var num12 = 1f / num11;
+                var num13 = (float)((double)value.m11 * value.m22 - (double)value.m12 * value.m21);
+                var num14 = (float)((double)value.m11 * value.m23 - (double)value.m13 * value.m21);
+                var num15 = (float)((double)value.m14 * value.m21 - (double)value.m11 * value.m24);
+                var num16 = (float)((double)value.m12 * value.m23 - (double)value.m13 * value.m22);
+                var num17 = (float)((double)value.m14 * value.m22 - (double)value.m12 * value.m24);
+                var num18 = (float)((double)value.m13 * value.m24 - (double)value.m14 * value.m23);
+                var num19 = (float)((double)value.m12 * num6 + (double)value.m13 * num5 +
+                                    (double)value.m14 * num4);
+                var num20 = (float)((double)value.m11 * num6 + (double)value.m13 * num3 +
+                                    (double)value.m14 * num2);
+                var num21 = (float)((double)value.m11 * -num5 + (double)value.m12 * num3 +
+                                    (double)value.m14 * num1);
+                var num22 = (float)((double)value.m11 * num4 + (double)value.m12 * -num2 +
+                                    (double)value.m13 * num1);
+                var num23 = (float)((double)value.m42 * num18 + (double)value.m43 * num17 +
+                                    (double)value.m44 * num16);
+                var num24 = (float)((double)value.m41 * num18 + (double)value.m43 * num15 +
+                                    (double)value.m44 * num14);
+                var num25 = (float)((double)value.m41 * -num17 + (double)value.m42 * num15 +
+                                    (double)value.m44 * num13);
+                var num26 = (float)((double)value.m41 * num16 + (double)value.m42 * -num14 +
+                                    (double)value.m43 * num13);
+                var num27 = (float)((double)value.m32 * num18 + (double)value.m33 * num17 +
+                                    (double)value.m34 * num16);
+                var num28 = (float)((double)value.m31 * num18 + (double)value.m33 * num15 +
+                                    (double)value.m34 * num14);
+                var num29 = (float)((double)value.m31 * -num17 + (double)value.m32 * num15 +
+                                    (double)value.m34 * num13);
+                var num30 = (float)((double)value.m31 * num16 + (double)value.m32 * -num14 +
+                                    (double)value.m33 * num13);
+                result.m11 = num7 * num12;
+                result.m12 = -num19 * num12;
+                result.m13 = num23 * num12;
+                result.m14 = -num27 * num12;
+                result.m21 = -num8 * num12;
+                result.m22 = num20 * num12;
+                result.m23 = -num24 * num12;
+                result.m24 = num28 * num12;
+                result.m31 = num9 * num12;
+                result.m32 = -num21 * num12;
+                result.m33 = num25 * num12;
+                result.m34 = -num29 * num12;
+                result.m41 = -num10 * num12;
+                result.m42 = num22 * num12;
+                result.m43 = -num26 * num12;
+                result.m44 = num30 * num12;
+            }
+        }
+        
+        public static Matrix4x4 Invert(Matrix4x4 value)
+        {
+            value.Invert();
+            return value;
+        }
+        
+        public static void Orthogonalize(ref Matrix4x4 value, out Matrix4x4 result)
+        {
+            result = value;
+            result.Row2 -= Vector4.Dot(result.Row1, result.Row2) / Vector4.Dot(result.Row1, result.Row1) * result.Row1;
+            result.Row3 -= Vector4.Dot(result.Row1, result.Row3) / Vector4.Dot(result.Row1, result.Row1) * result.Row1;
+            result.Row3 -= Vector4.Dot(result.Row2, result.Row3) / Vector4.Dot(result.Row2, result.Row2) * result.Row2;
+            result.Row4 -= Vector4.Dot(result.Row1, result.Row4) / Vector4.Dot(result.Row1, result.Row1) * result.Row1;
+            result.Row4 -= Vector4.Dot(result.Row2, result.Row4) / Vector4.Dot(result.Row2, result.Row2) * result.Row2;
+            result.Row4 -= Vector4.Dot(result.Row3, result.Row4) / Vector4.Dot(result.Row3, result.Row3) * result.Row3;
+        }
+        
+        /// <summary>Orthogonalizes the specified matrix.</summary>
+        /// <param name="value">The matrix to orthogonalize.</param>
+        /// <returns>The orthogonalized matrix.</returns>
+        /// <remarks>
+        /// <para>Orthogonalization is the process of making all rows orthogonal to each other. This
+        /// means that any given row in the matrix will be orthogonal to any other given row in the
+        /// matrix.</para>
+        /// <para>Because this method uses the modified Gram-Schmidt process, the resulting matrix
+        /// tends to be numerically unstable. The numeric stability decreases according to the rows
+        /// so that the first row is the most stable and the last row is the least stable.</para>
+        /// <para>This operation is performed on the rows of the matrix rather than the columns.
+        /// If you wish for this operation to be performed on the columns, first transpose the
+        /// input and than transpose the output.</para>
+        /// </remarks>
+        public static Matrix4x4 Orthogonalize(Matrix4x4 value)
+        {
+            Orthogonalize(ref value, out var result);
+            return result;
+        }
+        
+        /// <summary>Orthonormalizes the specified matrix.</summary>
+        /// <param name="value">The matrix to orthonormalize.</param>
+        /// <param name="result">When the method completes, contains the orthonormalized matrix.</param>
+        /// <remarks>
+        /// <para>Orthonormalization is the process of making all rows and columns orthogonal to each
+        /// other and making all rows and columns of unit length. This means that any given row will
+        /// be orthogonal to any other given row and any given column will be orthogonal to any other
+        /// given column. Any given row will not be orthogonal to any given column. Every row and every
+        /// column will be of unit length.</para>
+        /// <para>Because this method uses the modified Gram-Schmidt process, the resulting matrix
+        /// tends to be numerically unstable. The numeric stability decreases according to the rows
+        /// so that the first row is the most stable and the last row is the least stable.</para>
+        /// <para>This operation is performed on the rows of the matrix rather than the columns.
+        /// If you wish for this operation to be performed on the columns, first transpose the
+        /// input and than transpose the output.</para>
+        /// </remarks>
+        public static void Orthonormalize(ref Matrix4x4 value, out Matrix4x4 result)
+        {
+            result = value;
+            result.Row1 = Vector4.Normalize(result.Row1);
+            result.Row2 -= Vector4.Dot(result.Row1, result.Row2) * result.Row1;
+            result.Row2 = Vector4.Normalize(result.Row2);
+            result.Row3 -= Vector4.Dot(result.Row1, result.Row3) * result.Row1;
+            result.Row3 -= Vector4.Dot(result.Row2, result.Row3) * result.Row2;
+            result.Row3 = Vector4.Normalize(result.Row3);
+            result.Row4 -= Vector4.Dot(result.Row1, result.Row4) * result.Row1;
+            result.Row4 -= Vector4.Dot(result.Row2, result.Row4) * result.Row2;
+            result.Row4 -= Vector4.Dot(result.Row3, result.Row4) * result.Row3;
+            result.Row4 = Vector4.Normalize(result.Row4);
+        }
+        
+        /// <summary>Performs a linear interpolation between two vectors.</summary>
+        /// <param name="start">Start vector.</param>
+        /// <param name="end">End vector.</param>
+        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end" />.</param>
+        /// <param name="result">When the method completes, contains the linear interpolation of the two vectors.</param>
+        /// <remarks>
+        /// Passing <paramref name="amount" /> a value of 0 will cause <paramref name="start" /> to be returned; a value of 1 will cause <paramref name="end" /> to be returned.
+        /// </remarks>
+        public static void Lerp(ref Vector4 start, ref Vector4 end, float amount, out Vector4 result)
+        {
+            result.x = MathUtil.Lerp(start.x, end.x, amount);
+            result.y = MathUtil.Lerp(start.y, end.y, amount);
+            result.z = MathUtil.Lerp(start.z, end.z, amount);
+            result.w = MathUtil.Lerp(start.w, end.w, amount);
+        }
+        
+        /// <summary>Performs a linear interpolation between two vectors.</summary>
+        /// <param name="start">Start vector.</param>
+        /// <param name="end">End vector.</param>
+        /// <param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end" />.</param>
+        /// <returns>The linear interpolation of the two vectors.</returns>
+        /// <remarks>
+        /// Passing <paramref name="amount" /> a value of 0 will cause <paramref name="start" /> to be returned; a value of 1 will cause <paramref name="end" /> to be returned.
+        /// </remarks>
+        public static Vector4 Lerp(Vector4 start, Vector4 end, float amount)
+        {
+            Vector4.Lerp(ref start, ref end, amount, out var result);
+            return result;
+        }
+        
+        /// <summary>Orthonormalizes the specified matrix.</summary>
+        /// <param name="value">The matrix to orthonormalize.</param>
+        /// <returns>The orthonormalized matrix.</returns>
+        /// <remarks>
+        /// <para>Orthonormalization is the process of making all rows and columns orthogonal to each
+        /// other and making all rows and columns of unit length. This means that any given row will
+        /// be orthogonal to any other given row and any given column will be orthogonal to any other
+        /// given column. Any given row will not be orthogonal to any given column. Every row and every
+        /// column will be of unit length.</para>
+        /// <para>Because this method uses the modified Gram-Schmidt process, the resulting matrix
+        /// tends to be numerically unstable. The numeric stability decreases according to the rows
+        /// so that the first row is the most stable and the last row is the least stable.</para>
+        /// <para>This operation is performed on the rows of the matrix rather than the columns.
+        /// If you wish for this operation to be performed on the columns, first transpose the
+        /// input and than transpose the output.</para>
+        /// </remarks>
+        public static Matrix4x4 Orthonormalize(Matrix4x4 value)
+        {
+            Orthonormalize(ref value, out var result);
             return result;
         }
 
@@ -1031,9 +1414,9 @@ namespace DotEngine
             translation.x = m41;
             translation.y = m42;
             translation.z = m43;
-            scale.x = (float) Math.Sqrt((double) m11 * m11 + m12 * m12 + m13 * m13);
-            scale.y = (float) Math.Sqrt((double) m21 * m21 + m22 * m22 + m23 * m23);
-            scale.z = (float) Math.Sqrt((double) m31 * m31 + m32 * m32 + m33 * m33);
+            scale.x = (float) Math.Sqrt((double) m11 * m11 + (double)m12 * m12 + (double)m13 * m13);
+            scale.y = (float) Math.Sqrt((double) m21 * m21 + (double)m22 * m22 + (double)m23 * m23);
+            scale.z = (float) Math.Sqrt((double) m31 * m31 + (double)m32 * m32 + (double)m33 * m33);
             if (IsCloseToZero(scale.x) || IsCloseToZero(scale.y) || IsCloseToZero(scale.z))
             {
                 rotation = Quaternion.Identity;
@@ -1075,7 +1458,7 @@ namespace DotEngine
             translation.x = m41;
             translation.y = m42;
             translation.z = m43;
-            scale = (float) Math.Sqrt((double) m11 * m11 + m12 * m12 + m13 * m13);
+            scale = (float) Math.Sqrt((double) m11 * m11 + (double)m12 * m12 + (double)m13 * m13);
             var num = 1f / scale;
             
             if (IsCloseToZero(scale))
@@ -1149,10 +1532,10 @@ namespace DotEngine
             if (firstColumn == secondColumn)
                 return;
             
-            float num1 = this[0, secondColumn];
-            float num2 = this[1, secondColumn];
-            float num3 = this[2, secondColumn];
-            float num4 = this[3, secondColumn];
+            var num1 = this[0, secondColumn];
+            var num2 = this[1, secondColumn];
+            var num3 = this[2, secondColumn];
+            var num4 = this[3, secondColumn];
             
             this[0, secondColumn] = this[0, firstColumn];
             this[1, secondColumn] = this[1, firstColumn];

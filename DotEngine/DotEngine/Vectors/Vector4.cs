@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using SharpDX;
 
 namespace DotEngine
 {
@@ -155,6 +156,24 @@ namespace DotEngine
             if (s == 0f) throw new DivideByZeroException();
             return new Vector4(v.x / s, v.y / s, v.z / s, v.w / s);
         }
+        
+        /// <summary>Scales a vector by the given value.</summary>
+        /// <param name="value">The vector to scale.</param>
+        /// <param name="scale">The amount by which to scale the vector.</param>
+        /// <returns>The scaled vector.</returns>
+        public static Vector4 operator *(float scale, Vector4 value)
+        {
+            return new Vector4(value.x * scale, value.y * scale, value.z * scale, value.w * scale);
+        }
+        
+        /// <summary>Scales a vector by the given value.</summary>
+        /// <param name="scale">The amount by which to scale the vector.</param>
+        /// <param name="value">The vector to scale.</param>
+        /// <returns>The scaled vector.</returns>
+        public static Vector4 operator /(float scale, Vector4 value)
+        {
+            return new Vector4(scale / value.x, scale / value.y, scale / value.z, scale / value.w);
+        }
 
         /// <summary>
         /// Compares vectors by tolerance.
@@ -228,6 +247,15 @@ namespace DotEngine
         {
             return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
         }
+        
+        public static void Lerp(ref Vector4 start, ref Vector4 end, float amount, out Vector4 result)
+        {
+            result.x = MathUtil.Lerp(start.x, end.x, amount);
+            result.y = MathUtil.Lerp(start.y, end.y, amount);
+            result.z = MathUtil.Lerp(start.z, end.z, amount);
+            result.w = MathUtil.Lerp(start.w, end.w, amount);
+        }
+        
 
         /// <summary>
         /// Linearly interpolates between two vectors.
@@ -267,6 +295,15 @@ namespace DotEngine
         /// </summary>
         public static Vector4 Max(Vector4 a, Vector4 b) =>
             new(MathF.Max(a.x, b.x), MathF.Max(a.y, b.y), MathF.Max(a.z, b.z), MathF.Max(a.w, b.w));
+        
+        /// <summary>Converts the vector into a unit vector.</summary>
+        /// <param name="value">The vector to normalize.</param>
+        /// <returns>The normalized vector.</returns>
+        public static Vector4 Normalize(Vector4 value)
+        {
+            value.Normalize();
+            return value;
+        }
 
         #endregion
 
