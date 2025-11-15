@@ -446,6 +446,34 @@ namespace DotEngine
             }
         }
 
+        /// <summary>
+        /// Creates a quaternion given a yaw, pitch, and roll value.
+        /// </summary>
+        /// <param name="yaw">The yaw of rotation.</param>
+        /// <param name="pitch">The pitch of rotation.</param>
+        /// <param name="roll">The roll of rotation.</param>
+        /// <param name="result">When the method completes, contains the newly created quaternion.</param>
+        public static void RotationYawPitchRoll(
+            float yaw,
+            float pitch,
+            float roll,
+            out Quaternion result)
+        {
+            var num1 = (double) roll * 0.5;
+            var num2 = pitch * 0.5f;
+            var num3 = yaw * 0.5f;
+            var num4 = (float) Math.Sin(num1);
+            var num5 = (float) Math.Cos(num1);
+            var num6 = (float) Math.Sin((double) num2);
+            var num7 = (float) Math.Cos((double) num2);
+            var num8 = (float) Math.Sin((double) num3);
+            var num9 = (float) Math.Cos((double) num3);
+            result.x = (float) ((double) num9 * num6 * num5 + (double) num8 * num7 * num4);
+            result.y = (float) ((double) num8 * num7 * num5 - (double) num9 * num6 * num4);
+            result.z = (float) ((double) num9 * num7 * num4 - (double) num8 * num6 * num5);
+            result.w = (float) ((double) num9 * num7 * num5 + (double) num8 * num6 * num4);
+        }
+        
         #endregion
 
         #region Interface

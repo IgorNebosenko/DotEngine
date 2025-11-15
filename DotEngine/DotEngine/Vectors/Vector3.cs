@@ -181,6 +181,15 @@ namespace DotEngine
         /// </summary>
         public static Vector3 operator *(Vector3 v, float s) =>
             new(v.x * s, v.y * s, v.z * s);
+        
+        /// <summary>Scales a vector by the given value.</summary>
+        /// <param name="value">The vector to scale.</param>
+        /// <param name="scale">The amount by which to scale the vector.</param>
+        /// <returns>The scaled vector.</returns>
+        public static Vector3 operator *(float scale, Vector3 value)
+        {
+            return new Vector3(value.x * scale, value.y * scale, value.z * scale);
+        }
 
         /// <summary>
         /// Divides vector by scalar.
@@ -210,6 +219,12 @@ namespace DotEngine
         /// <param name="value">The vector to negate.</param>
         /// <returns>A vector facing in the opposite direction.</returns>
         public static Vector3 operator -(Vector3 value) => new Vector3(-value.x, -value.y, -value.z);
+        
+        
+        public static explicit operator Vector3(Vector2 v)
+        {
+            return new Vector3(v.x, v.y, 0f);
+        }
 
         #endregion
 
@@ -387,6 +402,15 @@ namespace DotEngine
         public static void Subtract(ref Vector3 left, ref Vector3 right, out Vector3 result)
         {
             result = new Vector3(left.x - right.x, left.y - right.y, left.z - right.z);
+        }
+        
+        /// <summary>Converts the vector into a unit vector.</summary>
+        /// <param name="value">The vector to normalize.</param>
+        /// <returns>The normalized vector.</returns>
+        public static Vector3 Normalize(Vector3 value)
+        {
+            value.Normalize();
+            return value;
         }
 
         #endregion

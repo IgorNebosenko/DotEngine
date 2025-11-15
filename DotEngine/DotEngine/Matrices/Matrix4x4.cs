@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using SharpDX;
+using SharpDX.Mathematics.Interop;
 
 namespace DotEngine
 {
@@ -30,11 +31,6 @@ namespace DotEngine
             0f, 0f, 1f, 0f,
             0f, 0f, 0f, 1f
         );
-
-        /// <summary>
-        /// Epsilon used for matrix equality comparison.
-        /// </summary>
-        public const float kEpsilon = 1e-6f;
 
         #endregion
 
@@ -133,110 +129,113 @@ namespace DotEngine
         #endregion
 
         #region Indexer
-          /// <summary>Gets or sets the component at the specified index.</summary>
-          /// <value>The value of the matrix component, depending on the index.</value>
-          /// <param name="index">The zero-based index of the component to access.</param>
-          /// <returns>The value of the component at the specified index.</returns>
-          /// <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <paramref name="index" /> is out of the range [0, 15].</exception>
-          public float this[int index]
-          {
+
+        /// <summary>Gets or sets the component at the specified index.</summary>
+        /// <value>The value of the matrix component, depending on the index.</value>
+        /// <param name="index">The zero-based index of the component to access.</param>
+        /// <returns>The value of the component at the specified index.</returns>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <paramref name="index" /> is out of the range [0, 15].</exception>
+        public float this[int index]
+        {
             get
             {
-              switch (index)
-              {
-                case 0:
-                  return m11;
-                case 1:
-                  return m12;
-                case 2:
-                  return m13;
-                case 3:
-                  return m14;
-                case 4:
-                  return m21;
-                case 5:
-                  return m22;
-                case 6:
-                  return m23;
-                case 7:
-                  return m24;
-                case 8:
-                  return m31;
-                case 9:
-                  return m32;
-                case 10:
-                  return m33;
-                case 11:
-                  return m34;
-                case 12:
-                  return m41;
-                case 13:
-                  return m42;
-                case 14:
-                  return m43;
-                case 15:
-                  return m44;
-                default:
-                  throw new ArgumentOutOfRangeException(nameof (index), "Indices for Matrix run from 0 to 15, inclusive.");
-              }
+                switch (index)
+                {
+                    case 0:
+                        return m11;
+                    case 1:
+                        return m12;
+                    case 2:
+                        return m13;
+                    case 3:
+                        return m14;
+                    case 4:
+                        return m21;
+                    case 5:
+                        return m22;
+                    case 6:
+                        return m23;
+                    case 7:
+                        return m24;
+                    case 8:
+                        return m31;
+                    case 9:
+                        return m32;
+                    case 10:
+                        return m33;
+                    case 11:
+                        return m34;
+                    case 12:
+                        return m41;
+                    case 13:
+                        return m42;
+                    case 14:
+                        return m43;
+                    case 15:
+                        return m44;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(index),
+                            "Indices for Matrix run from 0 to 15, inclusive.");
+                }
             }
             set
             {
-              switch (index)
-              {
-                case 0:
-                  m11 = value;
-                  break;
-                case 1:
-                  m12 = value;
-                  break;
-                case 2:
-                  m13 = value;
-                  break;
-                case 3:
-                  m14 = value;
-                  break;
-                case 4:
-                  m21 = value;
-                  break;
-                case 5:
-                  m22 = value;
-                  break;
-                case 6:
-                  m23 = value;
-                  break;
-                case 7:
-                  m24 = value;
-                  break;
-                case 8:
-                  m31 = value;
-                  break;
-                case 9:
-                  m32 = value;
-                  break;
-                case 10:
-                  m33 = value;
-                  break;
-                case 11:
-                  m34 = value;
-                  break;
-                case 12:
-                  m41 = value;
-                  break;
-                case 13:
-                  m42 = value;
-                  break;
-                case 14:
-                  m43 = value;
-                  break;
-                case 15:
-                  m44 = value;
-                  break;
-                default:
-                  throw new ArgumentOutOfRangeException(nameof (index), "Indices for Matrix run from 0 to 15, inclusive.");
-              }
+                switch (index)
+                {
+                    case 0:
+                        m11 = value;
+                        break;
+                    case 1:
+                        m12 = value;
+                        break;
+                    case 2:
+                        m13 = value;
+                        break;
+                    case 3:
+                        m14 = value;
+                        break;
+                    case 4:
+                        m21 = value;
+                        break;
+                    case 5:
+                        m22 = value;
+                        break;
+                    case 6:
+                        m23 = value;
+                        break;
+                    case 7:
+                        m24 = value;
+                        break;
+                    case 8:
+                        m31 = value;
+                        break;
+                    case 9:
+                        m32 = value;
+                        break;
+                    case 10:
+                        m33 = value;
+                        break;
+                    case 11:
+                        m34 = value;
+                        break;
+                    case 12:
+                        m41 = value;
+                        break;
+                    case 13:
+                        m42 = value;
+                        break;
+                    case 14:
+                        m43 = value;
+                        break;
+                    case 15:
+                        m44 = value;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(index),
+                            "Indices for Matrix run from 0 to 15, inclusive.");
+                }
             }
-          }
+        }
 
         /// <summary>
         /// Access matrix element by row and column index.
@@ -309,6 +308,25 @@ namespace DotEngine
 
         #region Constructors
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="m11">0, 0</param>
+        /// <param name="m12">0, 1</param>
+        /// <param name="m13">0, 2</param>
+        /// <param name="m14">0, 3</param>
+        /// <param name="m21">1, 0</param>
+        /// <param name="m22">1, 1</param>
+        /// <param name="m23">1, 2</param>
+        /// <param name="m24">1, 3</param>
+        /// <param name="m31">2, 0</param>
+        /// <param name="m32">2, 1</param>
+        /// <param name="m33">2, 2</param>
+        /// <param name="m34">2, 3</param>
+        /// <param name="m41">3, 0</param>
+        /// <param name="m42">3, 1</param>
+        /// <param name="m43">3, 2</param>
+        /// <param name="m44">3, 3</param>
         public Matrix4x4(float m11, float m12, float m13, float m14,
             float m21, float m22, float m23, float m24,
             float m31, float m32, float m33, float m34,
@@ -333,11 +351,21 @@ namespace DotEngine
             this.m44 = m44;
         }
 
+        /// <summary>
+        /// Constructor with fill all fields with value 
+        /// </summary>
+        /// <param name="value">Value for fill</param>
         public Matrix4x4(float value)
         {
             m11 = m12 = m13 = m14 = m21 = m22 = m23 = m24 = m31 = m32 = m33 = m34 = m41 = m42 = m43 = m44 = value;
         }
 
+        /// <summary>
+        /// Constructor with fill from float array
+        /// </summary>
+        /// <param name="values">Float array</param>
+        /// <exception cref="ArgumentNullException">When values is null</exception>
+        /// <exception cref="ArgumentOutOfRangeException">When range isn't 16 elements</exception>
         public Matrix4x4(float[] values)
         {
             if (values == null)
@@ -379,10 +407,7 @@ namespace DotEngine
         public float Determinant
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return ((SharpDX.Matrix)(this)).Determinant();
-            }
+            get => DeterminantOf(this);
         }
 
         /// <summary>
@@ -1068,7 +1093,7 @@ namespace DotEngine
             var num10 = (float)((double)value.m21 * num4 + (double)value.m22 * -num2 + (double)value.m23 * num1);
             var num11 = (float)((double)value.m11 * num7 - (double)value.m12 * num8 + (double)value.m13 * num9 -
                                 (double)value.m14 * num10);
-            if (IsCloseToZero(num11))
+            if (MathUtil.IsZero(num11))
             {
                 result = Matrix4x4.Zero;
             }
@@ -2205,10 +2230,9 @@ namespace DotEngine
         /// <param name="y">Scaling factor that is applied along the y-axis.</param>
         /// <param name="z">Scaling factor that is applied along the z-axis.</param>
         /// <returns>The created scaling matrix.</returns>
-        public static Matrix Scaling(float x, float y, float z)
+        public static Matrix4x4 Scaling(float x, float y, float z)
         {
-            Matrix4x4 result;
-            Scaling(x, y, z, out result);
+            Scaling(x, y, z, out var result);
             return result;
         }
         
@@ -2324,13 +2348,13 @@ namespace DotEngine
             var num8 = y * z;
             result = Identity;
             result.m11 = num3 + num1 * (1f - num3);
-            result.m12 = (float)((double)num6 - (double)num1 * (double)num6 + (double)num2 * (double)z);
-            result.m13 = (float)((double)num7 - (double)num1 * (double)num7 - (double)num2 * (double)y);
-            result.m21 = (float)((double)num6 - (double)num1 * (double)num6 - (double)num2 * (double)z);
+            result.m12 = (float)((double)num6 - (double)num1 * num6 + (double)num2 * z);
+            result.m13 = (float)((double)num7 - (double)num1 * num7 - (double)num2 * y);
+            result.m21 = (float)((double)num6 - (double)num1 * num6 - (double)num2 * z);
             result.m22 = num4 + num1 * (1f - num4);
-            result.m23 = (float)((double)num8 - (double)num1 * (double)num8 + (double)num2 * (double)x);
-            result.m31 = (float)((double)num7 - (double)num1 * (double)num7 + (double)num2 * (double)y);
-            result.m32 = (float)((double)num8 - (double)num1 * (double)num8 - (double)num2 * (double)x);
+            result.m23 = (float)((double)num8 - (double)num1 * num8 + (double)num2 * x);
+            result.m31 = (float)((double)num7 - (double)num1 * num7 + (double)num2 * y);
+            result.m32 = (float)((double)num8 - (double)num1 * num8 - (double)num2 * x);
             result.m33 = num5 + num1 * (1f - num5);
         }
 
@@ -2381,51 +2405,432 @@ namespace DotEngine
             return result;
         }
         
+        
+        /// <summary>
+        /// Creates a rotation matrix with a specified yaw, pitch, and roll.
+        /// </summary>
+        /// <param name="yaw">Yaw around the y-axis, in radians.</param>
+        /// <param name="pitch">Pitch around the x-axis, in radians.</param>
+        /// <param name="roll">Roll around the z-axis, in radians.</param>
+        /// <param name="result">When the method completes, contains the created rotation matrix.</param>
+        public static void RotationYawPitchRoll(float yaw, float pitch, float roll, out Matrix4x4 result)
+        {
+            var result1 = new Quaternion();
+            Quaternion.RotationYawPitchRoll(yaw, pitch, roll, out result1);
+            RotationQuaternion(ref result1, out result);
+        }
+        
+        /// <summary>
+        /// Creates a rotation matrix with a specified yaw, pitch, and roll.
+        /// </summary>
+        /// <param name="yaw">Yaw around the y-axis, in radians.</param>
+        /// <param name="pitch">Pitch around the x-axis, in radians.</param>
+        /// <param name="roll">Roll around the z-axis, in radians.</param>
+        /// <returns>The created rotation matrix.</returns>
+        public static Matrix4x4 RotationYawPitchRoll(float yaw, float pitch, float roll)
+        {
+            RotationYawPitchRoll(yaw, pitch, roll, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a translation matrix using the specified offsets.
+        /// </summary>
+        /// <param name="value">The offset for all three coordinate planes.</param>
+        /// <param name="result">When the method completes, contains the created translation matrix.</param>
+        public static void Translation(ref Vector3 value, out Matrix4x4 result)
+        {
+            Matrix4x4.Translation(value.x, value.y, value.z, out result);
+        }
+
+        /// <summary>
+        /// Creates a translation matrix using the specified offsets.
+        /// </summary>
+        /// <param name="value">The offset for all three coordinate planes.</param>
+        /// <returns>The created translation matrix.</returns>
+        public static Matrix4x4 Translation(Vector3 value)
+        {
+            Translation(ref value, out var result);
+            return result;
+        }
+        
+        /// <summary>
+        /// Creates a translation matrix using the specified offsets.
+        /// </summary>
+        /// <param name="x">X-coordinate offset.</param>
+        /// <param name="y">Y-coordinate offset.</param>
+        /// <param name="z">Z-coordinate offset.</param>
+        /// <param name="result">When the method completes, contains the created translation matrix.</param>
+        public static void Translation(float x, float y, float z, out Matrix4x4 result)
+        {
+            result = Identity;
+            result.m41 = x;
+            result.m42 = y;
+            result.m43 = z;
+        }
+        
+        /// <summary>
+        /// Creates a translation matrix using the specified offsets.
+        /// </summary>
+        /// <param name="x">X-coordinate offset.</param>
+        /// <param name="y">Y-coordinate offset.</param>
+        /// <param name="z">Z-coordinate offset.</param>
+        /// <returns>The created translation matrix.</returns>
+        public static Matrix4x4 Translation(float x, float y, float z)
+        {
+            Translation(x, y, z, out var result);
+            return result;
+        }
+
+        /// <summary>
+        /// Creates a skew/shear matrix by means of a translation vector, a rotation vector, and a rotation angle.
+        /// shearing is performed in the direction of translation vector, where translation vector and rotation vector define the shearing plane.
+        /// The effect is such that the skewed rotation vector has the specified angle with rotation itself.
+        /// </summary>
+        /// <param name="angle">The rotation angle.</param>
+        /// <param name="rotationVec">The rotation vector</param>
+        /// <param name="transVec">The translation vector</param>
+        /// <param name="matrix">Contains the created skew/shear matrix. </param>
+        public static void Skew(
+            float angle,
+            ref Vector3 rotationVec,
+            ref Vector3 transVec,
+            out Matrix4x4 matrix)
+        {
+            var num1 = 1E-06f;
+            var vector3 = rotationVec;
+            var right1 = Vector3.Normalize(transVec);
+            float result1;
+            Vector3.Dot(ref rotationVec, ref right1, out result1);
+            var right2 = vector3 + result1 * right1;
+            float result2;
+            Vector3.Dot(ref rotationVec, ref right2, out result2);
+            var num2 = (float)Math.Cos((double)angle);
+            var num3 = (float)Math.Sin((double)angle);
+            var num4 = (float)((double)result2 * num2 - (double)result1 * num3);
+            var num5 = (double)result2 * num3 + (double)result1 * num2;
+            var num6 = (double)num4 >= num1
+                ? (double)num4
+                : throw new ArgumentException("illegal skew angle");
+            var num7 = (float)(num5 / num6 - (double)result1 / (double)result2);
+            matrix = Identity;
+            matrix.m11 = (float)((double)num7 * right1[0] * right2[0] + 1.0);
+            matrix.m12 = num7 * right1[0] * right2[1];
+            matrix.m13 = num7 * right1[0] * right2[2];
+            matrix.m21 = num7 * right1[1] * right2[0];
+            matrix.m22 = (float)((double)num7 * right1[1] * right2[1] + 1.0);
+            matrix.m23 = num7 * right1[1] * right2[2];
+            matrix.m31 = num7 * right1[2] * right2[0];
+            matrix.m32 = num7 * right1[2] * right2[1];
+            matrix.m33 = (float)((double)num7 * right1[2] * right2[2] + 1.0);
+        }
+        
+        /// <summary>Creates a 3D affine transformation matrix.</summary>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <param name="result">When the method completes, contains the created affine transformation matrix.</param>
+        public static void AffineTransformation(
+            float scaling,
+            ref Quaternion rotation,
+            ref Vector3 translation,
+            out Matrix4x4 result)
+        {
+            result = Scaling(scaling) * RotationQuaternion(rotation) * Translation(translation);
+        }
+        
+        /// <summary>Creates a 3D affine transformation matrix.</summary>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <returns>The created affine transformation matrix.</returns>
+        public static Matrix4x4 AffineTransformation(
+            float scaling,
+            Quaternion rotation,
+            Vector3 translation)
+        {
+            AffineTransformation(scaling, ref rotation, ref translation, out var result);
+            return result;
+        }
+        
+        /// <summary>Creates a 3D affine transformation matrix.</summary>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotationCenter">The center of the rotation.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <param name="result">When the method completes, contains the created affine transformation matrix.</param>
+        public static void AffineTransformation(
+            float scaling,
+            ref Vector3 rotationCenter,
+            ref Quaternion rotation,
+            ref Vector3 translation,
+            out Matrix4x4 result)
+        {
+            result = Scaling(scaling) * Translation(-rotationCenter) * RotationQuaternion(rotation) * Translation(rotationCenter) * Translation(translation);
+        }
+        
+        /// <summary>Creates a 3D affine transformation matrix.</summary>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotationCenter">The center of the rotation.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <returns>The created affine transformation matrix.</returns>
+        public static Matrix4x4 AffineTransformation(
+            float scaling,
+            Vector3 rotationCenter,
+            Quaternion rotation,
+            Vector3 translation)
+        {
+            AffineTransformation(scaling, ref rotationCenter, ref rotation, ref translation, out var result);
+            return result;
+        }
+        
+        /// <summary>Creates a 2D affine transformation matrix.</summary>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <param name="result">When the method completes, contains the created affine transformation matrix.</param>
+        public static void AffineTransformation2D(
+            float scaling,
+            float rotation,
+            ref Vector2 translation,
+            out Matrix4x4 result)
+        {
+            result = Scaling(scaling, scaling, 1f) * RotationZ(rotation) * Translation((Vector3) translation);
+        }
+        
+        /// <summary>Creates a 2D affine transformation matrix.</summary>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <returns>The created affine transformation matrix.</returns>
+        public static Matrix4x4 AffineTransformation2D(float scaling, float rotation, Vector2 translation)
+        {
+            AffineTransformation2D(scaling, rotation, ref translation, out var result);
+            return result;
+        }
+        
+        /// <summary>Creates a 2D affine transformation matrix.</summary>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotationCenter">The center of the rotation.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <param name="result">When the method completes, contains the created affine transformation matrix.</param>
+        public static void AffineTransformation2D(
+            float scaling,
+            ref Vector2 rotationCenter,
+            float rotation,
+            ref Vector2 translation,
+            out Matrix4x4 result)
+        {
+            result = Scaling(scaling, scaling, 1f) * Translation(-(Vector3) rotationCenter) * RotationZ(rotation) * Translation((Vector3) rotationCenter) * Translation((Vector3) translation);
+        }
+        
+        /// <summary>Creates a 2D affine transformation matrix.</summary>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotationCenter">The center of the rotation.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <returns>The created affine transformation matrix.</returns>
+        public static Matrix4x4 AffineTransformation2D(
+            float scaling,
+            Vector2 rotationCenter,
+            float rotation,
+            Vector2 translation)
+        {
+            AffineTransformation2D(scaling, ref rotationCenter, rotation, ref translation, out var result);
+            return result;
+        }
+        
+        /// <summary>Creates a transformation matrix.</summary>
+        /// <param name="scalingCenter">Center point of the scaling operation.</param>
+        /// <param name="scalingRotation">Scaling rotation amount.</param>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotationCenter">The center of the rotation.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <param name="result">When the method completes, contains the created transformation matrix.</param>
+        public static void Transformation(
+            ref Vector3 scalingCenter,
+            ref Quaternion scalingRotation,
+            ref Vector3 scaling,
+            ref Vector3 rotationCenter,
+            ref Quaternion rotation,
+            ref Vector3 translation,
+            out Matrix4x4 result)
+        {
+            var matrix = RotationQuaternion(scalingRotation);
+            result = Translation(-scalingCenter) * Transpose(matrix) * Scaling(scaling) * matrix *
+                Translation(scalingCenter) * Translation(-rotationCenter) * RotationQuaternion(rotation) *
+                Translation(rotationCenter) * Translation(translation);
+        }
+        
+        /// <summary>Creates a transformation matrix.</summary>
+        /// <param name="scalingCenter">Center point of the scaling operation.</param>
+        /// <param name="scalingRotation">Scaling rotation amount.</param>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotationCenter">The center of the rotation.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <returns>The created transformation matrix.</returns>
+        public static Matrix4x4 Transformation(
+            Vector3 scalingCenter,
+            Quaternion scalingRotation,
+            Vector3 scaling,
+            Vector3 rotationCenter,
+            Quaternion rotation,
+            Vector3 translation)
+        {
+            Transformation(ref scalingCenter, ref scalingRotation, ref scaling, ref rotationCenter, ref rotation, ref translation, out var result);
+            return result;
+        }
+        
+        /// <summary>Creates a 2D transformation matrix.</summary>
+        /// <param name="scalingCenter">Center point of the scaling operation.</param>
+        /// <param name="scalingRotation">Scaling rotation amount.</param>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotationCenter">The center of the rotation.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <param name="result">When the method completes, contains the created transformation matrix.</param>
+        public static void Transformation2D(
+            ref Vector2 scalingCenter,
+            float scalingRotation,
+            ref Vector2 scaling,
+            ref Vector2 rotationCenter,
+            float rotation,
+            ref Vector2 translation,
+            out Matrix4x4 result)
+        {
+            result = Translation(-(Vector3)scalingCenter) * RotationZ(-scalingRotation) * Scaling((Vector3)scaling) *
+                     RotationZ(scalingRotation) * Translation((Vector3)scalingCenter) *
+                     Translation(-(Vector3)rotationCenter) * RotationZ(rotation) *
+                     Translation((Vector3)rotationCenter) * Translation((Vector3)translation);
+            result.m33 = 1f;
+            result.m44 = 1f;
+        }
+
+        /// <summary>Creates a 2D transformation matrix.</summary>
+        /// <param name="scalingCenter">Center point of the scaling operation.</param>
+        /// <param name="scalingRotation">Scaling rotation amount.</param>
+        /// <param name="scaling">Scaling factor.</param>
+        /// <param name="rotationCenter">The center of the rotation.</param>
+        /// <param name="rotation">The rotation of the transformation.</param>
+        /// <param name="translation">The translation factor of the transformation.</param>
+        /// <returns>The created transformation matrix.</returns>
+        public static Matrix4x4 Transformation2D(
+            Vector2 scalingCenter,
+            float scalingRotation,
+            Vector2 scaling,
+            Vector2 rotationCenter,
+            float rotation,
+            Vector2 translation)
+        {
+            Transformation2D(ref scalingCenter, scalingRotation, ref scaling, ref rotationCenter, rotation, ref translation, out var result);
+            return result;
+        }
+        
         #endregion
 
         #region Operators
 
+        /// <summary>Adds two matrices.</summary>
+        /// <param name="left">The first matrix to add.</param>
+        /// <param name="right">The second matrix to add.</param>
+        /// <returns>The sum of the two matrices.</returns>
+        public static Matrix operator +(Matrix4x4 left, Matrix4x4 right)
+        {
+            Add(ref left, ref right, out var result);
+            return result;
+        }
+        
+        /// <summary>Assert a matrix (return it unchanged).</summary>
+        /// <param name="value">The matrix to assert (unchanged).</param>
+        /// <returns>The asserted (unchanged) matrix.</returns>
+        public static Matrix4x4 operator +(Matrix4x4 value) => value;
+        
+        /// <summary>Subtracts two matrices.</summary>
+        /// <param name="left">The first matrix to subtract.</param>
+        /// <param name="right">The second matrix to subtract.</param>
+        /// <returns>The difference between the two matrices.</returns>
+        public static Matrix4x4 operator -(Matrix4x4 left, Matrix4x4 right)
+        {
+            Subtract(ref left, ref right, out var result);
+            return result;
+        }
+        
+        /// <summary>Negates a matrix.</summary>
+        /// <param name="value">The matrix to negate.</param>
+        /// <returns>The negated matrix.</returns>
+        public static Matrix4x4 operator -(Matrix4x4 value)
+        {
+            Negate(ref value, out var result);
+            return result;
+        }
+        
+        /// <summary>Scales a matrix by a given value.</summary>
+        /// <param name="right">The matrix to scale.</param>
+        /// <param name="left">The amount by which to scale.</param>
+        /// <returns>The scaled matrix.</returns>
+        public static Matrix4x4 operator *(float left, Matrix4x4 right)
+        {
+            Multiply(ref right, left, out var result);
+            return result;
+        }
+        
+        /// <summary>Scales a matrix by a given value.</summary>
+        /// <param name="left">The matrix to scale.</param>
+        /// <param name="right">The amount by which to scale.</param>
+        /// <returns>The scaled matrix.</returns>
+        public static Matrix4x4 operator *(Matrix4x4 left, float right)
+        {
+            Multiply(ref left, right, out var result);
+            return result;
+        }
+        
         /// <summary>
         /// Multiplies two matrices.
         /// </summary>
-        public static Matrix4x4 operator *(Matrix4x4 a, Matrix4x4 b)
+        public static Matrix4x4 operator *(Matrix4x4 left, Matrix4x4 right)
         {
-            var sa = (SharpDX.Matrix)a;
-            var sb = (SharpDX.Matrix)b;
-            var sr = SharpDX.Matrix.Multiply(sa, sb);
-            return FromSharpDX(sr);
+            Multiply(ref left, ref right, out var result);
+            return result;
+        }
+        
+        
+        /// <summary>Scales a matrix by a given value.</summary>
+        /// <param name="left">The matrix to scale.</param>
+        /// <param name="right">The amount by which to scale.</param>
+        /// <returns>The scaled matrix.</returns>
+        public static Matrix4x4 operator /(Matrix4x4 left, float right)
+        {
+            Divide(ref left, right, out var result);
+            return result;
         }
 
-        /// <summary>
-        /// Compares matrices using epsilon tolerance.
-        /// </summary>
-        public static bool operator ==(Matrix4x4 a, Matrix4x4 b)
-        {
-            return MathF.Abs(a.m11 - b.m11) < kEpsilon &&
-                   MathF.Abs(a.m12 - b.m12) < kEpsilon &&
-                   MathF.Abs(a.m13 - b.m13) < kEpsilon &&
-                   MathF.Abs(a.m14 - b.m14) < kEpsilon &&
-
-                   MathF.Abs(a.m21 - b.m21) < kEpsilon &&
-                   MathF.Abs(a.m22 - b.m22) < kEpsilon &&
-                   MathF.Abs(a.m23 - b.m23) < kEpsilon &&
-                   MathF.Abs(a.m24 - b.m24) < kEpsilon &&
-
-                   MathF.Abs(a.m31 - b.m31) < kEpsilon &&
-                   MathF.Abs(a.m32 - b.m32) < kEpsilon &&
-                   MathF.Abs(a.m33 - b.m33) < kEpsilon &&
-                   MathF.Abs(a.m34 - b.m34) < kEpsilon &&
-
-                   MathF.Abs(a.m41 - b.m41) < kEpsilon &&
-                   MathF.Abs(a.m42 - b.m42) < kEpsilon &&
-                   MathF.Abs(a.m43 - b.m43) < kEpsilon &&
-                   MathF.Abs(a.m44 - b.m44) < kEpsilon;
+        /// <summary>Divides two matrices.</summary>
+        /// <param name="left">The first matrix to divide.</param>
+        /// <param name="right">The second matrix to divide.</param>
+        /// <returns>The quotient of the two matrices.</returns>
+        public static Matrix operator /(Matrix4x4 left, Matrix4x4 right)
+        { 
+            Divide(ref left, ref right, out var result);
+            return result;
         }
 
-        /// <summary>
-        /// Compares matrices for inequality.
-        /// </summary>
-        public static bool operator !=(Matrix4x4 a, Matrix4x4 b) => !(a == b);
+        /// <summary>Tests for equality between two objects.</summary>
+        /// <param name="left">The first value to compare.</param>
+        /// <param name="right">The second value to compare.</param>
+        /// <returns><c>true</c> if <paramref name="left" /> has the same value as <paramref name="right" />; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator ==(Matrix4x4 left, Matrix4x4 right) => left.Equals(right);
+
+        /// <summary>Tests for inequality between two objects.</summary>
+        /// <param name="left">The first value to compare.</param>
+        /// <param name="right">The second value to compare.</param>
+        /// <returns><c>true</c> if <paramref name="left" /> has a different value than <paramref name="right" />; otherwise, <c>false</c>.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(Matrix4x4 left, Matrix4x4 right) => !left.Equals(right);
 
         #endregion
 
@@ -2450,7 +2855,7 @@ namespace DotEngine
         /// </summary>
         public void Invert()
         {
-            Matrix4x4.Inverse(ref this, out this);
+            Invert(ref this, out this);
         }
 
         /// <summary>
@@ -2554,7 +2959,7 @@ namespace DotEngine
             scale.x = (float) Math.Sqrt((double) m11 * m11 + (double)m12 * m12 + (double)m13 * m13);
             scale.y = (float) Math.Sqrt((double) m21 * m21 + (double)m22 * m22 + (double)m23 * m23);
             scale.z = (float) Math.Sqrt((double) m31 * m31 + (double)m32 * m32 + (double)m33 * m33);
-            if (IsCloseToZero(scale.x) || IsCloseToZero(scale.y) || IsCloseToZero(scale.z))
+            if (MathUtil.IsZero(scale.x) || MathUtil.IsZero(scale.y) || MathUtil.IsZero(scale.z))
             {
                 rotation = Quaternion.Identity;
                 return false;
@@ -2598,7 +3003,7 @@ namespace DotEngine
             scale = (float) Math.Sqrt((double) m11 * m11 + (double)m12 * m12 + (double)m13 * m13);
             var num = 1f / scale;
             
-            if (IsCloseToZero(scale))
+            if (MathUtil.IsZero(scale))
             {
                 rotation = Quaternion.Identity;
                 return false;
@@ -2776,22 +3181,40 @@ namespace DotEngine
         /// <summary>
         /// Converts DotEngine.Matrix4x4 to SharpDX.Matrix.
         /// </summary>
-        public static implicit operator SharpDX.Matrix(Matrix4x4 matrix)
+        public static implicit operator Matrix(Matrix4x4 matrix)
         {
-            return new SharpDX.Matrix(
+            return new Matrix(
                 matrix.m11, matrix.m12, matrix.m13, matrix.m14,
                 matrix.m21, matrix.m22, matrix.m23, matrix.m24,
                 matrix.m31, matrix.m32, matrix.m33, matrix.m34,
                 matrix.m41, matrix.m42, matrix.m43, matrix.m44);
         }
 
-        #endregion
-        
-        #region Misc methodes
-
-        private static bool IsCloseToZero(float val)
+        /// <summary>
+        /// Converts DotEngine.Matrix4x4 to SharpDX.RawMatrix.
+        /// </summary>
+        public static implicit operator RawMatrix(Matrix4x4 matrix)
         {
-            return (double) Math.Abs(val) < 9.999999974752427E-07;
+            var rawMatrix = new RawMatrix();
+
+            rawMatrix.M11 = matrix.m11;
+            rawMatrix.M12 = matrix.m12;
+            rawMatrix.M13 = matrix.m13;
+            rawMatrix.M14 = matrix.m14;
+            rawMatrix.M21 = matrix.m21;
+            rawMatrix.M22 = matrix.m22;
+            rawMatrix.M23 = matrix.m23;
+            rawMatrix.M24 = matrix.m24;
+            rawMatrix.M31 = matrix.m31;
+            rawMatrix.M32 = matrix.m32;
+            rawMatrix.M33 = matrix.m33;
+            rawMatrix.M34 = matrix.m34;
+            rawMatrix.M41 = matrix.m41;
+            rawMatrix.M42 = matrix.m42;
+            rawMatrix.M43 = matrix.m43;
+            rawMatrix.M44 = matrix.m44;
+            
+            return rawMatrix;
         }
 
         #endregion
