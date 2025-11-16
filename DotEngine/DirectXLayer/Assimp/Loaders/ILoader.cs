@@ -1,4 +1,6 @@
-﻿namespace DirectXLayer.Assimp.Loaders;
+﻿using DxStructures;
+
+namespace DirectXLayer.Assimp.Loaders;
 
 public interface ILoader
 {

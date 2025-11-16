@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using DirectXLayer.Assimp;
 using DirectXLayer.Assimp.Loaders;
+using DxStructures;
 using SharpDX.Direct3D11;
 
 namespace DirectXLayer.Mesh;

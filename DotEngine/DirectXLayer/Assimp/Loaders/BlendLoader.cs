@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Assimp;
+using DxStructures;
 using SharpDX;
 using SharpDX.Direct3D11;
 using Buffer = SharpDX.Direct3D11.Buffer;

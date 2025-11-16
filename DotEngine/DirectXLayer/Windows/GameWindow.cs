@@ -8,6 +8,7 @@ using DirectXLayer.Assimp;
 using DirectXLayer.Mesh;
 using DirectXLayer.Shaders;
 using DirectXLayer.Shaders.Integrated;
+using DxStructures;
 using SharpDX;
 using SharpDX.D3DCompiler;
 using SharpDX.Direct3D;

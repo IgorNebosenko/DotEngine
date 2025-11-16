@@ -1,6 +1,6 @@
 ﻿using Buffer = SharpDX.Direct3D11.Buffer;
 
-namespace DirectXLayer.Assimp;
+namespace DxStructures;
 
 public class VertexModelData
 {

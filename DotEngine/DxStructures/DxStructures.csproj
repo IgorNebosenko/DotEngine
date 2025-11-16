@@ -1,14 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0-windows</TargetFramework>
-        <UseWPF>true</UseWPF>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="AssimpNet" Version="5.0.0-beta1" />
+	<ItemGroup>
       <PackageReference Include="SharpDX" Version="4.2.0" />
       <PackageReference Include="SharpDX.D3DCompiler" Version="4.2.0" />
       <PackageReference Include="SharpDX.Desktop" Version="4.2.0" />
@@ -28,8 +26,7 @@
       <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\DxStructures\DxStructures.csproj" />
-    </ItemGroup>
-
+	<ItemGroup>
+	  <ProjectReference Include="..\Attributes\Attributes.csproj" />
+	</ItemGroup>
 </Project>
