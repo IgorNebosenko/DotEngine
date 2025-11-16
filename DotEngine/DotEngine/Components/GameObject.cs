@@ -81,6 +81,8 @@ public sealed class GameObject : Object
     public ulong SceneCullingMask => 0;
 
     public GameObject GameObjectReference => this;
+    
+    public int ChildCount => _childs.Count;
     #endregion
 
     #region Set active

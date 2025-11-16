@@ -252,8 +252,8 @@ public class Transform : Component, IEnumerable
     }
 
     public Transform Root => _root;
-    
-    public int ChildCount => throw new NotImplementedException();
+
+    public int ChildCount => _gameObject.ChildCount;
     public bool HasChanged => _hasChanged;
 
     public void SetPositionAndRotation(Vector3 position, Quaternion rotation)
