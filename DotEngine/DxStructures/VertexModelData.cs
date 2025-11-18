@@ -2,6 +2,7 @@
 
 namespace DxStructures;
 
+[Serializable]
 public class VertexModelData
 {
     public Buffer vertexBuffer;

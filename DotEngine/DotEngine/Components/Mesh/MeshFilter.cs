@@ -1,18 +1,18 @@
-﻿using Attributes;
-using DotEngine.Components;
+﻿using DotEngine.Components;
 using DxStructures;
+using Newtonsoft.Json;
 
 namespace DotEngine;
 
 public class MeshFilter : Component, IComponent
 {
-    private List<VertexModelData> _vertices;
+    private List<VertexModelData>? _vertices;
     public IReadOnlyList<VertexModelData> Vertices => _vertices;
 
     public string Name => "MeshFilter";
-    public ShowInExplorerReference Reference { get; private set; }
-    public void Load()
+
+    public void LoadFromJson(string json)
     {
-        throw new NotImplementedException();
+        _vertices = JsonConvert.DeserializeObject<List<VertexModelData>>(json);
     }
 }
